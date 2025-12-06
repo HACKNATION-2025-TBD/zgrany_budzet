@@ -1,0 +1,964 @@
+[
+  {
+    "kod": "200",
+    "tresc": "Dotacja celowa w ramach programów finansowanych z udziałem środków europejskich oraz środków, o których mowa w art. 5 ust. 1 pkt 3 oraz ust. 3 pkt 5 i 6 ustawy, lub płatności w ramach budżetu środków europejskich, z wyłączeniem wydatków klasyfikowanych w paragrafie 205"
+  },
+  {
+    "kod": "201",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na realizację zadań bieżących z zakresu administracji rządowej oraz innych zadań zleconych gminom (związkom gmin, związkom powiatowo-gminnym) ustawami"
+  },
+  {
+    "kod": "202",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na zadania bieżące realizowane przez gminę na podstawie porozumień z organami administracji rządowej"
+  },
+  {
+    "kod": "203",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na realizację własnych zadań bieżących gmin (związków gmin, związków powiatowo-gminnych)"
+  },
+  {
+    "kod": "204",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na realizację zadań bieżących gmin z zakresu edukacyjnej opieki wychowawczej finansowanych w całości przez budżet państwa w ramach programów rządowych"
+  },
+  {
+    "kod": "205",
+    "tresc": "Dotacja celowa w ramach programów finansowanych z udziałem środków europejskich oraz środków, o których mowa w art. 5 ust. 3 pkt 5 lit. a i b ustawy, lub płatności w ramach budżetu środków europejskich, realizowanych przez jednostki samorządu terytorialnego"
+  },
+  {
+    "kod": "206",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na zadania bieżące z zakresu administracji rządowej zlecone gminom (związkom gmin, związkom powiatowo-gminnym), związane z realizacją świadczenia wychowawczego stanowiącego pomoc państwa w wychowywaniu dzieci"
+  },
+  {
+    "kod": "207",
+    "tresc": "Dotacja celowa dla jednostki samorządu terytorialnego na realizację własnych zadań bieżących w zakresie pomocy obywatelom Ukrainy Paragraf ten obejmuje dotacje na realizację zadań wynikających z przepisów ustawy z dnia 12 marca 2022 r. o pomocy obywatelom Ukrainy w związku z konfliktem zbrojnym na terytorium tego państwa."
+  },
+  {
+    "kod": "208",
+    "tresc": "Dotacja celowa dla jednostki samorządu terytorialnego na realizację zadań zleconych z zakresu administracji rządowej w zakresie pomocy obywatelom Ukrainy"
+  },
+  {
+    "kod": "209",
+    "tresc": "Dotacja celowa dla pozostałych jednostek sektora finansów publicznych na finansowanie lub dofinansowanie zadań bieżących w zakresie pomocy obywatelom Ukrainy"
+  },
+  {
+    "kod": "210",
+    "tresc": "Środki z Funduszu Pomocy na finansowanie lub dofinansowanie zadań bieżących w zakresie pomocy obywatelom Ukrainy dla jednostki sektora finansów publicznych"
+  },
+  {
+    "kod": "211",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na zadania bieżące z zakresu administracji rządowej oraz inne zadania zlecone ustawami realizowane przez powiat"
+  },
+  {
+    "kod": "212",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na zadania bieżące realizowane przez powiat na podstawie porozumień z organami administracji rządowej"
+  },
+  {
+    "kod": "213",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na realizację bieżących zadań własnych powiatu"
+  },
+  {
+    "kod": "214",
+    "tresc": "Płatności w ramach budżetu środków europejskich na finansowanie planu rozwojowego."
+  },
+  {
+    "kod": "215",
+    "tresc": "Środki przekazane do funduszu prowadzonego w Banku Gospodarstwa Krajowego na finansowanie lub dofinansowanie zadań bieżących"
+  },
+  {
+    "kod": "216",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na zadania bieżące z zakresu administracji rządowej zlecone powiatom, związane z realizacją dodatku wychowawczego, dodatku do zryczałtowanej kwoty oraz dodatku w wysokości świadczenia wychowawczego stanowiących pomoc państwa w wychowywaniu dzieci"
+  },
+  {
+    "kod": "217",
+    "tresc": "Środki przekazane z państwowych funduszy celowych na realizację zadań bieżących dla jednostek sektora finansów publicznych"
+  },
+  {
+    "kod": "218",
+    "tresc": "Środki przekazane z państwowych funduszy celowych na realizację zadań bieżących dla jednostek niezaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "219",
+    "tresc": "Rezerwa z budżetu państwa na uzupełnienie dochodów jednostek samorządu terytorialnego"
+  },
+  { "kod": "220", "tresc": "Rezerwy" },
+  {
+    "kod": "221",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na zadania bieżące z zakresu administracji rządowej oraz inne zadania zlecone ustawami realizowane przez samorząd województwa"
+  },
+  {
+    "kod": "222",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na zadania bieżące realizowane przez samorząd województwa na podstawie porozumień z organami administracji rządowej"
+  },
+  {
+    "kod": "223",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na realizację bieżących zadań własnych samorządu województwa"
+  },
+  {
+    "kod": "224",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa dla państwowej instytucji kultury na dofinansowanie zadań bieżących objętych mecenatem państwa, wykonywanych w ramach programów ministra właściwego do spraw kultury i ochrony dziedzictwa narodowego przez samorządowe instytucje kultury"
+  },
+  {
+    "kod": "225",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa dla państwowej instytucji kultury na dofinansowanie zadań bieżących objętych mecenatem państwa, wykonywanych w ramach programów ministra właściwego do spraw kultury i ochrony dziedzictwa narodowego przez jednostki niezaliczane do sektora finansów publicznych"
+  },
+  {
+    "kod": "226",
+    "tresc": "Dotacja podmiotowa z budżetu dla jednostek systemu szkolnictwa wyższego i nauki niezaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "227",
+    "tresc": "Dotacja podmiotowa z budżetu dla jednostek systemu szkolnictwa wyższego i nauki zaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "228",
+    "tresc": "Dotacja z budżetu dla instytucji gospodarki budżetowej na pierwsze wyposażenie w środki obrotowe"
+  },
+  {
+    "kod": "229",
+    "tresc": "Wpłata do budżetu nadwyżki środków finansowych przez agencję wykonawczą"
+  },
+  { "kod": "230", "tresc": "Wpłaty jednostek na państwowy fundusz celowy" },
+  {
+    "kod": "231",
+    "tresc": "Dotacja celowa przekazana gminie na zadania bieżące realizowane na podstawie porozumień (umów) między jednostkami samorządu terytorialnego"
+  },
+  {
+    "kod": "232",
+    "tresc": "Dotacja celowa przekazana dla powiatu na zadania bieżące realizowane na podstawie porozumień (umów) między jednostkami samorządu terytorialnego"
+  },
+  {
+    "kod": "233",
+    "tresc": "Dotacja celowa przekazana do samorządu województwa na zadania bieżące realizowane na podstawie porozumień (umów) między jednostkami samorządu terytorialnego"
+  },
+  {
+    "kod": "234",
+    "tresc": "Dotacja celowa dla jednostki spoza sektora finansów publicznych na finansowanie lub dofinansowanie zadań bieżących związanych z pomocą obywatelom Ukrainy"
+  },
+  {
+    "kod": "235",
+    "tresc": "Środki z Funduszu Pomocy na finansowanie lub dofinansowanie zadań bieżących w zakresie pomocy obywatelom Ukrainy dla jednostki spoza sektora finansów publicznych"
+  },
+  {
+    "kod": "236",
+    "tresc": "Dotacja celowa z budżetu jednostki samorządu terytorialnego, udzielone w trybie art. 221 ustawy, na finansowanie lub dofinansowanie zadań zleconych do realizacji organizacjom prowadzącym działalność pożytku publicznego"
+  },
+  {
+    "kod": "237",
+    "tresc": "Wpłata do budżetu nadwyżki środków obrotowych przez samorządowy zakład budżetowy"
+  },
+  {
+    "kod": "238",
+    "tresc": "Środki na uzupełnienie dochodów miast na prawach powiatu"
+  },
+  {
+    "kod": "239",
+    "tresc": "Wpłata do budżetu zysku przez instytucję gospodarki budżetowej"
+  },
+  {
+    "kod": "240",
+    "tresc": "Wpłata do budżetu pozostałości środków finansowych gromadzonych na wydzielonym rachunku jednostki budżetowej"
+  },
+  {
+    "kod": "241",
+    "tresc": "Dotacja z budżetu jednostki samorządu terytorialnego dla samorządowego zakładu budżetowego na pierwsze wyposażenie w środki obrotowe"
+  },
+  {
+    "kod": "242",
+    "tresc": "Wpłaty dokonywane przez fundusze celowe do budżetu państwa"
+  },
+  {
+    "kod": "243",
+    "tresc": "Dotacja z budżetu dla państwowego funduszu celowego"
+  },
+  {
+    "kod": "244",
+    "tresc": "Dotacja przekazana z państwowego funduszu celowego na realizację zadań bieżących dla jednostek sektora finansów publicznych"
+  },
+  {
+    "kod": "245",
+    "tresc": "Dotacja przekazana z państwowego funduszu celowego na realizację zadań bieżących dla jednostek niezaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "246",
+    "tresc": "Wpłaty przekazane przez pozostałe jednostki zaliczane do sektora finansów publicznych na realizację zadań bieżących dla jednostek zaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "247",
+    "tresc": "Wpłaty przekazane przez pozostałe jednostki zaliczane do sektora finansów publicznych na realizację zadań bieżących dla jednostek niezaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "248",
+    "tresc": "Dotacja podmiotowa z budżetu dla samorządowej instytucji kultury"
+  },
+  {
+    "kod": "249",
+    "tresc": "Dotacja podmiotowa z budżetu dla samodzielnego publicznego zakładu opieki zdrowotnej utworzonego przez organ administracji rządowej lub państwową uczelnię"
+  },
+  {
+    "kod": "250",
+    "tresc": "Subwencje z budżetu dla podmiotów systemu szkolnictwa wyższego i nauki, niezaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "251",
+    "tresc": "Dotacja podmiotowa z budżetu dla samorządowego zakładu budżetowego"
+  },
+  {
+    "kod": "252",
+    "tresc": "Subwencje z budżetu dla podmiotów systemu szkolnictwa wyższego i nauki, zaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "253",
+    "tresc": "Środki na finansowanie lub dofinansowanie zadań bieżących w zakresie pomocy obywatelom Ukrainy"
+  },
+  {
+    "kod": "254",
+    "tresc": "Dotacja podmiotowa z budżetu dla niepublicznej jednostki systemu oświaty"
+  },
+  {
+    "kod": "255",
+    "tresc": "Dotacja podmiotowa z budżetu dla państwowej instytucji kultury"
+  },
+  {
+    "kod": "256",
+    "tresc": "Dotacja z budżetu dla samodzielnego publicznego zakładu opieki zdrowotnej utworzonego przez jednostkę samorządu terytorialnego"
+  },
+  {
+    "kod": "257",
+    "tresc": "Dotacja podmiotowa z budżetu dla pozostałych jednostek sektora finansów publicznych"
+  },
+  {
+    "kod": "258",
+    "tresc": "Dotacja podmiotowa z budżetu dla jednostek niezaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "259",
+    "tresc": "Dotacja podmiotowa z budżetu dla publicznej jednostki systemu oświaty prowadzonej przez osobę prawną inną niż jednostka samorządu terytorialnego lub przez osobę fizyczną"
+  },
+  {
+    "kod": "260",
+    "tresc": "Dotacja celowa z budżetu dla Funduszu Kredytów Studenckich"
+  },
+  {
+    "kod": "261",
+    "tresc": "Środki przekazane przez Narodowy Fundusz Ochrony Środowiska i Gospodarki Wodnej na finansowanie funkcjonowania systemu handlu uprawnieniami do emisji"
+  },
+  {
+    "kod": "262",
+    "tresc": "Dotacja przedmiotowa z budżetu dla pozostałych jednostek sektora finansów publicznych"
+  },
+  {
+    "kod": "263",
+    "tresc": "Dotacja przedmiotowa z budżetu dla jednostek niezaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "264",
+    "tresc": "Dotacja celowa przekazana z budżetu jednostki samorządu terytorialnego dla samorządowego zakładu budżetowego na zadania bieżące"
+  },
+  {
+    "kod": "265",
+    "tresc": "Dotacja przedmiotowa z budżetu dla samorządowego zakładu budżetowego"
+  },
+  {
+    "kod": "266",
+    "tresc": "Środki przekazane przez jednostki samorządu terytorialnego na finansowanie lub dofinansowanie zadań na podstawie odrębnych przepisów"
+  },
+  {
+    "kod": "267",
+    "tresc": "Dotacja celowa na finansowanie lub dofinansowanie ustawowo określonych zadań bieżących realizowanych przez jednostki niezaliczane do sektora finansów publicznych"
+  },
+  {
+    "kod": "268",
+    "tresc": "Rekompensaty utraconych dochodów w podatkach i opłatach lokalnych"
+  },
+  {
+    "kod": "269",
+    "tresc": "Środki Funduszu Pracy przekazane na realizację zadań wynikających z odrębnych ustaw"
+  },
+  { "kod": "270", "tresc": "Subwencje dla parঞi politycznych" },
+  {
+    "kod": "271",
+    "tresc": "Dotacja celowa na pomoc finansową udzielaną między jednostkami samorządu terytorialnego na dofinansowanie własnych zadań bieżących"
+  },
+  {
+    "kod": "272",
+    "tresc": "Dotacja celowa z budżetu na finansowanie lub dofinansowanie prac remontowych i konserwatorskich obiektów zabytkowych przekazane jednostkom niezaliczanym do sektora finansów publicznych"
+  },
+  {
+    "kod": "273",
+    "tresc": "Dotacja celowa z budżetu na finansowanie lub dofinansowanie prac remontowych i konserwatorskich obiektów zabytkowych, przekazane jednostkom zaliczanym do sektora finansów publicznych"
+  },
+  { "kod": "274", "tresc": "Pomoc zagraniczna" },
+  { "kod": "275", "tresc": "Środki na uzupełnienie dochodów gmin" },
+  { "kod": "276", "tresc": "Środki na uzupełnienie dochodów powiatów" },
+  { "kod": "277", "tresc": "Środki na uzupełnienie dochodów województw" },
+  {
+    "kod": "278",
+    "tresc": "Dotacja celowa przekazana z budżetu jednostki samorządu terytorialnego na dofinansowanie realizacji zadań w zakresie programów polityki zdrowotnej"
+  },
+  {
+    "kod": "280",
+    "tresc": "Dotacja celowa z budżetu dla pozostałych jednostek zaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "281",
+    "tresc": "Dotacja celowa z budżetu na finansowanie lub dofinansowanie zadań zleconych do realizacji fundacjom"
+  },
+  {
+    "kod": "282",
+    "tresc": "Dotacja celowa z budżetu na finansowanie lub dofinansowanie zadań zleconych do realizacji stowarzyszeniom"
+  },
+  {
+    "kod": "283",
+    "tresc": "Dotacja celowa z budżetu na finansowanie lub dofinansowanie zadań zleconych do realizacji pozostałym jednostkom niezaliczanym do sektora finansów publicznych"
+  },
+  {
+    "kod": "284",
+    "tresc": "Dotacja celowa z budżetu państwa na finansowanie lub dofinansowanie ustawowo określonych zadań bieżących realizowanych przez pozostałe jednostki sektora finansów publicznych"
+  },
+  {
+    "kod": "285",
+    "tresc": "Wpłaty gmin na rzecz izb rolniczych w wysokości 2 % uzyskanych wpływów z podatku rolnego oraz kwoty w wysokości 1,5 % należnego podatku rolnego na rzecz wybranego przez podatnika podmiotu uprawnionego"
+  },
+  {
+    "kod": "286",
+    "tresc": "Dotacja z budżetu państwa stanowiąca zwrot kosztów obsługi świadczeń zleconych do wypłaty Zakładowi Ubezpieczeń Społecznych i Kasie Rolniczego Ubezpieczenia Społecznego oraz dotacja dla Funduszu Kościelnego"
+  },
+  {
+    "kod": "287",
+    "tresc": "Dotacja z budżetu państwa dla gmin uzdrowiskowych"
+  },
+  {
+    "kod": "288",
+    "tresc": "Dotacja celowa przekazana jednostce samorządu terytorialnego przez inną jednostkę samorządu terytorialnego będącą instytucją wdrażającą na zadania bieżące realizowane na podstawie porozumień (umów)"
+  },
+  {
+    "kod": "289",
+    "tresc": "Środki Funduszu Promocji Kultury przekazane Polskiemu Instytutowi Sztuki Filmowej na realizację zadań bieżących"
+  },
+  {
+    "kod": "290",
+    "tresc": "Wpłaty gmin i powiatów na rzecz innych jednostek samorządu terytorialnego oraz związków gmin, związków powiatowo-gminnych, związków powiatów, związków metropolitalnych na dofinansowanie zadań bieżących"
+  },
+  {
+    "kod": "291",
+    "tresc": "Zwrot dotacji oraz płatności wykorzystanych niezgodnie z przeznaczeniem lub wykorzystanych z naruszeniem procedur, o których mowa w art. 184 ustawy, pobranych nienależnie lub w nadmiernej wysokości"
+  },
+  { "kod": "292", "tresc": "Subwencje ogólne z budżetu państwa" },
+  {
+    "kod": "293",
+    "tresc": "Wpłaty jednostek samorządu terytorialnego do budżetu państwa"
+  },
+  {
+    "kod": "294",
+    "tresc": "Zwrot do budżetu państwa nienależnie pobranej subwencji ogólnej za lata poprzednie"
+  },
+  { "kod": "295", "tresc": "Zwrot niewykorzystanych dotacji oraz płatności" },
+  { "kod": "296", "tresc": "Przelewy redystrybucyjne" },
+  { "kod": "297", "tresc": "Różne przelewy" },
+  { "kod": "298", "tresc": "Pozostałe rozliczenia z bankami" },
+  {
+    "kod": "299",
+    "tresc": "Wpłata do budżetu nadwyżek środków znajdujących się na rachunkach państwowych funduszy celowych tworzonych z przychodów z prywatyzacji"
+  },
+  { "kod": "302", "tresc": "Wydatki osobowe niezaliczone do wynagrodzeń" },
+  { "kod": "303", "tresc": "Różne wydatki na rzecz osób fizycznych" },
+  {
+    "kod": "304",
+    "tresc": "Nagrody o charakterze szczególnym niezaliczone do wynagrodzeń"
+  },
+  { "kod": "305", "tresc": "Zasądzone renty" },
+  {
+    "kod": "307",
+    "tresc": "Wydatki osobowe niezaliczone do uposażeń wypłacane żołnierzom i funkcjonariuszom"
+  },
+  { "kod": "311", "tresc": "Świadczenia społeczne" },
+  {
+    "kod": "312",
+    "tresc": "Dodatkowe roczne świadczenie pieniężne oraz kolejne dodatkowe roczne świadczenie pieniężne dla emerytów i rencistów"
+  },
+  { "kod": "320", "tresc": "Rezerwy" },
+  { "kod": "321", "tresc": "Stypendia i zasiłki dla studentów" },
+  { "kod": "324", "tresc": "Stypendia dla uczniów" },
+  { "kod": "325", "tresc": "Stypendia różne" },
+  { "kod": "326", "tresc": "Inne formy pomocy dla uczniów" },
+  {
+    "kod": "327",
+    "tresc": "Środki Funduszu Pracy na pracownicze plany kapitałowe"
+  },
+  {
+    "kod": "328",
+    "tresc": "Świadczenia związane z udzielaniem pomocy obywatelom Ukrainy"
+  },
+  {
+    "kod": "329",
+    "tresc": "Świadczenia społeczne wypłacane obywatelom Ukrainy przebywającym na terytorium RP"
+  },
+  { "kod": "400", "tresc": "Grupa wydatków bieżących jednostki" },
+  { "kod": "401", "tresc": "Wynagrodzenia osobowe pracowników" },
+  {
+    "kod": "402",
+    "tresc": "Wynagrodzenia osobowe członków korpusu służby cywilnej"
+  },
+  {
+    "kod": "403",
+    "tresc": "Wynagrodzenia osobowe sędziów i prokuratorów oraz asesorów i aplikantów"
+  },
+  { "kod": "404", "tresc": "Dodatkowe wynagrodzenie roczne" },
+  {
+    "kod": "405",
+    "tresc": "Uposażenia żołnierzy zawodowych oraz funkcjonariuszy"
+  },
+  {
+    "kod": "406",
+    "tresc": "Inne należności żołnierzy zawodowych oraz funkcjonariuszy zaliczane do wynagrodzeń"
+  },
+  {
+    "kod": "407",
+    "tresc": "Dodatkowe uposażenie roczne dla żołnierzy zawodowych oraz nagrody roczne dla funkcjonariuszy"
+  },
+  {
+    "kod": "408",
+    "tresc": "Uposażenia i świadczenia pieniężne wypłacane przez okres roku żołnierzom i funkcjonariuszom zwolnionym ze służby"
+  },
+  { "kod": "409", "tresc": "Honoraria" },
+  { "kod": "410", "tresc": "Wynagrodzenia agencyjno-prowizyjne" },
+  { "kod": "411", "tresc": "Składki na ubezpieczenia społeczne" },
+  {
+    "kod": "412",
+    "tresc": "Składki na Fundusz Pracy oraz Fundusz Solidarnościowy"
+  },
+  { "kod": "413", "tresc": "Składki na ubezpieczenie zdrowotne" },
+  {
+    "kod": "414",
+    "tresc": "Wpłaty na Państwowy Fundusz Rehabilitacji Osób Niepełnosprawnych"
+  },
+  { "kod": "415", "tresc": "Dopłaty w spółkach prawa handlowego" },
+  {
+    "kod": "416",
+    "tresc": "Pokrycie ujemnego wyniku finansowego jednostek zaliczanych do sektora finansów publicznych"
+  },
+  { "kod": "417", "tresc": "Wynagrodzenia bezosobowe" },
+  {
+    "kod": "418",
+    "tresc": "Równoważniki pieniężne i ekwiwalenty dla żołnierzy i funkcjonariuszy oraz pozostałe należności"
+  },
+  { "kod": "419", "tresc": "Nagrody konkursowe" },
+  { "kod": "420", "tresc": "Fundusz operacyjny" },
+  {
+    "kod": "423",
+    "tresc": "Zakup leków, wyrobów medycznych i produktów biobójczych"
+  },
+  { "kod": "424", "tresc": "Zakup środków dydaktycznych i książek" },
+  { "kod": "425", "tresc": "Zakup sprzętu i uzbrojenia" },
+  { "kod": "427", "tresc": "Zakup usług remontowych" },
+  {
+    "kod": "429",
+    "tresc": "Zakup świadczeń zdrowotnych dla osób nieobjętych obowiązkiem ubezpieczenia zdrowotnego"
+  },
+  {
+    "kod": "431",
+    "tresc": "Realizacja zleconych programów poręczeniowo-gwarancyjnych i wspierania eksportu"
+  },
+  { "kod": "432", "tresc": "Staże i specjalizacje medyczne" },
+  {
+    "kod": "433",
+    "tresc": "Zakup usług przez jednostki samorządu terytorialnego od innych jednostek samorządu terytorialnego"
+  },
+  {
+    "kod": "435",
+    "tresc": "Zakup towarów (w szczególności materiałów, leków, żywności) w związku z pomocą obywatelom Ukrainy"
+  },
+  {
+    "kod": "436",
+    "tresc": "(NIE) Opłaty z tytułu zakupu usług telekomunikacyjnych"
+  },
+  {
+    "kod": "437",
+    "tresc": "Zakup usług związanych z pomocą obywatelom Ukrainy"
+  },
+  { "kod": "441", "tresc": "Podróże służbowe krajowe" },
+  { "kod": "442", "tresc": "Podróże służbowe zagraniczne" },
+  { "kod": "443", "tresc": "Różne opłaty i składki" },
+  { "kod": "444", "tresc": "Odpisy na zakładowy fundusz świadczeń socjalnych" },
+  {
+    "kod": "445",
+    "tresc": "Udzielone pożyczki na zaspokojenie potrzeb mieszkaniowych sędziów i prokuratorów"
+  },
+  { "kod": "446", "tresc": "Podatek dochodowy od osób prawnych" },
+  { "kod": "447", "tresc": "Cła" },
+  { "kod": "448", "tresc": "Podatek od nieruchomości" },
+  { "kod": "449", "tresc": "Pozostałe podatki na rzecz budżetu państwa" },
+  {
+    "kod": "450",
+    "tresc": "Pozostałe podatki na rzecz budżetów jednostek samorządu terytorialnego"
+  },
+  { "kod": "451", "tresc": "Opłaty na rzecz budżetu państwa" },
+  {
+    "kod": "452",
+    "tresc": "Opłaty na rzecz budżetów jednostek samorządu terytorialnego"
+  },
+  { "kod": "453", "tresc": "Podatek od towarów i usług (VAT)" },
+  { "kod": "454", "tresc": "Składki do organizacji międzynarodowych" },
+  { "kod": "455", "tresc": "Szkolenia członków korpusu służby cywilnej" },
+  {
+    "kod": "456",
+    "tresc": "Odsetki od dotacji oraz płatności: wykorzystanych niezgodnie z przeznaczeniem lub wykorzystanych z naruszeniem procedur, o których mowa w art. 184 ustawy, pobranych nienależnie lub w nadmiernej wysokości"
+  },
+  {
+    "kod": "457",
+    "tresc": "Odsetki od nieterminowych wpłat z tytułu pozostałych podatków i opłat"
+  },
+  { "kod": "458", "tresc": "Pozostałe odsetki" },
+  {
+    "kod": "459",
+    "tresc": "Kary i odszkodowania wypłacane na rzecz osób fizycznych"
+  },
+  {
+    "kod": "460",
+    "tresc": "Kary, odszkodowania i grzywny wypłacane na rzecz osób prawnych i innych jednostek organizacyjnych"
+  },
+  { "kod": "461", "tresc": "Koszty postępowania sądowego i prokuratorskiego" },
+  { "kod": "462", "tresc": "Umorzenie należności agencji płatniczych" },
+  {
+    "kod": "463",
+    "tresc": "Rozliczenie wydatków agencji płatniczych związanych z interwencją rynkową w ramach Wspólnej Polityki Rolnej"
+  },
+  {
+    "kod": "464",
+    "tresc": "Wydatki egzekucyjne poniesione w postępowaniu egzekucyjnym wszczętym i prowadzonym na poczet należności objętych wnioskiem obcego państwa, nieściągnięte od zobowiązanego"
+  },
+  {
+    "kod": "465",
+    "tresc": "Odsetki od nieterminowych wpłat podatku dochodowego od osób prawnych"
+  },
+  { "kod": "466", "tresc": "Odsetki od nieterminowych wpłat ceł" },
+  {
+    "kod": "467",
+    "tresc": "Odsetki od nieterminowych wpłat podatku od nieruchomości"
+  },
+  {
+    "kod": "468",
+    "tresc": "Odsetki od nieterminowych wpłat podatku od towarów i usług (VAT)"
+  },
+  {
+    "kod": "469",
+    "tresc": "Składki do organizacji międzynarodowych, w których uczestnictwo związane jest z członkostwem w Unii Europejskiej"
+  },
+  {
+    "kod": "470",
+    "tresc": "Szkolenia pracowników niebędących członkami korpusu służby cywilnej"
+  },
+  {
+    "kod": "471",
+    "tresc": "Wpłaty na PPK finansowane przez podmiot zatrudniający"
+  },
+  { "kod": "472", "tresc": "Amortyzacja" },
+  {
+    "kod": "474",
+    "tresc": "Wynagrodzenia i uposażenia wypłacane w związku z pomocą obywatelom Ukrainy"
+  },
+  {
+    "kod": "475",
+    "tresc": "Wynagrodzenia nauczycieli wypłacane w związku z pomocą obywatelom Ukrain."
+  },
+  {
+    "kod": "477",
+    "tresc": "Rekompensata dla pracodawcy zatrudniającego żołnierza niezawodowego"
+  },
+  { "kod": "478", "tresc": "Składki na Fundusz Emerytur Pomostowych" },
+  { "kod": "479", "tresc": "Wynagrodzenia osobowe nauczycieli" },
+  { "kod": "480", "tresc": "Dodatkowe wynagrodzenie roczne nauczycieli" },
+  { "kod": "481", "tresc": "Rezerwy" },
+  {
+    "kod": "483",
+    "tresc": "Równoważniki pieniężne i ekwiwalenty dla żołnierzy i funkcjonariuszy oraz pozostałe należności wypłacane w związku z pomocą obywatelom Ukrainy"
+  },
+  {
+    "kod": "484",
+    "tresc": "Honoraria, wynagrodzenia agencyjno-prowizyjne i wynagrodzenia bezosobowe wypłacane w związku z pomocą obywatelom Ukrainy"
+  },
+  {
+    "kod": "485",
+    "tresc": "Składki i inne pochodne od wynagrodzeń pracowników wypłacanych w związku z pomocą obywatelom Ukrainy"
+  },
+  {
+    "kod": "486",
+    "tresc": "Pozostałe wydatki bieżące na zadania związane z pomocą obywatelom Ukrainy"
+  },
+  {
+    "kod": "487",
+    "tresc": "Darowizny przekazane na realizację zadań bieżących"
+  },
+  {
+    "kod": "488",
+    "tresc": "Pokrycie przejętych zobowiązań po likwidowanym instytucie badawczym"
+  },
+  {
+    "kod": "489",
+    "tresc": "Pokrycie przejętych zobowiązań po likwidowanych jednostkach zaliczanych do sektora finansów publicznych"
+  },
+  { "kod": "490", "tresc": "Pokrycie zobowiązań zakładów opieki zdrowotnej" },
+  {
+    "kod": "491",
+    "tresc": "Pokrycie przejętych zobowiązań po przekształcanych jednostkach zaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "492",
+    "tresc": "Spłata zobowiązań jednostek samorządu terytorialnego zaliczanych do tytułu dłużnego - kredyty i pożyczki, o którym mowa w art. 72 ust. 1 pkt 2 ustawy"
+  },
+  {
+    "kod": "493",
+    "tresc": "Wydatki państwowego funduszu celowego na cele związane z zaspokojeniem roszczeń byłych właścicieli mienia przejętego przez Skarb Państwa oraz usuwaniem skutków prawnych decyzji reprywatyzacyjnych wydanych z naruszeniem prawa"
+  },
+  { "kod": "495", "tresc": "Różnice kursowe" },
+  {
+    "kod": "496",
+    "tresc": "Stałe zaliczki do rozliczenia udzielone placówkom polskim za granicą"
+  },
+  {
+    "kod": "497",
+    "tresc": "Nierozliczone środki budżetowe przekazane jednostkom budżetowym mającym siedziby poza granicami Rzeczypospolitej Polskiej oraz jednostkom wojskowym poza granicami państwa na finansowanie wydatków"
+  },
+  {
+    "kod": "498",
+    "tresc": "Zwroty dotyczące rozliczeń z Komisją Europejską oraz z państwami członkowskimi Europejskiego Porozumienia o Wolnym Handlu (EFTA)"
+  },
+  { "kod": "601", "tresc": "Wydatki na zakup i objęcie akcji i udziałów" },
+  { "kod": "602", "tresc": "Wydatki na wniesienie wkładów do spółdzielni" },
+  {
+    "kod": "603",
+    "tresc": "Wniesienie wkładów do spółek prawa handlowego oraz na uzupełnienie funduszy statutowych banków państwowych i innych instytucji finansowych"
+  },
+  { "kod": "605", "tresc": "Wydatki inwestycyjne jednostek budżetowych" },
+  {
+    "kod": "606",
+    "tresc": "Wydatki na zakupy inwestycyjne jednostek budżetowych"
+  },
+  {
+    "kod": "607",
+    "tresc": "Wydatki inwestycyjne samorządowych zakładów budżetowych"
+  },
+  {
+    "kod": "608",
+    "tresc": "Wydatki na zakupy inwestycyjne samorządowych zakładów budżetowych"
+  },
+  {
+    "kod": "610",
+    "tresc": "Wydatki jednostek na zadania inwestycyjne realizowane ze środków otrzymanych z Rządowego Funduszu Inwestycji Lokalnych"
+  },
+  {
+    "kod": "611",
+    "tresc": "Wydatki inwestycyjne państwowych funduszy celowych"
+  },
+  {
+    "kod": "612",
+    "tresc": "Wydatki na zakupy inwestycyjne państwowych funduszy celowych"
+  },
+  { "kod": "613", "tresc": "Wydatki inwestycyjne pozostałych jednostek" },
+  {
+    "kod": "614",
+    "tresc": "Wydatki na zakupy inwestycyjne pozostałych jednostek"
+  },
+  {
+    "kod": "615",
+    "tresc": "Wydatki majątkowe jednostek samorządu terytorialnego na spłatę zobowiązań zaliczanych do tytułu dłużnego - kredyty i pożyczki, o którym mowa w art. 72 ust. 1 pkt 2 ustawy"
+  },
+  {
+    "kod": "616",
+    "tresc": "Wydatki na współfinansowanie programów inwestycyjnych NATO i UE"
+  },
+  {
+    "kod": "617",
+    "tresc": "Wpłaty jednostek na państwowy fundusz celowy na finansowanie lub dofinansowanie zadań inwestycyjnych"
+  },
+  {
+    "kod": "619",
+    "tresc": "Dotacja celowa z budżetu jednostki samorządu terytorialnego, udzielona w trybie art. 221 ustawy, na dofinansowanie inwestycji w ramach zadań zleconych do realizacji organizacjom prowadzącym działalność pożytku publicznego"
+  },
+  {
+    "kod": "620",
+    "tresc": "Dotacja celowa w ramach programów finansowanych z udziałem środków europejskich oraz środków, o których mowa w art. 5 ust. 1 pkt 3 oraz ust. 3 pkt 5 i 6 ustawy, lub płatności w ramach budżetu środków europejskich, z wyłączeniem wydatków klasyfikowanych w paragrafie 625"
+  },
+  {
+    "kod": "621",
+    "tresc": "Dotacja celowa z budżetu na finansowanie lub dofinansowanie kosztów realizacji inwestycji i zakupów inwestycyjnych samorządowych zakładów budżetowych"
+  },
+  {
+    "kod": "622",
+    "tresc": "Dotacja celowa z budżetu na finansowanie lub dofinansowanie kosztów realizacji inwestycji i zakupów inwestycyjnych innych jednostek sektora finansów publicznych"
+  },
+  {
+    "kod": "623",
+    "tresc": "Dotacja celowa z budżetu na finansowanie lub dofinansowanie kosztów realizacji inwestycji i zakupów inwestycyjnych jednostek niezaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "625",
+    "tresc": "Dotacja celowa w ramach programów finansowanych z udziałem środków europejskich oraz środków, o których mowa w art. 5 ust. 3 pkt 5 lit. a i b ustawy, lub płatności w ramach budżetu środków europejskich, realizowanych przez jednostki samorządu terytorialnego"
+  },
+  {
+    "kod": "626",
+    "tresc": "Dotacja z państwowego funduszu celowego na finansowanie lub dofinansowanie kosztów realizacji inwestycji i zakupów inwestycyjnych jednostek sektora finansów publicznych"
+  },
+  {
+    "kod": "627",
+    "tresc": "Dotacja z państwowego funduszu celowego na finansowanie lub dofinansowanie kosztów realizacji inwestycji i zakupów inwestycyjnych jednostek niezaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "628",
+    "tresc": "Środki przekazane przez pozostałe jednostki zaliczane do sektora finansów publicznych na finansowanie lub dofinansowanie kosztów realizacji inwestycji i zakupów inwestycyjnych jednostek zaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "629",
+    "tresc": "Środki przekazane przez pozostałe jednostki zaliczane do sektora finansów publicznych na finansowanie lub dofinansowanie kosztów realizacji inwestycji i zakupów inwestycyjnych jednostek niezaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "630",
+    "tresc": "Dotacja celowa na pomoc finansową udzielaną między jednostkami samorządu terytorialnego na dofinansowanie własnych zadań inwestycyjnych i zakupów inwestycyjnych"
+  },
+  {
+    "kod": "631",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na inwestycje i zakupy inwestycyjne z zakresu administracji rządowej oraz innych zadań zleconych gminom ustawami"
+  },
+  {
+    "kod": "632",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na inwestycje i zakupy inwestycyjne realizowane przez gminę na podstawie porozumień z organami administracji rządowej"
+  },
+  {
+    "kod": "633",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na realizację inwestycji i zakupów inwestycyjnych własnych gmin (związków gmin, związków powiatowo-gminnych)"
+  },
+  {
+    "kod": "634",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na inwestycje i zakupy inwestycyjne z zakresu administracji rządowej zlecone gminom (związkom gmin, związkom powiatowo-gminnym), związane z realizacją świadczenia wychowawczego stanowiącego pomoc państwa w wychowywaniu dzieci"
+  },
+  {
+    "kod": "635",
+    "tresc": "Środki z państwowych funduszy celowych na finansowanie lub dofinansowanie kosztów realizacji inwestycji i zakupów inwestycyjnych jednostek sektora finansów publicznych"
+  },
+  {
+    "kod": "636",
+    "tresc": "Środki z państwowych funduszy celowych na finansowanie lub dofinansowanie kosztów realizacji inwestycji i zakupów inwestycyjnych jednostek niezaliczanych do sektora finansów publicznych"
+  },
+  {
+    "kod": "637",
+    "tresc": "Wydatki jednostek poniesione ze środków z Rządowego Funduszu Polski Ład: Program Inwestycji Strategicznych na realizację zadań inwestycyjnych"
+  },
+  {
+    "kod": "638",
+    "tresc": "Środki z Funduszu Pomocy na finansowanie lub dofinansowanie inwestycji i zakupów inwestycyjnych w zakresie pomocy obywatelom Ukrainy dla jednostki sektora finansów publicznych"
+  },
+  {
+    "kod": "639",
+    "tresc": "Środki na finansowanie lub dofinansowanie inwestycji i zakupów inwestycyjnych w zakresie pomocy obywatelom Ukrainy"
+  },
+  {
+    "kod": "640",
+    "tresc": "Darowizny przekazane na realizację zadań inwestycyjnych"
+  },
+  {
+    "kod": "641",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na inwestycje i zakupy inwestycyjne z zakresu administracji rządowej oraz inne zadania zlecone ustawami realizowane przez powiat"
+  },
+  {
+    "kod": "642",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na inwestycje i zakupy inwestycyjne realizowane przez powiat na podstawie porozumień z organami administracji rządowej"
+  },
+  {
+    "kod": "643",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na realizację inwestycji i zakupów inwestycyjnych własnych powiatu"
+  },
+  {
+    "kod": "644",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na inwestycje i zakupy inwestycyjne z zakresu administracji rządowej zlecone powiatom, związane z realizacją dodatku wychowawczego, dodatku do zryczałtowanej kwoty oraz dodatku w wysokości świadczenia wychowawczego stanowiących pomoc państwa w wychowywaniu dzieci"
+  },
+  {
+    "kod": "646",
+    "tresc": "Środki z Funduszu Pomocy na finansowanie lub dofinansowanie inwestycji i zakupów inwestycyjnych w zakresie pomocy obywatelom Ukrainy dla jednostki spoza sektora finansów publicznych"
+  },
+  {
+    "kod": "647",
+    "tresc": "Dotacja celowa dla jednostki spoza sektora finansów publicznych na finansowanie lub dofinansowanie inwestycji i zakupów inwestycyjnych związanych z pomocą obywatelom Ukrainy"
+  },
+  {
+    "kod": "648",
+    "tresc": "Wydatki na inwestycje związane z pomocą obywatelom Ukrainy"
+  },
+  {
+    "kod": "649",
+    "tresc": "Wydatki na zakupy inwestycyjne związane z pomocą obywatelom Ukrainy"
+  },
+  {
+    "kod": "651",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na inwestycje i zakupy inwestycyjne z zakresu administracji rządowej oraz inne zadania zlecone ustawami realizowane przez samorząd województwa"
+  },
+  {
+    "kod": "652",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na inwestycje i zakupy inwestycyjne realizowane przez samorząd województwa na podstawie porozumień z organami administracji rządowej"
+  },
+  {
+    "kod": "653",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa na realizację inwestycji i zakupów inwestycyjnych własnych samorządu województwa"
+  },
+  {
+    "kod": "654",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa dla państwowej instytucji kultury na dofinansowanie zadań inwestycyjnych objętych mecenatem państwa, wykonywanych w ramach programów ministra właściwego do spraw kultury i ochrony dziedzictwa narodowego przez samorządowe instytucje kultury"
+  },
+  {
+    "kod": "655",
+    "tresc": "Dotacja celowa przekazana z budżetu państwa dla państwowej instytucji kultury na dofinansowanie zadań inwestycyjnych objętych mecenatem państwa, wykonywanych w ramach programów ministra właściwego do spraw kultury i ochrony dziedzictwa narodowego przez jednostki niezaliczane do sektora finansów publicznych"
+  },
+  {
+    "kod": "656",
+    "tresc": "Dotacja celowa przekazana z budżetu na finansowanie lub dofinansowanie zadań inwestycyjnych obiektów zabytkowych jednostkom zaliczanym do sektora finansów publicznych"
+  },
+  {
+    "kod": "657",
+    "tresc": "Dotacja celowa przekazana z budżetu na finansowanie lub dofinansowanie zadań inwestycyjnych obiektów zabytkowych jednostkom niezaliczanym do sektora finansów publicznych"
+  },
+  {
+    "kod": "658",
+    "tresc": "Wydatki inwestycyjne dotyczące obiektów zabytkowych będących w użytkowaniu jednostek budżetowych"
+  },
+  {
+    "kod": "659",
+    "tresc": "Środki przekazane przez jednostki samorządu terytorialnego na finansowanie lub dofinansowanie zadań inwestycyjnych na podstawie odrębnych przepisów"
+  },
+  {
+    "kod": "661",
+    "tresc": "Dotacja celowa przekazana gminie na inwestycje i zakupy inwestycyjne realizowane na podstawie porozumień (umów) między jednostkami samorządu terytorialnego"
+  },
+  {
+    "kod": "662",
+    "tresc": "Dotacja celowa przekazana dla powiatu na inwestycje i zakupy inwestycyjne realizowane na podstawie porozumień (umów) między jednostkami samorządu terytorialnego"
+  },
+  {
+    "kod": "663",
+    "tresc": "Dotacja celowa przekazana do samorządu województwa na inwestycje i zakupy inwestycyjne realizowane na podstawie porozumień (umów) między jednostkami samorządu terytorialnego"
+  },
+  {
+    "kod": "664",
+    "tresc": "Dotacja celowa przekazana jednostce samorządu terytorialnego przez inną jednostkę samorządu terytorialnego będącą instytucją wdrażającą na inwestycje i zakupy inwestycyjne realizowane na podstawie porozumień (umów)"
+  },
+  {
+    "kod": "665",
+    "tresc": "Wpłaty gmin i powiatów na rzecz innych jednostek samorządu terytorialnego oraz związków gmin, związków powiatowo-gminnych lub związków powiatów na dofinansowanie zadań inwestycyjnych i zakupów inwestycyjnych"
+  },
+  {
+    "kod": "666",
+    "tresc": "Zwroty dotacji oraz płatności wykorzystanych niezgodnie z przeznaczeniem lub wykorzystanych z naruszeniem procedur, o których mowa w art. 184 ustawy, pobranych nienależnie lub w nadmiernej wysokości, dotyczące wydatków majątkowych"
+  },
+  {
+    "kod": "667",
+    "tresc": "Środki Funduszu Promocji Kultury przekazane Polskiemu Instytutowi Sztuki Filmowej na realizację zadań inwestycyjnych"
+  },
+  {
+    "kod": "668",
+    "tresc": "Środki przekazane do funduszu prowadzonego w Banku Gospodarstwa Krajowego na finansowanie lub dofinansowanie inwestycji i zakupów inwestycyjnych"
+  },
+  {
+    "kod": "669",
+    "tresc": "Zwroty niewykorzystanych dotacji oraz płatności, dotyczące wydatków majątkowych"
+  },
+  {
+    "kod": "670",
+    "tresc": "Dotacja celowa dla jednostki samorządu terytorialnego na finansowanie lub dofinansowanie własnych zadań inwestycyjnych i zakupów inwestycyjnych w zakresie pomocy obywatelom Ukrainy"
+  },
+  {
+    "kod": "671",
+    "tresc": "Dotacja celowa dla jednostki samorządu terytorialnego na inwestycje i zakupy inwestycyjne z zakresu administracji rządowej w zakresie pomocy obywatelom Ukrainy"
+  },
+  {
+    "kod": "672",
+    "tresc": "Dotacja celowa dla pozostałych jednostek sektora finansów publicznych na finansowanie lub dofinansowanie inwestycji i zakupów inwestycyjnych w zakresie pomocy obywatelom Ukrainy"
+  },
+  {
+    "kod": "673",
+    "tresc": "Dotacja na zadania inwestycyjne realizowane ze środków otrzymanych z Rządowego Funduszu Polski Ład: Program Inwestycji Strategicznych przez jednostki z sektora finansów publicznych"
+  },
+  {
+    "kod": "674",
+    "tresc": "Dotacja na zadania inwestycyjne realizowane ze środków otrzymanych z Rządowego Funduszu Polski Ład: Program Inwestycji Strategicznych przez jednostki niezaliczane do sektora finansów publicznych"
+  },
+  {
+    "kod": "675",
+    "tresc": "Dotacja na zadania inwestycyjne realizowane ze środków otrzymanych z Rządowego Funduszu Inwestycji Lokalnych przez jednostki z sektora finansów publicznych"
+  },
+  {
+    "kod": "676",
+    "tresc": "Dotacja na zadania inwestycyjne realizowane ze środków otrzymanych z Rządowego Funduszu Inwestycji Lokalnych przez jednostki niezaliczane do sektora finansów publicznych"
+  },
+  { "kod": "680", "tresc": "Rezerwy na inwestycje i zakupy inwestycyjne" },
+  { "kod": "681", "tresc": "Środki na uzupełnienie dochodów gmin" },
+  { "kod": "682", "tresc": "Środki na uzupełnienie dochodów powiatów" },
+  { "kod": "683", "tresc": "Środki na uzupełnienie dochodów województw" },
+  {
+    "kod": "684",
+    "tresc": "Środki na uzupełnienie dochodów miast na prawach powiatu"
+  },
+  {
+    "kod": "801",
+    "tresc": "Rozliczenia z bankami związane z obsługą długu publicznego"
+  },
+  {
+    "kod": "802",
+    "tresc": "Wypłaty z tytułu zagranicznych poręczeń i gwarancji"
+  },
+  { "kod": "803", "tresc": "Wypłaty z tytułu krajowych poręczeń i gwarancji" },
+  {
+    "kod": "804",
+    "tresc": "Obsługa zobowiązań jednostek samorządu terytorialnego zaliczanych do tytułu dłużnego - kredyty i pożyczki, o którym mowa w art. 72 ust. 1 pkt 2 ustawy"
+  },
+  {
+    "kod": "806",
+    "tresc": "Odsetki, dyskonto i inne rozliczenia dotyczące skarbowych papierów wartościowych, kredytów i pożyczek oraz innych instrumentów finansowych, związanych z obsługą długu zagranicznego"
+  },
+  {
+    "kod": "807",
+    "tresc": "Odsetki, dyskonto i inne rozliczenia dotyczące skarbowych papierów wartościowych, kredytów i pożyczek oraz innych instrumentów finansowych, związanych z obsługą długu krajowego"
+  },
+  {
+    "kod": "808",
+    "tresc": "Koszty emisji skarbowych papierów wartościowych na rynkach zagranicznych oraz inne opłaty i prowizje"
+  },
+  {
+    "kod": "809",
+    "tresc": "Koszty emisji samorządowych papierów wartościowych oraz inne opłaty i prowizje"
+  },
+  {
+    "kod": "810",
+    "tresc": "Koszty emisji skarbowych papierów wartościowych na rynku krajowym oraz inne opłaty i prowizje"
+  },
+  {
+    "kod": "811",
+    "tresc": "Odsetki od samorządowych papierów wartościowych lub zaciągniętych przez jednostkę samorządu terytorialnego kredytów i pożyczek"
+  },
+  {
+    "kod": "812",
+    "tresc": "Odsetki od pożyczek udzielonych przez jednostkę samorządu terytorialnego"
+  },
+  { "kod": "813", "tresc": "Dyskonto od samorządowych papierów wartościowych" },
+  { "kod": "814", "tresc": "Wydatki związane z finansowaniem programu F-16" },
+  { "kod": "850", "tresc": "Rezerwy" },
+  {
+    "kod": "851",
+    "tresc": "Wpłata obliczona na podstawie Dochodu Narodowego Brutto"
+  },
+  {
+    "kod": "852",
+    "tresc": "Wpłata obliczona, zgodnie z metodologią wynikającą z przepisów Unii Europejskiej, na podstawie podatku od towarów i usług"
+  },
+  {
+    "kod": "853",
+    "tresc": "Wpłata z tytułu udziału w opłatach celnych i opłatach rolnych"
+  },
+  { "kod": "854", "tresc": "Wpłata z tytułu udziału w opłatach cukrowych" },
+  { "kod": "855", "tresc": "Różne rozliczenia finansowe" },
+  { "kod": "856", "tresc": "Wpłata z tytułu finansowania rabatu brytyjskiego" },
+  {
+    "kod": "857",
+    "tresc": "Wpłata z tytułu finansowania obniżki wkładów opartych na Dochodzie Narodowym Brutto"
+  },
+  {
+    "kod": "858",
+    "tresc": "Wpłata obliczona na podstawie masy odpadów opakowaniowych z tworzyw sztucznych niepoddanych recyklingowi"
+  }
+]
