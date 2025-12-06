@@ -10,3 +10,8 @@ dependencies = [
     "sqlalchemy>=2.0.44",
     "websockets>=15.0.1",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
