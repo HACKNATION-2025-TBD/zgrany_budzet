@@ -16,7 +16,7 @@ export function RoleCard({
   description,
 }: RoleCardProps) {
   return (
-    <Link to={to} className="bg-primary rounded-md py-4 px-2">
+    <Link to={to} className="bg-primary rounded-md py-4 px-2 group">
       <div className="flex items-center justify-between gap-3">
         <div className="grid grid-cols-[auto_1fr] gap-4 items-center">
           <Icon width={40} height={40} className="text-primary-foreground" />
@@ -25,7 +25,7 @@ export function RoleCard({
             <div className="text-sm">{description}</div>
           </div>
         </div>
-        <ChevronRight className="text-primary-foreground" />
+        <ChevronRight className="text-primary-foreground transition-transform group-hover:translate-x-[5px]" />
       </div>
     </Link>
   );

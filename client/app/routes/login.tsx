@@ -1,6 +1,6 @@
 import MC from '@/assets/mc.png';
 import LoginImage from '@/assets/login.png';
-import { Home } from 'lucide-react';
+import { Home, Landmark, HandCoins, BanknoteArrowUp } from 'lucide-react';
 import { RoleCard } from '@/components/role-card';
 
 export function meta() {
@@ -19,19 +19,19 @@ export default function Login() {
         <nav className='flex flex-col gap-4 py-4 mr-8'>
           <RoleCard
             to='/dashboard'
-            icon={Home}
+            icon={BanknoteArrowUp}
             title='Kierownictwo'
             description='Komórka organizacyjna MC odpowiedzialna za planowanie budżetu'
           />
           <RoleCard
             to='/dashboard'
-            icon={Home}
+            icon={HandCoins}
             title='Biuro Budżetowo Finansowe'
             description='Kierownictwo Ministerstwa Cyfryzacji'
           />
           <RoleCard
             to='/edit'
-            icon={Home}
+            icon={Landmark}
             title='Komórki organizacyjne'
             description='Departamenty i biura'
           />
