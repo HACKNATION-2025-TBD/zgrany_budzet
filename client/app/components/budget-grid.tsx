@@ -9,6 +9,7 @@ import {
 import { AgGridReact } from 'ag-grid-react';
 import type { BudgetDocument } from '~/schema';
 import { useGridData } from '~/hooks/use-grid-data';
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -27,30 +28,45 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
     isLoading: isLoadingGridData,
   } = useGridData();
 
-  const formatKodAndNazwa = (item: {
+  const formatKodAndNazwa = (params: {
     value: { kod: string; nazwa?: string; tresc?: string } | null;
   }) => {
-    if (!item?.value) return '';
+    if (!params?.value) return '';
 
-    return `${item.value.kod} - ${item.value?.nazwa ?? item.value?.tresc}`.trim();
+    return `${params.value.kod} - ${params.value?.nazwa ?? params.value?.tresc}`.trim();
+  };
+
+  const renderKodCellWithTooltip = (params: {
+    value: { kod: string; nazwa?: string; tresc?: string } | null;
+  }) => {
+    if (!params?.value) return '';
+
+    return (
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className='w-full'>
+            {params.value.kod ?? params.value?.nazwa ?? params.value}
+          </div>
+        </TooltipTrigger>
+        <TooltipContent side='bottom' className='max-w-sm'>
+          <span>
+            {params.value?.nazwa ??
+              params.value?.tresc ??
+              params.value?.kod ??
+              params.value}
+          </span>
+        </TooltipContent>
+      </Tooltip>
+    );
   };
 
   const colDefs: ColDef[] = useMemo(
     () => [
       {
         field: 'czescBudzetowa' as const,
-        valueParser: (params) => {
-          console.log('Value parser called with params:', params);
-          const newValue = params.newValue;
-          console.log(params);
-
-          if (Number.isNaN(Number(newValue))) {
-            return params.oldValue;
-          }
-          return newValue;
-        },
         editable: true,
         valueFormatter: formatKodAndNazwa,
+        cellRenderer: renderKodCellWithTooltip,
         cellEditor: 'agSelectCellEditor',
         cellEditorParams: {
           values:
@@ -61,6 +77,7 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
         field: 'dzial' as const,
         editable: true,
         valueFormatter: formatKodAndNazwa,
+        cellRenderer: renderKodCellWithTooltip,
         cellEditor: 'agSelectCellEditor',
         cellEditorParams: {
           values: dzialy?.sort((a, b) => a.kod.localeCompare(b.kod)) ?? [],
@@ -71,6 +88,7 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
         editable: true,
         cellEditor: 'agSelectCellEditor',
         valueFormatter: formatKodAndNazwa,
+        cellRenderer: renderKodCellWithTooltip,
         cellEditorParams: {
           values: rozdzialy?.sort((a, b) => a.kod.localeCompare(b.kod)) ?? [],
         },
@@ -80,6 +98,7 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
         editable: true,
         cellEditor: 'agSelectCellEditor',
         valueFormatter: formatKodAndNazwa,
+        cellRenderer: renderKodCellWithTooltip,
         cellEditorParams: {
           values: paragrafy?.sort((a, b) => a.kod.localeCompare(b.kod)) ?? [],
         },
@@ -89,6 +108,7 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
         editable: true,
         cellEditor: 'agSelectCellEditor',
         valueFormatter: formatKodAndNazwa,
+        cellRenderer: renderKodCellWithTooltip,
         cellEditorParams: {
           values:
             zrodlaFinansowania?.sort((a, b) => a.kod.localeCompare(b.kod)) ??
@@ -97,6 +117,7 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
       },
       {
         field: 'grupaWydatkow' as const,
+        cellRenderer: renderKodCellWithTooltip,
         editable: true,
         cellEditor: 'agSelectCellEditor',
         cellEditorParams: {
