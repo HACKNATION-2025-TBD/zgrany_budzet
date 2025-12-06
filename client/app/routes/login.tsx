@@ -1,13 +1,16 @@
 import MC from '@/assets/mc.png';
 import LoginImage from '@/assets/login.png';
-import { Home, Landmark, HandCoins, BanknoteArrowUp } from 'lucide-react';
+import { Landmark, HandCoins, BanknoteArrowUp } from 'lucide-react';
 import { RoleCard } from '@/components/role-card';
+import { useUserMock } from '~/hooks/use-user-mock';
 
 export function meta() {
   return [{ title: 'Login' }];
 }
 
 export default function Login() {
+  const { setUserType } = useUserMock();
+
   return (
     <div className='grid grid-cols-2 gap-4'>
       <div>
@@ -22,18 +25,21 @@ export default function Login() {
             icon={BanknoteArrowUp}
             title='Kierownictwo'
             description='Komórka organizacyjna MC odpowiedzialna za planowanie budżetu'
+            onClick={() => setUserType('kierownictwo')}
           />
           <RoleCard
             to='/dashboard'
             icon={HandCoins}
             title='Biuro Budżetowo Finansowe'
             description='Kierownictwo Ministerstwa Cyfryzacji'
+            onClick={() => setUserType('bbf')}
           />
           <RoleCard
             to='/edit'
             icon={Landmark}
             title='Komórki organizacyjne'
             description='Departamenty i biura'
+            onClick={() => setUserType('ko')}
           />
         </nav>
       </div>
