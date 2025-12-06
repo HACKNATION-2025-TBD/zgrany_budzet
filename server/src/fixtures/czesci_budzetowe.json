@@ -1,0 +1,682 @@
+[
+  {
+    "kod": "01",
+    "nazwa": "Kancelaria Prezydenta RP"
+  },
+  {
+    "kod": "02",
+    "nazwa": "Kancelaria Sejmu"
+  },
+  {
+    "kod": "03",
+    "nazwa": "Kancelaria Senatu"
+  },
+  {
+    "kod": "04",
+    "nazwa": "Sąd Najwyższy"
+  },
+  {
+    "kod": "05",
+    "nazwa": "Naczelny Sąd Administracyjny"
+  },
+  {
+    "kod": "06",
+    "nazwa": "Trybunał Konstytucyjny"
+  },
+  {
+    "kod": "07",
+    "nazwa": "Najwyższa Izba Kontroli"
+  },
+  {
+    "kod": "08",
+    "nazwa": "Rzecznik Praw Obywatelskich"
+  },
+  {
+    "kod": "09",
+    "nazwa": "Krajowa Rada Radiofonii i Telewizji"
+  },
+  {
+    "kod": "10",
+    "nazwa": "Urząd Ochrony Danych Osobowych"
+  },
+  {
+    "kod": "11",
+    "nazwa": "Krajowe Biuro Wyborcze"
+  },
+  {
+    "kod": "12",
+    "nazwa": "Państwowa Inspekcja Pracy"
+  },
+  {
+    "kod": "13",
+    "nazwa": "Instytut Pamięci Narodowej - Komisja Ścigania Zbrodni przeciwko Narodowi Polskiemu"
+  },
+  {
+    "kod": "14",
+    "nazwa": "Rzecznik Praw Dziecka"
+  },
+  {
+    "kod": "15/00",
+    "nazwa": "Sądy powszechne"
+  },
+  {
+    "kod": "16",
+    "nazwa": "Kancelaria Prezesa Rady Ministrów"
+  },
+  {
+    "kod": "17",
+    "nazwa": "Administracja publiczna"
+  },
+  {
+    "kod": "18",
+    "nazwa": "Budownictwo, planowanie i zagospodarowanie przestrzenne oraz mieszkalnictwo"
+  },
+  {
+    "kod": "19",
+    "nazwa": "Budżet, finanse publiczne i instytucje finansowe"
+  },
+  {
+    "kod": "20",
+    "nazwa": "Gospodarka"
+  },
+  {
+    "kod": "21",
+    "nazwa": "Gospodarka morska"
+  },
+  {
+    "kod": "22",
+    "nazwa": "Gospodarka wodna"
+  },
+  {
+    "kod": "23",
+    "nazwa": "Członkostwo Rzeczypospolitej Polskiej w Unii Europejskiej"
+  },
+  {
+    "kod": "24",
+    "nazwa": "Kultura i ochrona dziedzictwa narodowego"
+  },
+  {
+    "kod": "25",
+    "nazwa": "Kultura fizyczna"
+  },
+  {
+    "kod": "26",
+    "nazwa": "Łączność"
+  },
+  {
+    "kod": "27",
+    "nazwa": "Informatyzacja"
+  },
+  {
+    "kod": "28",
+    "nazwa": "Szkolnictwo wyższe i nauka"
+  },
+  {
+    "kod": "29",
+    "nazwa": "Obrona narodowa"
+  },
+  {
+    "kod": "30",
+    "nazwa": "Oświata i wychowanie"
+  },
+  {
+    "kod": "31",
+    "nazwa": "Praca"
+  },
+  {
+    "kod": "32",
+    "nazwa": "Rolnictwo"
+  },
+  {
+    "kod": "33",
+    "nazwa": "Rozwój wsi"
+  },
+  {
+    "kod": "34",
+    "nazwa": "Rozwój regionalny"
+  },
+  {
+    "kod": "35",
+    "nazwa": "Rynki rolne"
+  },
+  {
+    "kod": "36",
+    "nazwa": "(uchylona)"
+  },
+  {
+    "kod": "37",
+    "nazwa": "Sprawiedliwość"
+  },
+  {
+    "kod": "38",
+    "nazwa": "(uchylona)"
+  },
+  {
+    "kod": "39",
+    "nazwa": "Transport"
+  },
+  {
+    "kod": "40",
+    "nazwa": "Turystyka"
+  },
+  {
+    "kod": "41",
+    "nazwa": "Środowisko"
+  },
+  {
+    "kod": "42",
+    "nazwa": "Sprawy wewnętrzne"
+  },
+  {
+    "kod": "43",
+    "nazwa": "Wyznania religijne oraz mniejszości narodowe i etniczne"
+  },
+  {
+    "kod": "44",
+    "nazwa": "Zabezpieczenie społeczne"
+  },
+  {
+    "kod": "45",
+    "nazwa": "Sprawy zagraniczne"
+  },
+  {
+    "kod": "46",
+    "nazwa": "Zdrowie"
+  },
+  {
+    "kod": "47",
+    "nazwa": "Energia"
+  },
+  {
+    "kod": "48",
+    "nazwa": "Gospodarka surowcami energetycznymi"
+  },
+  {
+    "kod": "49",
+    "nazwa": "Urząd Zamówień Publicznych"
+  },
+  {
+    "kod": "50",
+    "nazwa": "Urząd Regulacji Energetyki"
+  },
+  {
+    "kod": "51",
+    "nazwa": "Klimat"
+  },
+  {
+    "kod": "52",
+    "nazwa": "Krajowa Rada Sądownictwa"
+  },
+  {
+    "kod": "53",
+    "nazwa": "Urząd Ochrony Konkurencji i Konsumentów"
+  },
+  {
+    "kod": "54",
+    "nazwa": "Urząd do Spraw Kombatantów i Osób Represjonowanych"
+  },
+  {
+    "kod": "55",
+    "nazwa": "Aktywa państwowe"
+  },
+  {
+    "kod": "56",
+    "nazwa": "Centralne Biuro Antykorupcyjne"
+  },
+  {
+    "kod": "57",
+    "nazwa": "Agencja Bezpieczeństwa Wewnętrznego"
+  },
+  {
+    "kod": "58",
+    "nazwa": "Główny Urząd Statystyczny"
+  },
+  {
+    "kod": "59",
+    "nazwa": "Agencja Wywiadu"
+  },
+  {
+    "kod": "60",
+    "nazwa": "Wyższy Urząd Górniczy"
+  },
+  {
+    "kod": "61",
+    "nazwa": "Urząd Patentowy Rzeczypospolitej Polskiej"
+  },
+  {
+    "kod": "62",
+    "nazwa": "Rybołówstwo"
+  },
+  {
+    "kod": "63",
+    "nazwa": "Rodzina"
+  },
+  {
+    "kod": "64",
+    "nazwa": "Główny Urząd Miar"
+  },
+  {
+    "kod": "65",
+    "nazwa": "Polski Komitet Normalizacyjny"
+  },
+  {
+    "kod": "66",
+    "nazwa": "Rzecznik Praw Pacjenta"
+  },
+  {
+    "kod": "67",
+    "nazwa": "Polska Akademia Nauk"
+  },
+  {
+    "kod": "68",
+    "nazwa": "Państwowa Agencja Atomistyki"
+  },
+  {
+    "kod": "69",
+    "nazwa": "Żegluga śródlądowa"
+  },
+  {
+    "kod": "70",
+    "nazwa": "(uchylona)"
+  },
+  {
+    "kod": "71",
+    "nazwa": "Urząd Transportu Kolejowego"
+  },
+  {
+    "kod": "72",
+    "nazwa": "Kasa Rolniczego Ubezpieczenia Społecznego"
+  },
+  {
+    "kod": "73",
+    "nazwa": "Zakład Ubezpieczeń Społecznych"
+  },
+  {
+    "kod": "74",
+    "nazwa": "Prokuratoria Generalna Rzeczypospolitej Polskiej"
+  },
+  {
+    "kod": "75",
+    "nazwa": "Rządowe Centrum Legislacji"
+  },
+  {
+    "kod": "76",
+    "nazwa": "Urząd Komunikacji Elektronicznej"
+  },
+  {
+    "kod": "77",
+    "nazwa": "Podatki i inne wpłaty na rzecz budżetu państwa"
+  },
+  {
+    "kod": "78",
+    "nazwa": "(uchylona)"
+  },
+  {
+    "kod": "79",
+    "nazwa": "Obsługa długu Skarbu Państwa"
+  },
+  {
+    "kod": "80",
+    "nazwa": "Regionalne izby obrachunkowe"
+  },
+  {
+    "kod": "81",
+    "nazwa": "Rezerwa ogólna"
+  },
+  {
+    "kod": "82",
+    "nazwa": "Subwencje ogólne dla jednostek samorządu terytorialnego"
+  },
+  {
+    "kod": "83",
+    "nazwa": "Rezerwy celowe"
+  },
+  {
+    "kod": "84",
+    "nazwa": "Środki własne Unii Europejskiej"
+  },
+  {
+    "kod": "85/00",
+    "nazwa": "Województwa"
+  },
+  {
+    "kod": "86/00",
+    "nazwa": "Samorządowe Kolegia Odwoławcze"
+  },
+  {
+    "kod": "87",
+    "nazwa": "Dochody budżetu środków europejskich"
+  },
+  {
+    "kod": "88",
+    "nazwa": "Powszechne jednostki organizacyjne prokuratury"
+  },
+  {
+    "kod": "89",
+    "nazwa": "Państwowa Komisja do spraw przeciwdziałania wykorzystaniu seksualnemu małoletnich poniżej lat 15"
+  },
+  {
+    "kod": "90",
+    "nazwa": "Akademia Kopernikańska"
+  },
+  {
+    "kod": "91",
+    "nazwa": "Biuro Rady Fiskalnej"
+  },
+  {
+    "kod": "97",
+    "nazwa": "Przychody i rozchody związane z prefinansowaniem zadań realizowanych z udziałem środków pochodzących z budżetu Unii Europejskiej"
+  },
+  {
+    "kod": "98",
+    "nazwa": "Przychody i rozchody związane z finansowaniem potrzeb pożyczkowych budżetu państwa"
+  },
+  {
+    "kod": "15/01",
+    "nazwa": "Ministerstwo Sprawiedliwości"
+  },
+  {
+    "kod": "15/02",
+    "nazwa": "Sąd Apelacyjny w Warszawie"
+  },
+  {
+    "kod": "15/03",
+    "nazwa": "Sąd Apelacyjny w Katowicach"
+  },
+  {
+    "kod": "15/04",
+    "nazwa": "Sąd Apelacyjny w Gdańsku"
+  },
+  {
+    "kod": "15/05",
+    "nazwa": "Sąd Apelacyjny w Poznaniu"
+  },
+  {
+    "kod": "15/06",
+    "nazwa": "Sąd Apelacyjny w Krakowie"
+  },
+  {
+    "kod": "15/07",
+    "nazwa": "Sąd Apelacyjny we Wrocławiu"
+  },
+  {
+    "kod": "15/08",
+    "nazwa": "Sąd Apelacyjny w Łodzi"
+  },
+  {
+    "kod": "15/09",
+    "nazwa": "Sąd Apelacyjny w Rzeszowie"
+  },
+  {
+    "kod": "15/10",
+    "nazwa": "Sąd Apelacyjny w Białymstoku"
+  },
+  {
+    "kod": "15/11",
+    "nazwa": "Sąd Apelacyjny w Lublinie"
+  },
+  {
+    "kod": "15/12",
+    "nazwa": "Sąd Apelacyjny w Szczecinie"
+  },
+  {
+    "kod": "85/02",
+    "nazwa": "Województwo dolnośląskie"
+  },
+  {
+    "kod": "85/04",
+    "nazwa": "Województwo kujawsko-pomorskie"
+  },
+  {
+    "kod": "85/06",
+    "nazwa": "Województwo lubelskie"
+  },
+  {
+    "kod": "85/08",
+    "nazwa": "Województwo lubuskie"
+  },
+  {
+    "kod": "85/10",
+    "nazwa": "Województwo łódzkie"
+  },
+  {
+    "kod": "85/12",
+    "nazwa": "Województwo małopolskie"
+  },
+  {
+    "kod": "85/14",
+    "nazwa": "Województwo mazowieckie"
+  },
+  {
+    "kod": "85/16",
+    "nazwa": "Województwo opolskie"
+  },
+  {
+    "kod": "85/18",
+    "nazwa": "Województwo podkarpackie"
+  },
+  {
+    "kod": "85/20",
+    "nazwa": "Województwo podlaskie"
+  },
+  {
+    "kod": "85/22",
+    "nazwa": "Województwo pomorskie"
+  },
+  {
+    "kod": "85/24",
+    "nazwa": "Województwo śląskie"
+  },
+  {
+    "kod": "85/26",
+    "nazwa": "Województwo świętokrzyskie"
+  },
+  {
+    "kod": "85/28",
+    "nazwa": "Województwo warmińsko-mazurskie"
+  },
+  {
+    "kod": "85/30",
+    "nazwa": "Województwo wielkopolskie"
+  },
+  {
+    "kod": "85/32",
+    "nazwa": "Województwo zachodniopomorskie"
+  },
+  {
+    "kod": "86/01",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Warszawie"
+  },
+  {
+    "kod": "86/03",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Białej Podlaskiej"
+  },
+  {
+    "kod": "86/05",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Białymstoku"
+  },
+  {
+    "kod": "86/07",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Bielsku-Białej"
+  },
+  {
+    "kod": "86/09",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Bydgoszczy"
+  },
+  {
+    "kod": "86/11",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Chełmie"
+  },
+  {
+    "kod": "86/13",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Ciechanowie"
+  },
+  {
+    "kod": "86/15",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Częstochowie"
+  },
+  {
+    "kod": "86/17",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Elblągu"
+  },
+  {
+    "kod": "86/19",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Gdańsku"
+  },
+  {
+    "kod": "86/21",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Gorzowie Wielkopolskim"
+  },
+  {
+    "kod": "86/23",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Jeleniej Górze"
+  },
+  {
+    "kod": "86/25",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Kaliszu"
+  },
+  {
+    "kod": "86/27",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Katowicach"
+  },
+  {
+    "kod": "86/29",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Kielcach"
+  },
+  {
+    "kod": "86/31",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Koninie"
+  },
+  {
+    "kod": "86/33",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Koszalinie"
+  },
+  {
+    "kod": "86/35",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Krakowie"
+  },
+  {
+    "kod": "86/37",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Krośnie"
+  },
+  {
+    "kod": "86/39",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Legnicy"
+  },
+  {
+    "kod": "86/41",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Lesznie"
+  },
+  {
+    "kod": "86/43",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Lublinie"
+  },
+  {
+    "kod": "86/45",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Łomży"
+  },
+  {
+    "kod": "86/47",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Łodzi"
+  },
+  {
+    "kod": "86/49",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Nowym Sączu"
+  },
+  {
+    "kod": "86/51",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Olsztynie"
+  },
+  {
+    "kod": "86/53",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Opolu"
+  },
+  {
+    "kod": "86/55",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Ostrołęce"
+  },
+  {
+    "kod": "86/57",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Pile"
+  },
+  {
+    "kod": "86/59",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Piotrkowie Trybunalskim"
+  },
+  {
+    "kod": "86/61",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Płocku"
+  },
+  {
+    "kod": "86/63",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Poznaniu"
+  },
+  {
+    "kod": "86/65",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Przemyślu"
+  },
+  {
+    "kod": "86/67",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Radomiu"
+  },
+  {
+    "kod": "86/69",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Rzeszowie"
+  },
+  {
+    "kod": "86/71",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Siedlcach"
+  },
+  {
+    "kod": "86/73",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Sieradzu"
+  },
+  {
+    "kod": "86/75",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Skierniewicach"
+  },
+  {
+    "kod": "86/77",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Słupsku"
+  },
+  {
+    "kod": "86/79",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Suwałkach"
+  },
+  {
+    "kod": "86/81",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Szczecinie"
+  },
+  {
+    "kod": "86/83",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Tarnobrzegu"
+  },
+  {
+    "kod": "86/85",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Tarnowie"
+  },
+  {
+    "kod": "86/87",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Toruniu"
+  },
+  {
+    "kod": "86/89",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Wałbrzychu"
+  },
+  {
+    "kod": "86/91",
+    "nazwa": "Samorządowe Kolegium Odwoławcze we Włocławku"
+  },
+  {
+    "kod": "86/93",
+    "nazwa": "Samorządowe Kolegium Odwoławcze we Wrocławiu"
+  },
+  {
+    "kod": "86/95",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Zamościu"
+  },
+  {
+    "kod": "86/97",
+    "nazwa": "Samorządowe Kolegium Odwoławcze w Zielonej Górze"
+  }
+]

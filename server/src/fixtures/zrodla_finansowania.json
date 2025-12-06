@@ -1,0 +1,47 @@
+[
+  { "kod": "0", "nazwa": "Środki budżetu państwa" },
+  {
+    "kod": "1",
+    "nazwa": "Finansowanie programów ze środków bezzwrotnych pochodzących z Unii Europejskiej",
+    "opis": "Symbol ten stosuje się do oznaczenia wydatków ponoszonych w trakcie realizacji przedsięwzięć w ramach danego programu finansowanego ze środków bezzwrotnych pochodzących z Unii Europejskiej, m.in. do wydatków realizowanych ze środków instrumentu finansowego UE Transiঞon Facility lub z innych środków, o których mowa w art. 5 ust. 3 pkt 6 ustawy, w tym do wydatków ponoszonych w ramach działu 3a budżetu Unii Europejskiej."
+  },
+  {
+    "kod": "2",
+    "nazwa": "Współfinansowanie programów realizowanych ze środków bezzwrotnych pochodzących z Unii Europejskiej",
+    "opis": "Symbol ten stosuje się do oznaczenia wydatków ponoszonych w trakcie realizacji tych przedsięwzięć w ramach programów finansowanych ze środków bezzwrotnych pochodzących z Unii Europejskiej, co do których strona polska podjęła zobowiązanie, że będą one również przez nią finansowane. Źródłem finansowania tych wydatków mogą być np. środki pochodzące z budżetu państwa oraz środki własne jednostek samorządu terytorialnego. Symbol ten stosuje się również do wydatków współfinansowanych ze środków instrumentu finansowego UE Transiঞon Facility lub z innych środków, o których mowa w art. 5 ust. 3 pkt 6 ustawy, w tym do wydatków ponoszonych w ramach działu 3a budżetu Unii Europejskiej."
+  },
+  {
+    "kod": "3",
+    "nazwa": "Finansowanie z pożyczek i kredytów zagranicznych oraz darowizn lub grantów przyznanych Polsce przez poszczególne kraje lub instytucje",
+    "opis": "Symbol ten stosuje się do oznaczenia wszystkich wydatków ponoszonych w trakcie realizacji przedsięwzięć, których źródłem finansowania są środki pochodzące z pożyczek i kredytów zagranicznych z międzynarodowych instytucji finansowych, np. Banku Światowego (Międzynarodowego Banku Odbudowy i Rozwoju), Europejskiego Banku Inwestycyjnego, Europejskiego Banku Odbudowy i Rozwoju, Nordyckiego Banku Inwestycyjnego, Banku Rozwoju Rady Europy, oraz z pożyczki ze środków Instrumentu na Rzecz Odbudowy i Zwiększenia Odporności, o której mowa w art. 6 ust. 1 lit b rozporządzenia Parlamentu Europejskiego i Rady (UE) 2021/241 z dnia 12 lutego 2021 r. ustanawiającego Instrument na rzecz Odbudowy i Zwiększania Odporności, w części przeznaczonej na wsparcie o charakterze bezzwrotnym. Symbol ten stosuje się również do oznaczenia wszystkich wydatków ponoszonych w trakcie realizacji przedsięwzięć, których źródłem finansowania są środki pochodzące z darowizn, grantów przyznanych Polsce przez poszczególne kraje lub instytucje (np. grant rządu USA, Królestwa Niderlandów itp.)."
+  },
+  {
+    "kod": "4",
+    "nazwa": "Współfinansowanie pożyczek i kredytów zagranicznych oraz darowizn lub grantów przyznanych Polsce przez poszczególne kraje lub instytucje",
+    "opis": "Symbol ten stosuje się do oznaczenia wszystkich wydatków ponoszonych w trakcie realizacji tych przedsięwzięć finansowanych z pożyczek i kredytów zagranicznych, a także z grantów i darowizn, co do których strona polska podjęła zobowiązanie, że będą one również przez nią finansowane. Zobowiązanie strony polskiej potwierdzone jest w dokumentach przyznania pożyczek lub kredytów zagranicznych z międzynarodowych instytucji finansowych albo w dokumentach przyznania grantów lub darowizn. Źródłem finansowania tych wydatków mogą być np. środki pochodzące z budżetu państwa oraz środki własne jednostek samorządu terytorialnego."
+  },
+  {
+    "kod": "5",
+    "nazwa": "Finansowanie z innych środków bezzwrotnych",
+    "opis": "Symbol ten stosuje się do wydatków budżetu państwa finansowanych ze środków Norweskiego Mechanizmu Finansowego, Mechanizmu Finansowego Europejskiego Obszaru Gospodarczego oraz Szwajcarsko-Polskiego Programu Współpracy, z wyłączeniem środków europejskich, do których stosuje się czwartą cyfrę paragrafu 7."
+  },
+  {
+    "kod": "6",
+    "nazwa": "Współfinansowanie innych środków bezzwrotnych",
+    "opis": "Symbol ten stosuje się do wydatków na współfinansowanie przedsięwzięć realizowanych w ramach Norweskiego Mechanizmu Finansowego, Mechanizmu Finansowego Europejskiego Obszaru Gospodarczego oraz Szwajcarsko-Polskiego Programu Współpracy."
+  },
+  {
+    "kod": "7",
+    "nazwa": "Płatności w zakresie budżetu środków europejskich oraz wypłaty dokonywane przez Polski Fundusz Rozwoju S.A. na realizację Krajowego Planu Odbudowy",
+    "opis": "Symbol ten stosuje się dla wydatków dokonywanych w ramach płatności budżetu środków europejskich. Symbol ten stosuje się również do oznaczenia wydatków jednostek samorządu terytorialnego ponoszonych ze środków wypłaconych przez Polski Fundusz Rozwoju S.A. przeznaczonych na finansowanie inwestycji i przedsięwzięć realizowanych z udziałem środków, o których mowa w art. 5 ust. 3 pkt 5d ustawy o finansach publicznych."
+  },
+  {
+    "kod": "8",
+    "nazwa": "Finansowanie programów i projektów ze środków, o których mowa w art. 5 ust. 3 ustawy, z wyłączeniem środków, o których mowa w art. 5 ust. 3 pkt 2, pkt 5 lit. c i d oraz pkt 6 ustawy oraz z wyłączeniem budżetu środków europejskich",
+    "opis": "Symbol ten stosuje się do oznaczenia wszystkich wydatków ponoszonych w trakcie realizacji przedsięwzięć w ramach danego programu lub projektu finansowanego ze środków pochodzących z budżetu UE, o których mowa w art. 5 ust. 3 ustawy, z wyłączeniem środków, o których mowa w art. 5 ust. 3 pkt 2, pkt 5 lit. c i d oraz pkt 6 ustawy (do których stosowana jest czwarta cyfra paragrafu 5 lub 1) oraz z wyłączeniem budżetu środków europejskich, a także z wyjątkiem wydatków oznaczonych cyfrą 9. Symbol ten stosuje się również do oznaczenia wydatków ponoszonych na finansowanie Programu Rozwoju Obszarów Wiejskich w ramach Wspólnej Polityki Rolnej, z udziałem funduszy unijnych finansujących Wspólną Politykę Rolną. Stosuje się go również do wydatków, których źródłem finansowania jest pożyczka na prefinansowanie z budżetu państwa."
+  },
+  {
+    "kod": "9",
+    "nazwa": "Współfinansowanie programów i projektów realizowanych ze środków, o których mowa w art. 5 ust. 3 ustawy, z wyłączeniem środków, o których mowa w art. 5 ust. 3 pkt 2, pkt 5 lit. c i d oraz pkt 6 ustawy Symbol ten stosuje się do oznaczenia wydatków ponoszonych w trakcie realizacji przedsięwzięć finansowanych ze środków pochodzących z budżetu UE, o których mowa w art. 5 ust. 3 ustawy, z wyłączeniem środków, o których mowa w art. 5 ust. 3 pkt 2, pkt 5 lit. c i d oraz pkt 6 ustawy (do których stosowana jest czwarta cyfra 6 lub 2), stanowiących krajowy wkład publiczny w realizację programu lub projektu. Źródłem finansowania tych wydatków mogą być na przykład środki pochodzące z budżetu państwa (z wyłączeniem środków otrzymanych z tytułu pożyczki na prefinansowanie) bądź środki własne jednostek sektora finansów publicznych."
+  }
+]

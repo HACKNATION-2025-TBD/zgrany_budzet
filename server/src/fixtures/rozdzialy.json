@@ -1,0 +1,2087 @@
+[
+  {
+    "kod": "01001",
+    "nazwa": "Centrum Doradztwa Rolniczego ośrodki",
+    "dzial": "010"
+  },
+  {
+    "kod": "01002",
+    "nazwa": "Biura geodezji i terenów rolnych",
+    "dzial": "010"
+  },
+  {
+    "kod": "01004",
+    "nazwa": "Wojewódzkie doradztwa rolniczego",
+    "dzial": "010"
+  },
+  {
+    "kod": "01005",
+    "nazwa": "Prace geodezyjno-urządzeniowe na potrzeby rolnictwa",
+    "dzial": "010"
+  },
+  {
+    "kod": "01006",
+    "nazwa": "Zarządy melioracji i urządzeń wodnych",
+    "dzial": "010"
+  },
+  {
+    "kod": "01007",
+    "nazwa": "Zakłady konserwacji urządzeń wodnych i melioracji wodne",
+    "dzial": "010"
+  },
+  {
+    "kod": "01008",
+    "nazwa": "Spółki wodne",
+    "dzial": "010"
+  },
+  {
+    "kod": "01009",
+    "nazwa": "Krajowa Stacja Chemiczno-Rolnicza",
+    "dzial": "010"
+  },
+  {
+    "kod": "01011",
+    "nazwa": "Centralny Ośrodek Badania Odmian Roślin Uprawnych",
+    "dzial": "010"
+  },
+  {
+    "kod": "01013",
+    "nazwa": "Melioracje",
+    "dzial": "010"
+  },
+  {
+    "kod": "01015",
+    "nazwa": "Postęp biologiczny w produkcji roślinnej",
+    "dzial": "010"
+  },
+  {
+    "kod": "01017",
+    "nazwa": "Ochrona roślin",
+    "dzial": "010"
+  },
+  {
+    "kod": "01018",
+    "nazwa": "Rolnictwo ekologiczne",
+    "dzial": "010"
+  },
+  {
+    "kod": "01019",
+    "nazwa": "Krajowe Centrum Hodowli Zwierząt",
+    "dzial": "010"
+  },
+  {
+    "kod": "01020",
+    "nazwa": "Postęp biologiczny w produkcji zwierzęcej",
+    "dzial": "010"
+  },
+  {
+    "kod": "01021",
+    "nazwa": "Główny Inspektorat Weterynarii",
+    "dzial": "010"
+  },
+  {
+    "kod": "01022",
+    "nazwa": "Zwalczanie chorób zakaźnych zwierząt oraz badania monitoringowe pozostałości chemicznych i biologicznych w tkankach zwierząt i produktach pochodzenia zwierzęcego",
+    "dzial": "010"
+  },
+  {
+    "kod": "01023",
+    "nazwa": "Inspekcja Jakości Handlowej Artykułów Rolno-Spożywczych",
+    "dzial": "010"
+  },
+  {
+    "kod": "01024",
+    "nazwa": "Działalność Krajowego Ośrodka Wsparcia Rolnictwa",
+    "dzial": "010"
+  },
+  {
+    "kod": "01026",
+    "nazwa": "Dopłaty do ubezpieczeń upraw rolnych i zwierząt gospodarskich",
+    "dzial": "010"
+  },
+  {
+    "kod": "01027",
+    "nazwa": "Agencja Restrukturyzacji i Modernizacji Rolnictwa",
+    "dzial": "010"
+  },
+  {
+    "kod": "01029",
+    "nazwa": "Dopłaty do oprocentowania kredytów na cele rolnicze",
+    "dzial": "010"
+  },
+  {
+    "kod": "01030",
+    "nazwa": "Izby rolnicze",
+    "dzial": "010"
+  },
+  {
+    "kod": "01031",
+    "nazwa": "Grupy producentów rolnych",
+    "dzial": "010"
+  },
+  {
+    "kod": "01032",
+    "nazwa": "Państwowa Inspekcja Ochrony Roślin i Nasiennictwa",
+    "dzial": "010"
+  },
+  {
+    "kod": "01033",
+    "nazwa": "Wojewódzkie inspektoraty weterynarii",
+    "dzial": "010"
+  },
+  {
+    "kod": "01034",
+    "nazwa": "Powiatowe inspektoraty weterynarii",
+    "dzial": "010"
+  },
+  {
+    "kod": "01035",
+    "nazwa": "Graniczne inspektoraty weterynarii",
+    "dzial": "010"
+  },
+  {
+    "kod": "01036",
+    "nazwa": "Restrukturyzacja i modernizacja sektora żywnościowego oraz rozwój obszarów wiejskich",
+    "dzial": "010"
+  },
+  {
+    "kod": "01037",
+    "nazwa": "Płatności uzupełniające do gruntów rolnych",
+    "dzial": "010"
+  },
+  {
+    "kod": "01038",
+    "nazwa": "Rozwój obszarów wiejskich",
+    "dzial": "010"
+  },
+  {
+    "kod": "01039",
+    "nazwa": "Pozostałe zadania Wspólnej Polityki Rolnej",
+    "dzial": "010"
+  },
+  {
+    "kod": "01040",
+    "nazwa": "Opłaty cukrowe",
+    "dzial": "010"
+  },
+  {
+    "kod": "01041",
+    "nazwa": "Program Rozwoju Obszarów Wiejskich",
+    "dzial": "010"
+  },
+  {
+    "kod": "01042",
+    "nazwa": "Wyłączenie z produkcji gruntów rolnych",
+    "dzial": "010"
+  },
+  {
+    "kod": "01043",
+    "nazwa": "Infrastruktura wodociągowa wsi",
+    "dzial": "010"
+  },
+  {
+    "kod": "01044",
+    "nazwa": "Infrastruktura sanitacyjna wsi",
+    "dzial": "010"
+  },
+  {
+    "kod": "01078",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "010"
+  },
+  {
+    "kod": "01045",
+    "nazwa": "Europejski Fundusz Rolny na rzecz Rozwoju Obszarów Wiejskich",
+    "dzial": "010"
+  },
+  {
+    "kod": "01079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "010"
+  },
+  {
+    "kod": "01080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "010"
+  },
+  {
+    "kod": "01095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "010"
+  },
+  {
+    "kod": "02001",
+    "nazwa": "Gospodarka leśna",
+    "dzial": "020"
+  },
+  {
+    "kod": "02002",
+    "nazwa": "Nadzór nad gospodarką leśną",
+    "dzial": "020"
+  },
+  {
+    "kod": "02003",
+    "nazwa": "Biuro Nasiennictwa Leśnego",
+    "dzial": "020"
+  },
+  {
+    "kod": "02078",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "020"
+  },
+  {
+    "kod": "02079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "020"
+  },
+  {
+    "kod": "02080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "020"
+  },
+  {
+    "kod": "02095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "020"
+  },
+  {
+    "kod": "05001",
+    "nazwa": "Rybołówstwo",
+    "dzial": "050"
+  },
+  {
+    "kod": "05002",
+    "nazwa": "Rybactwo",
+    "dzial": "050"
+  },
+  {
+    "kod": "05003",
+    "nazwa": "Państwowa Straż Rybacka",
+    "dzial": "050"
+  },
+  {
+    "kod": "05004",
+    "nazwa": "Główny Inspektorat Rybołówstwa Morskiego",
+    "dzial": "050"
+  },
+  {
+    "kod": "05006",
+    "nazwa": "Zarybianie polskich obszarów morskich",
+    "dzial": "050"
+  },
+  {
+    "kod": "05008",
+    "nazwa": "Organizacje producentów rybnych",
+    "dzial": "050"
+  },
+  {
+    "kod": "05009",
+    "nazwa": "Rybołówstwo i przetwórstwo ryb",
+    "dzial": "050"
+  },
+  {
+    "kod": "05010",
+    "nazwa": "Pozostałe zadania Wspólnej Polityki Rybackiej",
+    "dzial": "050"
+  },
+  {
+    "kod": "05011",
+    "nazwa": "Program Operacyjny Zrównoważony rozwój sektora rybołówstwa i nadbrzeżnych obszarów rybackich 2007-2013, Program Operacyjny Rybactwo i Morze 2014-2020 oraz Program Fundusze Europejskie dla Rybactwa",
+    "dzial": "050"
+  },
+  {
+    "kod": "05078",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "050"
+  },
+  {
+    "kod": "05079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "050"
+  },
+  {
+    "kod": "05080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "050"
+  },
+  {
+    "kod": "05095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "050"
+  },
+  {
+    "kod": "10001",
+    "nazwa": "Górnictwo węgla kamiennego",
+    "dzial": "100"
+  },
+  {
+    "kod": "10002",
+    "nazwa": "Górnictwo węgla brunatnego",
+    "dzial": "100"
+  },
+  {
+    "kod": "10003",
+    "nazwa": "Kopalnictwo rud cynkowo-ołowiowych",
+    "dzial": "100"
+  },
+  {
+    "kod": "10004",
+    "nazwa": "Kopalnictwo minerałów dla przemysłu chemicznego oraz do produkcji nawozów",
+    "dzial": "100"
+  },
+  {
+    "kod": "10005",
+    "nazwa": "Produkcja soli",
+    "dzial": "100"
+  },
+  {
+    "kod": "10006",
+    "nazwa": "Pozostałe górnictwo i kopalnictwo",
+    "dzial": "100"
+  },
+  {
+    "kod": "10078",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "100"
+  },
+  {
+    "kod": "10079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "100"
+  },
+  {
+    "kod": "10080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "100"
+  },
+  {
+    "kod": "10095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "100"
+  },
+  {
+    "kod": "15001",
+    "nazwa": "Drukarnie",
+    "dzial": "150"
+  },
+  {
+    "kod": "15002",
+    "nazwa": "Wydawanie podręczników szkolnych i akademickich",
+    "dzial": "150"
+  },
+  {
+    "kod": "15004",
+    "nazwa": "Zadania w zakresie bezpiecznego wykorzystania energii atomowej",
+    "dzial": "150"
+  },
+  {
+    "kod": "15005",
+    "nazwa": "Stacje ratownictwa chemicznego",
+    "dzial": "150"
+  },
+  {
+    "kod": "15006",
+    "nazwa": "Hutnictwo",
+    "dzial": "150"
+  },
+  {
+    "kod": "15008",
+    "nazwa": "Naprawa i konserwacja sprzętu medycznego",
+    "dzial": "150"
+  },
+  {
+    "kod": "15011",
+    "nazwa": "Rozwój przedsiębiorczości",
+    "dzial": "150"
+  },
+  {
+    "kod": "15012",
+    "nazwa": "Polska Agencja Rozwoju Przedsiębiorczości",
+    "dzial": "150"
+  },
+  {
+    "kod": "15013",
+    "nazwa": "Rozwój kadr nowoczesnej gospodarki i przedsiębiorczości",
+    "dzial": "150"
+  },
+  {
+    "kod": "15014",
+    "nazwa": "Wsparcie finansowe inwestycji",
+    "dzial": "150"
+  },
+  {
+    "kod": "15015",
+    "nazwa": "Rozliczenie kosztów przedsięwzięć realizowanych za granicą",
+    "dzial": "150"
+  },
+  {
+    "kod": "15017",
+    "nazwa": "Rozliczenia z tytułu gwarantowanych przez Skarb Państwa ubezpieczeń eksportowych",
+    "dzial": "150"
+  },
+  {
+    "kod": "15019",
+    "nazwa": "Wspieranie polskiego eksportu",
+    "dzial": "150"
+  },
+  {
+    "kod": "15020",
+    "nazwa": "Rozwój rynku oraz infrastruktury paliw alternatywnych",
+    "dzial": "150"
+  },
+  {
+    "kod": "15021",
+    "nazwa": "Program polskiej energetyki jądrowej",
+    "dzial": "150"
+  },
+  {
+    "kod": "15078",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "150"
+  },
+  {
+    "kod": "15079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "150"
+  },
+  {
+    "kod": "15080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "150"
+  },
+  {
+    "kod": "15095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "150"
+  },
+  {
+    "kod": "40001",
+    "nazwa": "Dostarczanie ciepła",
+    "dzial": "400"
+  },
+  {
+    "kod": "40002",
+    "nazwa": "Dostarczanie wody",
+    "dzial": "400"
+  },
+  {
+    "kod": "40003",
+    "nazwa": "Dostarczanie energii elektrycznej",
+    "dzial": "400"
+  },
+  {
+    "kod": "40004",
+    "nazwa": "Dostarczanie paliw gazowych",
+    "dzial": "400"
+  },
+  {
+    "kod": "40078",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "400"
+  },
+  {
+    "kod": "40079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "400"
+  },
+  {
+    "kod": "40080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "400"
+  },
+  {
+    "kod": "40095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "400"
+  },
+  {
+    "kod": "50001",
+    "nazwa": "Inspekcja Handlowa",
+    "dzial": "500"
+  },
+  {
+    "kod": "50003",
+    "nazwa": "Działalność Rządowej Agencji Rezerw Strategicznych",
+    "dzial": "500"
+  },
+  {
+    "kod": "50004",
+    "nazwa": "Utrzymanie obowiązkowych zapasów paliw ciekłych",
+    "dzial": "500"
+  },
+  {
+    "kod": "50005",
+    "nazwa": "Promocja eksportu",
+    "dzial": "500"
+  },
+  {
+    "kod": "50079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "500"
+  },
+  {
+    "kod": "50080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "500"
+  },
+  {
+    "kod": "50095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "500"
+  },
+  {
+    "kod": "55001",
+    "nazwa": "Schroniska turystyczne",
+    "dzial": "550"
+  },
+  {
+    "kod": "55002",
+    "nazwa": "Kempingi, pola biwakowe",
+    "dzial": "550"
+  },
+  {
+    "kod": "55003",
+    "nazwa": "Bary mleczne",
+    "dzial": "550"
+  },
+  {
+    "kod": "55078",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "550"
+  },
+  {
+    "kod": "55079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "550"
+  },
+  {
+    "kod": "55080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "550"
+  },
+  {
+    "kod": "55095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "550"
+  },
+  {
+    "kod": "60001",
+    "nazwa": "Krajowe pasażerskie przewozy kolejowe",
+    "dzial": "600"
+  },
+  {
+    "kod": "60002",
+    "nazwa": "Infrastruktura kolejowa",
+    "dzial": "600"
+  },
+  {
+    "kod": "60003",
+    "nazwa": "Krajowe pasażerskie przewozy autobusowe",
+    "dzial": "600"
+  },
+  {
+    "kod": "60004",
+    "nazwa": "Lokalny transport zbiorowy",
+    "dzial": "600"
+  },
+  {
+    "kod": "60005",
+    "nazwa": "Autostrady płatne",
+    "dzial": "600"
+  },
+  {
+    "kod": "60011",
+    "nazwa": "Drogi publiczne krajowe",
+    "dzial": "600"
+  },
+  {
+    "kod": "60012",
+    "nazwa": "Generalna Dyrekcja Dróg Krajowych i Autostrad",
+    "dzial": "600"
+  },
+  {
+    "kod": "60013",
+    "nazwa": "Drogi publiczne wojewódzkie",
+    "dzial": "600"
+  },
+  {
+    "kod": "60014",
+    "nazwa": "Drogi publiczne powiatowe",
+    "dzial": "600"
+  },
+  {
+    "kod": "60015",
+    "nazwa": "Drogi publiczne w miastach na prawach powiatu",
+    "dzial": "600"
+  },
+  {
+    "kod": "60016",
+    "nazwa": "Drogi publiczne gminne",
+    "dzial": "600"
+  },
+  {
+    "kod": "60017",
+    "nazwa": "Drogi wewnętrzne",
+    "dzial": "600"
+  },
+  {
+    "kod": "60018",
+    "nazwa": "Działalność Rządowego Funduszu Rozwoju Dróg",
+    "dzial": "600"
+  },
+  {
+    "kod": "60019",
+    "nazwa": "Płatne parkowanie",
+    "dzial": "600"
+  },
+  {
+    "kod": "60020",
+    "nazwa": "Funkcjonowanie przystanków komunikacyjnych",
+    "dzial": "600"
+  },
+  {
+    "kod": "60021",
+    "nazwa": "Funkcjonowanie dworców i węzłów przesiadkowych",
+    "dzial": "600"
+  },
+  {
+    "kod": "60022",
+    "nazwa": "Funkcjonowanie systemów rowerów publicznych",
+    "dzial": "600"
+  },
+  {
+    "kod": "60031",
+    "nazwa": "Przejścia graniczne",
+    "dzial": "600"
+  },
+  {
+    "kod": "60041",
+    "nazwa": "Infrastruktura portowa",
+    "dzial": "600"
+  },
+  {
+    "kod": "60042",
+    "nazwa": "Urzędy żeglugi śródlądowej",
+    "dzial": "600"
+  },
+  {
+    "kod": "60043",
+    "nazwa": "Urzędy morskie",
+    "dzial": "600"
+  },
+  {
+    "kod": "60044",
+    "nazwa": "Ratownictwo morskie",
+    "dzial": "600"
+  },
+  {
+    "kod": "60046",
+    "nazwa": "Operatorzy pocztowi",
+    "dzial": "600"
+  },
+  {
+    "kod": "60047",
+    "nazwa": "Urząd Komunikacji Elektronicznej",
+    "dzial": "600"
+  },
+  {
+    "kod": "60052",
+    "nazwa": "Zadania w zakresie telekomunikacji",
+    "dzial": "600"
+  },
+  {
+    "kod": "60053",
+    "nazwa": "Infrastruktura telekomunikacyjna",
+    "dzial": "600"
+  },
+  {
+    "kod": "60055",
+    "nazwa": "Inspekcja Transportu Drogowego",
+    "dzial": "600"
+  },
+  {
+    "kod": "60056",
+    "nazwa": "Urząd Lotnictwa Cywilnego",
+    "dzial": "600"
+  },
+  {
+    "kod": "60060",
+    "nazwa": "Fundusz Żeglugi Śródlądowej i Fundusz Rezerwowy",
+    "dzial": "600"
+  },
+  {
+    "kod": "60061",
+    "nazwa": "Polska Agencja Żeglugi Powietrznej",
+    "dzial": "600"
+  },
+  {
+    "kod": "60078",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "600"
+  },
+  {
+    "kod": "60079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "600"
+  },
+  {
+    "kod": "60080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "600"
+  },
+  {
+    "kod": "60095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "600"
+  },
+  {
+    "kod": "63001",
+    "nazwa": "Ośrodki informacji turystycznej",
+    "dzial": "630"
+  },
+  {
+    "kod": "63002",
+    "nazwa": "Polska Organizacja Turystyczna",
+    "dzial": "630"
+  },
+  {
+    "kod": "63003",
+    "nazwa": "Zadania w zakresie upowszechniania turystyki",
+    "dzial": "630"
+  },
+  {
+    "kod": "63078",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "630"
+  },
+  {
+    "kod": "63079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "630"
+  },
+  {
+    "kod": "63080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "630"
+  },
+  {
+    "kod": "63095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "630"
+  },
+  {
+    "kod": "70001",
+    "nazwa": "Zakłady gospodarki mieszkaniowej",
+    "dzial": "700"
+  },
+  {
+    "kod": "70004",
+    "nazwa": "Różne jednostki obsługi gospodarki mieszkaniowej",
+    "dzial": "700"
+  },
+  {
+    "kod": "70005",
+    "nazwa": "Gospodarka gruntami i nieruchomościami",
+    "dzial": "700"
+  },
+  {
+    "kod": "70006",
+    "nazwa": "Krajowy Zasób Nieruchomości",
+    "dzial": "700"
+  },
+  {
+    "kod": "70007",
+    "nazwa": "Gospodarowanie mieszkaniowym zasobem gminy",
+    "dzial": "700"
+  },
+  {
+    "kod": "70014",
+    "nazwa": "Umorzenie kredytów mieszkaniowych",
+    "dzial": "700"
+  },
+  {
+    "kod": "70015",
+    "nazwa": "Refundacja premii gwarancyjnych oraz premii za systematyczne oszczędzanie",
+    "dzial": "700"
+  },
+  {
+    "kod": "70017",
+    "nazwa": "Wykup odsetek od kredytów mieszkaniowych",
+    "dzial": "700"
+  },
+  {
+    "kod": "70018",
+    "nazwa": "Rządowy Fundusz Mieszkaniowy",
+    "dzial": "700"
+  },
+  {
+    "kod": "70020",
+    "nazwa": "Fundusz Termomodernizacji i Remontów",
+    "dzial": "700"
+  },
+  {
+    "kod": "70021",
+    "nazwa": "Społeczne inicjatywy mieszkaniowe",
+    "dzial": "700"
+  },
+  {
+    "kod": "70022",
+    "nazwa": "Fundusz Dopłat",
+    "dzial": "700"
+  },
+  {
+    "kod": "70023",
+    "nazwa": "Refundacja spółdzielniom mieszkaniowym kosztów prac związanych z podziałem nieruchomości oraz ewidencją gruntów i budynków",
+    "dzial": "700"
+  },
+  {
+    "kod": "70078",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "700"
+  },
+  {
+    "kod": "70079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "700"
+  },
+  {
+    "kod": "70080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "700"
+  },
+  {
+    "kod": "70095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "700"
+  },
+  {
+    "kod": "71001",
+    "nazwa": "Zespoły usług projektowych",
+    "dzial": "710"
+  },
+  {
+    "kod": "71002",
+    "nazwa": "Jednostki organizacji i nadzoru inwestycyjnego",
+    "dzial": "710"
+  },
+  {
+    "kod": "71003",
+    "nazwa": "Biura planowania przestrzennego",
+    "dzial": "710"
+  },
+  {
+    "kod": "71004",
+    "nazwa": "Plany zagospodarowania przestrzennego",
+    "dzial": "710"
+  },
+  {
+    "kod": "71005",
+    "nazwa": "Prace geologiczne (nieinwestycyjne)",
+    "dzial": "710"
+  },
+  {
+    "kod": "71012",
+    "nazwa": "Zadania z zakresu geodezji i kartografii",
+    "dzial": "710"
+  },
+  {
+    "kod": "71013",
+    "nazwa": "Prace geodezyjne i kartograficzne na potrzeby organów administracji geodezyjnej i kartograficznej",
+    "dzial": "710"
+  },
+  {
+    "kod": "71015",
+    "nazwa": "Nadzór budowlany",
+    "dzial": "710"
+  },
+  {
+    "kod": "71017",
+    "nazwa": "Polskie Centrum Akredytacji",
+    "dzial": "710"
+  },
+  {
+    "kod": "71020",
+    "nazwa": "Organizacja targów i wystaw",
+    "dzial": "710"
+  },
+  {
+    "kod": "71021",
+    "nazwa": "Główny Urząd Geodezji i Kartografii",
+    "dzial": "710"
+  },
+  {
+    "kod": "71030",
+    "nazwa": "Fundusz Gospodarki Zasobem Geodezyjnym i Kartograficznym",
+    "dzial": "710"
+  },
+  {
+    "kod": "71031",
+    "nazwa": "Centrum Badania Opinii Społecznej",
+    "dzial": "710"
+  },
+  {
+    "kod": "71035",
+    "nazwa": "Cmentarze",
+    "dzial": "710"
+  },
+  {
+    "kod": "71078",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "710"
+  },
+  {
+    "kod": "71079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "710"
+  },
+  {
+    "kod": "71080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "710"
+  },
+  {
+    "kod": "71095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "710"
+  },
+  {
+    "kod": "72001",
+    "nazwa": "Działalność Centrum Informatyki Statystycznej",
+    "dzial": "720"
+  },
+  {
+    "kod": "72003",
+    "nazwa": "Działalność Funduszu Cyberbezpieczeństwa",
+    "dzial": "720"
+  },
+  {
+    "kod": "72079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "720"
+  },
+  {
+    "kod": "72080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "720"
+  },
+  {
+    "kod": "72095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "720"
+  },
+  {
+    "kod": "73007",
+    "nazwa": "Współpraca z zagranicą",
+    "dzial": "730"
+  },
+  {
+    "kod": "73008",
+    "nazwa": "Działalność Narodowego Centrum Badań i Rozwoju",
+    "dzial": "730"
+  },
+  {
+    "kod": "73009",
+    "nazwa": "Działalność Narodowego Centrum Nauki",
+    "dzial": "730"
+  },
+  {
+    "kod": "73010",
+    "nazwa": "Działalność organów i korporacji uczonych Polskiej Akademii Nauk",
+    "dzial": "730"
+  },
+  {
+    "kod": "73011",
+    "nazwa": "Działalność pomocniczych jednostek naukowych i innych jednostek organizacyjnych Polskiej Akademii Nauk",
+    "dzial": "730"
+  },
+  {
+    "kod": "73012",
+    "nazwa": "Działalność Polskiej Agencji Kosmicznej",
+    "dzial": "730"
+  },
+  {
+    "kod": "73013",
+    "nazwa": "Działalność w zakresie umiędzynarodowienia nauki i szkolnictwa wyższego",
+    "dzial": "730"
+  },
+  {
+    "kod": "73014",
+    "nazwa": "Działalność dydaktyczna i badawcza",
+    "dzial": "730"
+  },
+  {
+    "kod": "73015",
+    "nazwa": "Działalność dydaktyczna w zakresie związanym z obroną narodową",
+    "dzial": "730"
+  },
+  {
+    "kod": "73016",
+    "nazwa": "Pomoc materialna dla studentów i doktorantów",
+    "dzial": "730"
+  },
+  {
+    "kod": "73017",
+    "nazwa": "Fundusz Kredytów Studenckich",
+    "dzial": "730"
+  },
+  {
+    "kod": "73018",
+    "nazwa": "Programy i przedsięwzięcia ministra właściwego do spraw szkolnictwa wyższego i nauki",
+    "dzial": "730"
+  },
+  {
+    "kod": "73019",
+    "nazwa": "Działalność podmiotów funkcjonujących w obszarze nauki i szkolnictwa wyższego",
+    "dzial": "730"
+  },
+  {
+    "kod": "73020",
+    "nazwa": "Działalność Sieci Badawczej Łukasiewicz",
+    "dzial": "730"
+  },
+  {
+    "kod": "73078",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "730"
+  },
+  {
+    "kod": "73079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "730"
+  },
+  {
+    "kod": "73090",
+    "nazwa": "Rozliczenia środków ewidencjonowanych do 2018 r. w działach 730 - Nauka\" i 803 - Szkolnictwo wyższe\"",
+    "dzial": "730"
+  },
+  {
+    "kod": "73095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "730"
+  },
+  {
+    "kod": "75001",
+    "nazwa": "Urzędy naczelnych i centralnych organów administracji rządowej",
+    "dzial": "750"
+  },
+  {
+    "kod": "75002",
+    "nazwa": "Polski Komitet Normalizacyjny",
+    "dzial": "750"
+  },
+  {
+    "kod": "75003",
+    "nazwa": "Prokuratoria Generalna Rzeczypospolitej Polskiej",
+    "dzial": "750"
+  },
+  {
+    "kod": "75004",
+    "nazwa": "Państwowa Komisja do spraw przeciwdziałania wykorzystaniu seksualnemu małoletnich poniżej lat 15",
+    "dzial": "750"
+  },
+  {
+    "kod": "75006",
+    "nazwa": "Rządowe Centrum Legislacji",
+    "dzial": "750"
+  },
+  {
+    "kod": "75007",
+    "nazwa": "Jednostki terenowe podległe naczelnym i centralnym organom administracji rządowej",
+    "dzial": "750"
+  },
+  {
+    "kod": "75008",
+    "nazwa": "Działalność izb administracji skarbowej wraz z podległymi urzędami skarbowymi i urzędami celno-skarbowymi",
+    "dzial": "750"
+  },
+  {
+    "kod": "75011",
+    "nazwa": "Urzędy wojewódzkie",
+    "dzial": "750"
+  },
+  {
+    "kod": "75014",
+    "nazwa": "Egzekucja administracyjna należności pieniężnych",
+    "dzial": "750"
+  },
+  {
+    "kod": "75015",
+    "nazwa": "Regionalne izby obrachunkowe",
+    "dzial": "750"
+  },
+  {
+    "kod": "75016",
+    "nazwa": "Samorządowe kolegia odwoławcze",
+    "dzial": "750"
+  },
+  {
+    "kod": "75017",
+    "nazwa": "Samorządowe sejmiki województw",
+    "dzial": "750"
+  },
+  {
+    "kod": "75018",
+    "nazwa": "Urzędy marszałkowskie",
+    "dzial": "750"
+  },
+  {
+    "kod": "75019",
+    "nazwa": "Rady powiatów",
+    "dzial": "750"
+  },
+  {
+    "kod": "75020",
+    "nazwa": "Starostwa powiatowe",
+    "dzial": "750"
+  },
+  {
+    "kod": "75022",
+    "nazwa": "Rady gmin (miast i miast na prawach powiatu)",
+    "dzial": "750"
+  },
+  {
+    "kod": "75023",
+    "nazwa": "Urzędy gmin (miast i miast na prawach powiatu)",
+    "dzial": "750"
+  },
+  {
+    "kod": "75024",
+    "nazwa": "Działalność Krajowej Szkoły Skarbowości",
+    "dzial": "750"
+  },
+  {
+    "kod": "75025",
+    "nazwa": "Zgromadzenie związku metropolitalnego",
+    "dzial": "750"
+  },
+  {
+    "kod": "75026",
+    "nazwa": "Urząd metropolitalny",
+    "dzial": "750"
+  },
+  {
+    "kod": "75027",
+    "nazwa": "Działalność Narodowego Instytutu Wolności - Centrum Rozwoju Społeczeństwa Obywatelskiego",
+    "dzial": "750"
+  },
+  {
+    "kod": "75028",
+    "nazwa": "Działalność Instytutu Współpracy Polsko-Węgierskiej im. Wacława Felczaka",
+    "dzial": "750"
+  },
+  {
+    "kod": "75029",
+    "nazwa": "Działalność Polskiego Instytutu Ekonomicznego",
+    "dzial": "750"
+  },
+  {
+    "kod": "75030",
+    "nazwa": "Działalność Rzecznika Małych i Średnich Przedsiębiorców",
+    "dzial": "750"
+  },
+  {
+    "kod": "75031",
+    "nazwa": "Działalność Instytutu Europy Środkowej",
+    "dzial": "750"
+  },
+  {
+    "kod": "75032",
+    "nazwa": "Działalność Instytutu Pokolenia",
+    "dzial": "750"
+  },
+  {
+    "kod": "75033",
+    "nazwa": "Działalność Instytutu Strat Wojennych im. Jana Karskiego",
+    "dzial": "750"
+  },
+  {
+    "kod": "75046",
+    "nazwa": "Komisje egzaminacyjne",
+    "dzial": "750"
+  },
+  {
+    "kod": "75051",
+    "nazwa": "Wybory Prezydenta Rzeczypospolitej Polskiej",
+    "dzial": "750"
+  },
+  {
+    "kod": "75052",
+    "nazwa": "Wybory do Sejmu i Senatu",
+    "dzial": "750"
+  },
+  {
+    "kod": "75053",
+    "nazwa": "Wybory do rad gmin, rad powiatów i sejmików województw, wybory wójtów, burmistrzów i prezydentów miast oraz referenda gminne, powiatowe i wojewódzkie",
+    "dzial": "750"
+  },
+  {
+    "kod": "75054",
+    "nazwa": "Referenda ogólnokrajowe i konstytucyjne",
+    "dzial": "750"
+  },
+  {
+    "kod": "75055",
+    "nazwa": "Wybory do Parlamentu Europejskiego",
+    "dzial": "750"
+  },
+  {
+    "kod": "75056",
+    "nazwa": "Spis powszechny i inne",
+    "dzial": "750"
+  },
+  {
+    "kod": "75057",
+    "nazwa": "Placówki zagraniczne",
+    "dzial": "750"
+  },
+  {
+    "kod": "75058",
+    "nazwa": "Działalność informacyjna i kulturalna prowadzona za granicą",
+    "dzial": "750"
+  },
+  {
+    "kod": "75059",
+    "nazwa": "Operacje pokojowe",
+    "dzial": "750"
+  },
+  {
+    "kod": "75061",
+    "nazwa": "Ośrodek Studiów Wschodnich",
+    "dzial": "750"
+  },
+  {
+    "kod": "75062",
+    "nazwa": "Polski Instytut Spraw Międzynarodowych",
+    "dzial": "750"
+  },
+  {
+    "kod": "75063",
+    "nazwa": "Polski Komitet do spraw UNESCO",
+    "dzial": "750"
+  },
+  {
+    "kod": "75065",
+    "nazwa": "Krajowa Szkoła Administracji Publicznej",
+    "dzial": "750"
+  },
+  {
+    "kod": "75068",
+    "nazwa": "Rada do Spraw Uchodźców",
+    "dzial": "750"
+  },
+  {
+    "kod": "75069",
+    "nazwa": "Zadania realizowane w placówkach zagranicznych przez przedstawicieli organów administracji rządowej",
+    "dzial": "750"
+  },
+  {
+    "kod": "75070",
+    "nazwa": "Centrum Personalizacji Dokumentów",
+    "dzial": "750"
+  },
+  {
+    "kod": "75072",
+    "nazwa": "Centrum Partnerstwa Społecznego Dialog",
+    "dzial": "750"
+  },
+  {
+    "kod": "75073",
+    "nazwa": "Urząd do Spraw Cudzoziemców",
+    "dzial": "750"
+  },
+  {
+    "kod": "75074",
+    "nazwa": "Działalność Rady do Spraw Polaków poza Granicami Kraju",
+    "dzial": "750"
+  },
+  {
+    "kod": "75075",
+    "nazwa": "Promocja jednostek samorządu terytorialnego",
+    "dzial": "750"
+  },
+  {
+    "kod": "75076",
+    "nazwa": "Prezydencja Rzeczypospolitej Polskiej w Radzie Unii Europejskiej w 2025 roku",
+    "dzial": "750"
+  },
+  {
+    "kod": "75077",
+    "nazwa": "Centrum Projektów Polska Cyfrowa",
+    "dzial": "750"
+  },
+  {
+    "kod": "75078",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "750"
+  },
+  {
+    "kod": "75079",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "750"
+  },
+  {
+    "kod": "75080",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "750"
+  },
+  {
+    "kod": "75081",
+    "nazwa": "System powiadamiania ratunkowego",
+    "dzial": "750"
+  },
+  {
+    "kod": "75082",
+    "nazwa": "Działalność Krajowej Informacji Skarbowej",
+    "dzial": "750"
+  },
+  {
+    "kod": "75083",
+    "nazwa": "Funkcjonowanie Rady i Biura Rady Dialogu Społecznego",
+    "dzial": "750"
+  },
+  {
+    "kod": "75084",
+    "nazwa": "Funkcjonowanie wojewódzkich rad dialogu społecznego",
+    "dzial": "750"
+  },
+  {
+    "kod": "75085",
+    "nazwa": "Wspólna obsługa jednostek samorządu terytorialnego",
+    "dzial": "750"
+  },
+  {
+    "kod": "75086",
+    "nazwa": "Działalność Instytutu Zachodniego im. Zygmunta Wojciechowskiego",
+    "dzial": "750"
+  },
+  {
+    "kod": "75087",
+    "nazwa": "Ministerstwo Skarbu Państwa w likwidacji",
+    "dzial": "750"
+  },
+  {
+    "kod": "75088",
+    "nazwa": "Działalność Centrum Informatyki Resortu Finansów",
+    "dzial": "750"
+  },
+  {
+    "kod": "75089",
+    "nazwa": "Działalność Instytutu Finansów",
+    "dzial": "750"
+  },
+  {
+    "kod": "75090",
+    "nazwa": "Działalność Instytutu De Republica",
+    "dzial": "750"
+  },
+  {
+    "kod": "75095",
+    "nazwa": "Pozostała działalność",
+    "dzial": "750"
+  },
+  {
+    "kod": "75101",
+    "nazwa": "Urzędy naczelnych organów władzy państwowej, kontroli i ochrony prawa",
+    "dzial": "751"
+  },
+  {
+    "kod": "75102",
+    "nazwa": "Naczelne organy sądownictwa",
+    "dzial": "751"
+  },
+  {
+    "kod": "75103",
+    "nazwa": "Biuro Bezpieczeństwa Narodowego",
+    "dzial": "751"
+  },
+  {
+    "kod": "75104",
+    "nazwa": "Krajowa Rada Sądownictwa",
+    "dzial": "751"
+  },
+  {
+    "kod": "75106",
+    "nazwa": "Odznaczenia państwowe",
+    "dzial": "751"
+  },
+  {
+    "kod": "75107",
+    "nazwa": "Wybory Prezydenta Rzeczypospolitej Polskiej",
+    "dzial": "751"
+  },
+  {
+    "kod": "75108",
+    "nazwa": "Wybory do Sejmu i Senatu",
+    "dzial": "751"
+  },
+  {
+    "kod": "75109",
+    "nazwa": "Wybory do rad gmin, rad powiatów i sejmików województw, wybory wójtów, burmistrzów i prezydentów miast oraz referenda gminne, powiatowe i wojewódzkie",
+    "dzial": "751"
+  },
+  {
+    "kod": "75110",
+    "nazwa": "Referenda ogólnokrajowe i konstytucyjne",
+    "dzial": "751"
+  },
+  {
+    "kod": "75111",
+    "nazwa": "Biuro Polityki Międzynarodowej",
+    "dzial": "751"
+  },
+  {
+    "kod": "75112",
+    "nazwa": "Jednostki podległe Instytutowi Pamięci Narodowej - Komisji Ścigania Zbrodni przeciwko Narodowi Polskiemu",
+    "dzial": "751"
+  },
+  {
+    "kod": "75113",
+    "nazwa": "Wybory do Parlamentu Europejskiego",
+    "dzial": "751"
+  },
+  {
+    "kod": "75178",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "751"
+  },
+  {
+    "kod": "75179",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "751"
+  },
+  {
+    "kod": "75180",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "751"
+  },
+  {
+    "kod": "75195",
+    "nazwa": "Pozostała działalność",
+    "dzial": "751"
+  },
+  {
+    "kod": "75201",
+    "nazwa": "Wojska Lądowe",
+    "dzial": "752"
+  },
+  {
+    "kod": "75202",
+    "nazwa": "Siły Powietrzne",
+    "dzial": "752"
+  },
+  {
+    "kod": "75203",
+    "nazwa": "Marynarka Wojenna",
+    "dzial": "752"
+  },
+  {
+    "kod": "75204",
+    "nazwa": "Centralne wsparcie",
+    "dzial": "752"
+  },
+  {
+    "kod": "75205",
+    "nazwa": "Jednostki organizacyjne prokuratury powszechnej właściwe w sprawach wojskowych",
+    "dzial": "752"
+  },
+  {
+    "kod": "75206",
+    "nazwa": "Wojska Obrony Terytorialnej",
+    "dzial": "752"
+  },
+  {
+    "kod": "75207",
+    "nazwa": "Żandarmeria Wojskowa",
+    "dzial": "752"
+  },
+  {
+    "kod": "75208",
+    "nazwa": "Duszpasterstwa Wojskowe",
+    "dzial": "752"
+  },
+  {
+    "kod": "75211",
+    "nazwa": "Cyberbezpieczeństwo i wsparcie kryptologiczne",
+    "dzial": "752"
+  },
+  {
+    "kod": "75212",
+    "nazwa": "Pozostałe wydatki obronne",
+    "dzial": "752"
+  },
+  {
+    "kod": "75213",
+    "nazwa": "Dowodzenie i kierowanie Siłami Zbrojnymi Rzeczypospolitej Polskiej",
+    "dzial": "752"
+  },
+  {
+    "kod": "75214",
+    "nazwa": "Wykonywanie funkcji Państwa Gospodarza (HNS)",
+    "dzial": "752"
+  },
+  {
+    "kod": "75215",
+    "nazwa": "Zabezpieczenie potrzeb Sił Zbrojnych realizowanych przez przedsiębiorców",
+    "dzial": "752"
+  },
+  {
+    "kod": "75216",
+    "nazwa": "Wojskowe Misje Pokojowe",
+    "dzial": "752"
+  },
+  {
+    "kod": "75217",
+    "nazwa": "Służba Wywiadu Wojskowego",
+    "dzial": "752"
+  },
+  {
+    "kod": "75218",
+    "nazwa": "Służba Kontrwywiadu Wojskowego",
+    "dzial": "752"
+  },
+  {
+    "kod": "75219",
+    "nazwa": "Wojska Specjalne",
+    "dzial": "752"
+  },
+  {
+    "kod": "75220",
+    "nazwa": "Zabezpieczenie wojsk",
+    "dzial": "752"
+  },
+  {
+    "kod": "75221",
+    "nazwa": "Projekty badawcze i celowe w dziedzinie obronności",
+    "dzial": "752"
+  },
+  {
+    "kod": "75222",
+    "nazwa": "Agencja Mienia Wojskowego",
+    "dzial": "752"
+  },
+  {
+    "kod": "75224",
+    "nazwa": "Kwalifikacja wojskowa",
+    "dzial": "752"
+  },
+  {
+    "kod": "75278",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "752"
+  },
+  {
+    "kod": "75279",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "752"
+  },
+  {
+    "kod": "75280",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "752"
+  },
+  {
+    "kod": "75281",
+    "nazwa": "Zadania o charakterze obronnym wynikające z ustawy o ochronie ludności i obronie cywilnej",
+    "dzial": "752"
+  },
+  {
+    "kod": "75282",
+    "nazwa": "Zadania o charakterze obronnym wynikające z ustawy o ochronie ludności i obronie cywilnej realizowane przez Państwową Straż Pożarną",
+    "dzial": "752"
+  },
+  {
+    "kod": "75295",
+    "nazwa": "Pozostała działalność",
+    "dzial": "752"
+  },
+  {
+    "kod": "75301",
+    "nazwa": "Świadczenia pieniężne z zaopatrzenia emerytalnego",
+    "dzial": "753"
+  },
+  {
+    "kod": "75302",
+    "nazwa": "Uposażenia prokuratorów w stanie spoczynku oraz uposażenia rodzinne",
+    "dzial": "753"
+  },
+  {
+    "kod": "75303",
+    "nazwa": "Fundusz Ubezpieczeń Społecznych",
+    "dzial": "753"
+  },
+  {
+    "kod": "75305",
+    "nazwa": "Fundusz Emerytalno-Rentowy",
+    "dzial": "753"
+  },
+  {
+    "kod": "75306",
+    "nazwa": "Fundusz Prewencji i Rehabilitacji",
+    "dzial": "753"
+  },
+  {
+    "kod": "75307",
+    "nazwa": "Fundusz Administracyjny",
+    "dzial": "753"
+  },
+  {
+    "kod": "75308",
+    "nazwa": "Fundusz Rezerwy Demograficznej",
+    "dzial": "753"
+  },
+  {
+    "kod": "75310",
+    "nazwa": "Fundusz Emerytur Pomostowych",
+    "dzial": "753"
+  },
+  {
+    "kod": "75311",
+    "nazwa": "Renty strukturalne",
+    "dzial": "753"
+  },
+  {
+    "kod": "75312",
+    "nazwa": "Uposażenia sędziów w stanie spoczynku oraz uposażenia rodzinne",
+    "dzial": "753"
+  },
+  {
+    "kod": "75313",
+    "nazwa": "Świadczenia finansowane z budżetu państwa zlecone do wypłaty Zakładowi Ubezpieczeń Społecznych i Kasie Rolniczego Ubezpieczenia Społecznego",
+    "dzial": "753"
+  },
+  {
+    "kod": "75379",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "753"
+  },
+  {
+    "kod": "75380",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "753"
+  },
+  {
+    "kod": "75395",
+    "nazwa": "Pozostała działalność",
+    "dzial": "753"
+  },
+  {
+    "kod": "75401",
+    "nazwa": "Centralne Biuro Śledcze Policji",
+    "dzial": "754"
+  },
+  {
+    "kod": "75402",
+    "nazwa": "Komenda Główna Policji",
+    "dzial": "754"
+  },
+  {
+    "kod": "75403",
+    "nazwa": "Jednostki terenowe Policji",
+    "dzial": "754"
+  },
+  {
+    "kod": "75404",
+    "nazwa": "Komendy wojewódzkie Policji",
+    "dzial": "754"
+  },
+  {
+    "kod": "75405",
+    "nazwa": "Komendy powiatowe Policji",
+    "dzial": "754"
+  },
+  {
+    "kod": "75406",
+    "nazwa": "Straż Graniczna",
+    "dzial": "754"
+  },
+  {
+    "kod": "75407",
+    "nazwa": "Centralne Biuro Zwalczania Cyberprzestępczości",
+    "dzial": "754"
+  },
+  {
+    "kod": "75408",
+    "nazwa": "Działalność Służby Ochrony Państwa",
+    "dzial": "754"
+  },
+  {
+    "kod": "75409",
+    "nazwa": "Komenda Główna Państwowej Straży Pożarnej",
+    "dzial": "754"
+  },
+  {
+    "kod": "75410",
+    "nazwa": "Komendy wojewódzkie Państwowej Straży Pożarnej",
+    "dzial": "754"
+  },
+  {
+    "kod": "75411",
+    "nazwa": "Komendy powiatowe Państwowej Straży Pożarnej",
+    "dzial": "754"
+  },
+  {
+    "kod": "75412",
+    "nazwa": "Ochotnicze straże pożarne",
+    "dzial": "754"
+  },
+  {
+    "kod": "75413",
+    "nazwa": "Pozostałe jednostki ochrony przeciwpożarowej",
+    "dzial": "754"
+  },
+  {
+    "kod": "75414",
+    "nazwa": "Obrona cywilna",
+    "dzial": "754"
+  },
+  {
+    "kod": "75415",
+    "nazwa": "Zadania ratownictwa górskiego i wodnego",
+    "dzial": "754"
+  },
+  {
+    "kod": "75416",
+    "nazwa": "Straż gminna (miejska)",
+    "dzial": "754"
+  },
+  {
+    "kod": "75417",
+    "nazwa": "Organizacja Traktatu Północnoatlantyckiego",
+    "dzial": "754"
+  },
+  {
+    "kod": "75418",
+    "nazwa": "Agencja Bezpieczeństwa Wewnętrznego",
+    "dzial": "754"
+  },
+  {
+    "kod": "75419",
+    "nazwa": "Agencja Wywiadu",
+    "dzial": "754"
+  },
+  {
+    "kod": "75420",
+    "nazwa": "Centralne Biuro Antykorupcyjne",
+    "dzial": "754"
+  },
+  {
+    "kod": "75421",
+    "nazwa": "Zarządzanie kryzysowe",
+    "dzial": "754"
+  },
+  {
+    "kod": "75422",
+    "nazwa": "Krajowe Biuro Informacji i Poszukiwań Polskiego Czerwonego Krzyża",
+    "dzial": "754"
+  },
+  {
+    "kod": "75478",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "754"
+  },
+  {
+    "kod": "75479",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "754"
+  },
+  {
+    "kod": "75480",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "754"
+  },
+  {
+    "kod": "75495",
+    "nazwa": "Pozostała działalność",
+    "dzial": "754"
+  },
+  {
+    "kod": "75501",
+    "nazwa": "Centralne administracyjne jednostki wymiaru sprawiedliwości i prokuratury",
+    "dzial": "755"
+  },
+  {
+    "kod": "75502",
+    "nazwa": "Jednostki sądownictwa powszechnego",
+    "dzial": "755"
+  },
+  {
+    "kod": "75503",
+    "nazwa": "Sądy wojskowe",
+    "dzial": "755"
+  },
+  {
+    "kod": "75504",
+    "nazwa": "Izby morskie",
+    "dzial": "755"
+  },
+  {
+    "kod": "75505",
+    "nazwa": "Jednostki powszechne prokuratury",
+    "dzial": "755"
+  },
+  {
+    "kod": "75506",
+    "nazwa": "Wojskowe jednostki organizacyjne prokuratury",
+    "dzial": "755"
+  },
+  {
+    "kod": "75507",
+    "nazwa": "Instytuty naukowe resortu sprawiedliwości",
+    "dzial": "755"
+  },
+  {
+    "kod": "75512",
+    "nazwa": "Więziennictwo",
+    "dzial": "755"
+  },
+  {
+    "kod": "75513",
+    "nazwa": "Zakłady dla nieletnich",
+    "dzial": "755"
+  },
+  {
+    "kod": "75514",
+    "nazwa": "Krajowa Szkoła Sądownictwa i Prokuratury",
+    "dzial": "755"
+  },
+  {
+    "kod": "75515",
+    "nazwa": "Nieodpłatna pomoc prawna",
+    "dzial": "755"
+  },
+  {
+    "kod": "75578",
+    "nazwa": "Usuwanie skutków klęsk żywiołowych",
+    "dzial": "755"
+  },
+  {
+    "kod": "75579",
+    "nazwa": "Pomoc zagraniczna",
+    "dzial": "755"
+  },
+  {
+    "kod": "75580",
+    "nazwa": "Działalność badawczo-rozwojowa",
+    "dzial": "755"
+  },
+  {
+    "kod": "75595",
+    "nazwa": "Pozostała działalność",
+    "dzial": "755"
+  },
+  {
+    "kod": "75601",
+    "nazwa": "Wpływy z podatku dochodowego od osób fizycznych",
+    "dzial": "756"
+  },
+  {
+    "kod": "75602",
+    "nazwa": "Wpłaty z zysku Narodowego Banku Polskiego i wpłaty od Banku Gospodarstwa Krajowego",
+    "dzial": "756"
+  },
+  {
+    "kod": "75603",
+    "nazwa": "Wpływy z podatku dochodowego od osób prawnych i innych jednostek organizacyjnych",
+    "dzial": "756"
+  },
+  {
+    "kod": "75604",
+    "nazwa": "Wpływy z podatku dochodowego od osób fizycznych pobieranego w wysokości 19% od dochodów z pozarolniczej działalności gospodarczej",
+    "dzial": "756"
+  },
+  {
+    "kod": "75605",
+    "nazwa": "Wpłaty z zysku przedsiębiorstw i jednoosobowych spółek",
+    "dzial": "756"
+  },
+  {
+    "kod": "75606",
+    "nazwa": "Ryczałt od dochodów spółek kapitałowych",
+    "dzial": "756"
+  },
+  {
+    "kod": "75607",
+    "nazwa": "Wpływy z podatku akcyzowego od alkoholu etylowego",
+    "dzial": "756"
+  },
+  {
+    "kod": "75608",
+    "nazwa": "Wpływy z podatku akcyzowego od wina, pozostałych napojów fermentowanych i wyrobów pośrednich",
+    "dzial": "756"
+  },
+  {
+    "kod": "75609",
+    "nazwa": "Wpływy z podatku akcyzowego od piwa",
+    "dzial": "756"
+  },
+  {
+    "kod": "75610",
+    "nazwa": "Wpływy z podatku akcyzowego od paliw silnikowych",
+    "dzial": "756"
+  },
+  {
+    "kod": "75611",
+    "nazwa": "Wpływy z podatku akcyzowego od samochodów osobowych",
+    "dzial": "756"
+  },
+  {
+    "kod": "75612",
+    "nazwa": "Wpływy z podatku akcyzowego od wyrobów tytoniowych",
+    "dzial": "756"
+  },
+  {
+    "kod": "75613",
+    "nazwa": "Wpływy z podatku akcyzowego od pozostałych wyrobów objętych podatkiem akcyzowym",
+    "dzial": "756"
+  },
+  {
+    "kod": "75614",
+    "nazwa": "Wpływy z gier",
+    "dzial": "756"
+  },
+  {
+    "kod": "75615",
+    "nazwa": "Wpływy z podatku rolnego, podatku leśnego, podatku od czynności cywilnoprawnych, podatków i opłat lokalnych od osób prawnych i innych jednostek organizacyjnych",
+    "dzial": "756"
+  },
+  {
+    "kod": "75616",
+    "nazwa": "Wpływy z podatku rolnego, podatku leśnego, podatku od spadków i darowizn, podatku od czynności cywilnoprawnych oraz podatków i opłat lokalnych od osób fizycznych",
+    "dzial": "756"
+  },
+  {
+    "kod": "75617",
+    "nazwa": "Wpływy z innych podatków od innych jednostek (poza wymienionymi w wyodrębnionych rozdziałach)",
+    "dzial": "756"
+  },
+  {
+    "kod": "75618",
+    "nazwa": "Wpływy z innych opłat stanowiących dochody jednostek samorządu terytorialnego na podstawie ustaw",
+    "dzial": "756"
+  },
+  {
+    "kod": "75619",
+    "nazwa": "Wpływy z różnych rozliczeń",
+    "dzial": "756"
+  },
+  {
+    "kod": "75620",
+    "nazwa": "Wpływy z rozliczeń jednostek budżetowych z tytułu potrąceń",
+    "dzial": "756"
+  },
+  {
+    "kod": "75621",
+    "nazwa": "Udziały gmin w podatkach stanowiących dochód budżetu państwa",
+    "dzial": "756"
+  },
+  {
+    "kod": "75622",
+    "nazwa": "Udziały powiatów w podatkach stanowiących dochód budżetu państwa",
+    "dzial": "756"
+  },
+  {
+    "kod": "75623",
+    "nazwa": "Udziały województw w podatkach stanowiących dochód budżetu państwa",
+    "dzial": "756"
+  },
+  {
+    "kod": "75624",
+    "nazwa": "Dywidendy",
+    "dzial": "756"
+  },
+  {
+    "kod": "75625",
+    "nazwa": "Wpływy z podatku akcyzowego od energii elektrycznej",
+    "dzial": "756"
+  },
+  {
+    "kod": "75626",
+    "nazwa": "Wpływy z podatku akcyzowego od paliw opałowych (z wyłączeniem wyrobów węglowych i wyrobów gazowych)",
+    "dzial": "756"
+  },
+  {
+    "kod": "75627",
+    "nazwa": "Wpływy z podatku akcyzowego od gazu do napędu silników spalinowych",
+    "dzial": "756"
+  },
+  {
+    "kod": "75628",
+    "nazwa": "Wpływy z podatku akcyzowego od preparatów smarowych, olejów smarowych i pozostałych olejów",
+    "dzial": "756"
+  },
+  {
+    "kod": "75629",
+    "nazwa": "Wpływy z podatku akcyzowego od wyrobów węglowych",
+    "dzial": "756"
+  },
+  {
+    "kod": "75630",
+    "nazwa": "Wpływy z podatku od wydobycia niektórych kopalin",
+    "dzial": "756"
+  },
+  {
+    "kod": "75631",
+    "nazwa": "Wpływy z podatku akcyzowego od suszu tytoniowego",
+    "dzial": "756"
+  },
+  {
+    "kod": "75632",
+    "nazwa": "Wpływy z podatku akcyzowego od wyrobów gazowych (z wyłączeniem gazu do napędu silników spalinowych)",
+    "dzial": "756"
+  },
+  {
+    "kod": "75633",
+    "nazwa": "Wpływy z podatku dochodowego od osób prawnych od dochodów zagranicznej jednostki kontrolowanej",
+    "dzial": "756"
+  },
+  {
+    "kod": "75634",
+    "nazwa": "Udziały związków metropolitalnych w podatku dochodowym od osób fizycznych",
+    "dzial": "756"
+  },
+  {
+    "kod": "75635",
+    "nazwa": "Wpływy z podatku akcyzowego od płynu do papierosów elektronicznych",
+    "dzial": "756"
+  },
+  {
+    "kod": "75636",
+    "nazwa": "Wpływy z podatku akcyzowego od wyrobów nowatorskich",
+    "dzial": "756"
+  },
+  {
+    "kod": "75637",
+    "nazwa": "Wpływy z podatku dochodowego od osób prawnych od dochodów z niezrealizowanych zysków",
+    "dzial": "756"
+  },
+  {
+    "kod": "75638",
+    "nazwa": "Dochody ze zbycia praw do spółki nieruchomościowej z tytułu wpłat dokonanych przez płatnika",
+    "dzial": "756"
+  },
+  {
+    "kod": "75639",
+    "nazwa": "Ryczałt od przychodów zagranicznych osób przenoszących miejsce zamieszkania na terytorium Rzeczypospolitej Polskiej",
+    "dzial": "756"
+  },
+  {
+    "kod": "75640",
+    "nazwa": "Udziały miast na prawach powiatu w podatkach stanowiących dochód budżetu państwa",
+    "dzial": "756"
+  },
+  {
+    "kod": "75648",
+    "nazwa": "Wpłaty z podatku od towarów i usług od importu towarów rozliczane przez urzędy celno-skarbowe",
+    "dzial": "756"
+  },
+  {
+    "kod": "75650",
+    "nazwa": "Wpłaty ze zryczałtowanego podatku od towarów i usług rozliczane przez urzędy skarbowe od usług taksówek osobowych",
+    "dzial": "756"
+  },
+  {
+    "kod": "75651",
+    "nazwa": "Wpłaty z podatku od towarów i usług rozliczane przez urzędy skarbowe jako dodatkowe zobowiązanie podatkowe z tytułu nieprawidłowości popełnianych przez podatnika przy",
+    "dzial": "756"
+  }
+]
