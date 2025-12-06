@@ -60,6 +60,7 @@ from schemas.rozdzialy import Rozdzial
 from schemas.paragrafy import Paragraf
 from schemas.zrodla_finansowania import ZrodloFinansowania
 from schemas.grupy_wydatkow import GrupaWydatkow
+from schemas.planowanie_budzetu import PlanowanieBudzetu
 
 
 def load_json_fixture(filename: str) -> list[dict]:
