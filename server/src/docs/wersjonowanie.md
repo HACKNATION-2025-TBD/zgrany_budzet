@@ -182,6 +182,40 @@ Zwraca wszystkie wiersze z najnowszymi wersjami wszystkich pól.
 #### GET `/api/planowanie_budzetu/{id}`
 Zwraca pojedynczy wiersz z najnowszymi wersjami wszystkich pól.
 
+#### GET `/api/planowanie_budzetu/{id}/field_history/{field_name}`
+**NOWY ENDPOINT** - Zwraca historię zmian dla konkretnego pola.
+
+Przykładowe wywołanie:
+```
+GET /api/planowanie_budzetu/1/field_history/nazwa_projektu
+```
+
+Odpowiedź:
+```json
+{
+  "field_name": "nazwa_projektu",
+  "history": [
+    {
+      "value": "Nowa nazwa projektu v3",
+      "timestamp": "2024-01-15T16:00:00"
+    },
+    {
+      "value": "Nowa nazwa projektu v2",
+      "timestamp": "2024-01-15T14:30:00"
+    },
+    {
+      "value": "Projekt testowy",
+      "timestamp": "2024-01-15T10:00:00"
+    }
+  ]
+}
+```
+
+**Obsługiwane pola dla planowanie_budzetu:**
+- Pola tekstowe: `nazwa_projektu`, `nazwa_zadania`, `szczegolowe_uzasadnienie_realizacji`, `budzet`
+- Klucze obce (string): `czesc_budzetowa_kod`, `dzial_kod`, `rozdzial_kod`, `paragraf_kod`, `zrodlo_finansowania_kod`
+- Klucze obce (int): `grupa_wydatkow_id`, `komorka_organizacyjna_id`
+
 #### GET `/api/planowanie_budzetu/{id}/history`
 Zwraca pełną historię zmian dla wszystkich pól danego wiersza.
 
@@ -212,11 +246,46 @@ Zwraca pełną historię zmian dla wszystkich pól danego wiersza.
 }
 ```
 
+**Uwaga:** Ten endpoint jest użyteczny gdy potrzebujesz historii wszystkich pól naraz, ale może być wolniejszy dla dużych zbiorów danych. Jeśli potrzebujesz historii tylko jednego pola, użyj `/field_history/{field_name}`.
+
 #### GET `/api/rok_budzetowy`
 Zwraca wszystkie lata budżetowe z najnowszymi wersjami pól.
 
 #### GET `/api/rok_budzetowy/{id}`
 Zwraca pojedynczy rok budżetowy z najnowszymi wersjami pól.
+
+#### GET `/api/rok_budzetowy/{id}/field_history/{field_name}`
+**NOWY ENDPOINT** - Zwraca historię zmian dla konkretnego pola numerycznego.
+
+Przykładowe wywołanie:
+```
+GET /api/rok_budzetowy/1/field_history/limit
+```
+
+Odpowiedź:
+```json
+{
+  "field_name": "limit",
+  "history": [
+    {
+      "value": 80000.00,
+      "timestamp": "2024-01-15T15:00:00"
+    },
+    {
+      "value": 70000.00,
+      "timestamp": "2024-01-15T13:00:00"
+    },
+    {
+      "value": 50000.00,
+      "timestamp": "2024-01-15T10:00:00"
+    }
+  ]
+}
+```
+
+**Obsługiwane pola dla rok_budzetowy:**
+- `limit`
+- `potrzeba`
 
 #### GET `/api/rok_budzetowy/{id}/history`
 Zwraca historię zmian dla pól `limit` i `potrzeba`.
@@ -241,13 +310,56 @@ Gdy aktualizujesz pojedynczą komórkę:
 ### 3. Odczyt Aktualnych Danych
 
 Gdy pobierasz dane:
-1. System dla każdego pola pobiera wszystkie wersje
-2. Wybiera wersję z najnowszym timestampem
-3. Zwraca wartość z tej wersji
+1. System query'uje bazę danych z `ORDER BY timestamp DESC LIMIT 1` dla każdego pola
+2. Wybiera tylko najnowszą wersję bezpośrednio z SQL (bez ładowania wszystkich wersji)
+3. Zwraca wartość z najnowszej wersji
+
+**Optymalizacja:** System NIE ładuje wszystkich wersji do pamięci - query SQL pobiera tylko najnowszą wersję, co jest bardzo wydajne.
 
 ### 4. Odczyt Historii
 
-Gdy pobierasz historię:
-1. System pobiera wszystkie wersje wszystkich pól
+**Endpoint pełnej historii (`/history`):**
+1. System pobiera wszystkie wersje wszystkich pól dla danego wiersza
+2. Sortuje je po timestamp (od najnowszych)
+3. Zwraca listę zmian z timestampami dla każdego pola
+
+**Endpoint historii pojedynczego pola (`/field_history/{field_name}`):**
+1. System pobiera tylko wersje wybranego pola
 2. Sortuje je po timestamp (od najnowszych)
 3. Zwraca listę zmian z timestampami
+
+**Zalecenie:** Używaj `/field_history/{field_name}` gdy potrzebujesz historii tylko jednego pola - jest szybsze i bardziej wydajne.
+
+## Performance i Optymalizacje
+
+### Indeksy Bazodanowe
+
+Dla optymalnej wydajności, w tabelach wersjonowanych powinny być utworzone indeksy:
+
+```sql
+-- Dla versioned_string_fields
+CREATE INDEX idx_versioned_string_lookup 
+ON versioned_string_fields(entity_type, entity_id, field_name, timestamp DESC);
+
+-- Dla versioned_numeric_fields
+CREATE INDEX idx_versioned_numeric_lookup 
+ON versioned_numeric_fields(entity_type, entity_id, field_name, timestamp DESC);
+
+-- Dla versioned_foreign_key_fields
+CREATE INDEX idx_versioned_fk_lookup 
+ON versioned_foreign_key_fields(entity_type, entity_id, field_name, timestamp DESC);
+```
+
+### Query Optimization
+
+System używa zoptymalizowanych query SQL:
+- Zamiast pobierać wszystkie wersje i wybierać najnowszą w Pythonie
+- Query SQL bezpośrednio pobiera tylko najnowszą wersję: `ORDER BY timestamp DESC LIMIT 1`
+- Brak eager loadingu relacji - wszystkie wersje są query'owane on-demand
+
+### Best Practices
+
+1. **Dla UI tabeli/spreadsheet:** Używaj `GET /api/planowanie_budzetu` - pobiera wszystkie wiersze z aktualnymi wartościami
+2. **Dla historii jednego pola:** Używaj `GET /api/.../field_history/{field_name}` - szybsze i bardziej wydajne
+3. **Dla pełnego audytu:** Używaj `GET /api/.../history` - zwraca wszystkie zmiany wszystkich pól
+4. **Dla edycji komórki:** Używaj `PATCH` - aktualizuje tylko jedno pole

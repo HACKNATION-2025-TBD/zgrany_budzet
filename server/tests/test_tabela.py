@@ -310,6 +310,153 @@ class TestPlanowanieBudzetuEndpoints:
         timestamps = [item["timestamp"] for item in history]
         assert timestamps == sorted(timestamps, reverse=True)
 
+    def test_get_field_history_string_field(self, client, db_session):
+        """Test getting history for a specific string field."""
+        # Create record
+        payload = {
+            "nazwa_projektu": "Original Project",
+            "nazwa_zadania": "Original Task",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        create_response = client.post("/api/planowanie_budzetu", json=payload)
+        planowanie_id = create_response.json()["id"]
+
+        # Update nazwa_projektu several times
+        for i in range(3):
+            update_payload = {
+                "field": "nazwa_projektu",
+                "value": f"Updated Project {i+1}"
+            }
+            client.patch(f"/api/planowanie_budzetu/{planowanie_id}", json=update_payload)
+
+        # Get field history
+        response = client.get(f"/api/planowanie_budzetu/{planowanie_id}/field_history/nazwa_projektu")
+        
+        assert response.status_code == 200
+        data = response.json()
+        assert data["field_name"] == "nazwa_projektu"
+        assert "history" in data
+        
+        history = data["history"]
+        assert len(history) == 4  # Original + 3 updates
+        assert history[0]["value"] == "Updated Project 3"  # Most recent
+        assert history[-1]["value"] == "Original Project"  # Original
+        
+        # Verify all have timestamps
+        assert all("timestamp" in item for item in history)
+
+    def test_get_field_history_fk_string_field(self, client, db_session):
+        """Test getting history for a foreign key string field."""
+        # Create record
+        payload = {
+            "nazwa_projektu": "Project",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        create_response = client.post("/api/planowanie_budzetu", json=payload)
+        planowanie_id = create_response.json()["id"]
+
+        # Update dzial_kod
+        for kod in ["801", "802"]:
+            update_payload = {
+                "field": "dzial_kod",
+                "value": kod
+            }
+            client.patch(f"/api/planowanie_budzetu/{planowanie_id}", json=update_payload)
+
+        # Get field history
+        response = client.get(f"/api/planowanie_budzetu/{planowanie_id}/field_history/dzial_kod")
+        
+        assert response.status_code == 200
+        data = response.json()
+        assert data["field_name"] == "dzial_kod"
+        
+        history = data["history"]
+        assert len(history) == 3  # Original + 2 updates
+        assert history[0]["value"] == "802"
+        assert history[1]["value"] == "801"
+        assert history[2]["value"] == "750"
+
+    def test_get_field_history_fk_int_field(self, client, db_session):
+        """Test getting history for a foreign key integer field."""
+        # Create record
+        payload = {
+            "nazwa_projektu": "Project",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        create_response = client.post("/api/planowanie_budzetu", json=payload)
+        planowanie_id = create_response.json()["id"]
+
+        # Update grupa_wydatkow_id
+        for value in [2, 3]:
+            update_payload = {
+                "field": "grupa_wydatkow_id",
+                "value": value
+            }
+            client.patch(f"/api/planowanie_budzetu/{planowanie_id}", json=update_payload)
+
+        # Get field history
+        response = client.get(f"/api/planowanie_budzetu/{planowanie_id}/field_history/grupa_wydatkow_id")
+        
+        assert response.status_code == 200
+        data = response.json()
+        assert data["field_name"] == "grupa_wydatkow_id"
+        
+        history = data["history"]
+        assert len(history) == 3
+        assert history[0]["value"] == 3
+        assert history[1]["value"] == 2
+        assert history[2]["value"] == 1
+
+    def test_get_field_history_unknown_field(self, client, db_session):
+        """Test getting history for a field that doesn't exist."""
+        # Create record
+        payload = {
+            "nazwa_projektu": "Project",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        create_response = client.post("/api/planowanie_budzetu", json=payload)
+        planowanie_id = create_response.json()["id"]
+
+        response = client.get(f"/api/planowanie_budzetu/{planowanie_id}/field_history/non_existent_field")
+        
+        assert response.status_code == 400
+        assert "Unknown field" in response.json()["detail"]
+
+    def test_get_field_history_nonexistent_record(self, client):
+        """Test getting field history for a record that doesn't exist."""
+        response = client.get("/api/planowanie_budzetu/99999/field_history/nazwa_projektu")
+        
+        assert response.status_code == 404
+        assert "not found" in response.json()["detail"].lower()
+
     def test_update_unknown_field(self, client, db_session):
         """Test updating a field that doesn't exist."""
         payload = {
@@ -488,6 +635,125 @@ class TestRokBudzetowyEndpoints:
         assert len(history) == 3  # Original + 2 updates
         assert history[0]["value"] == 70000.00  # Most recent
         assert history[-1]["value"] == 50000.00  # Original
+
+    def test_get_rok_budzetowy_field_history_limit(self, client, db_session):
+        """Test getting history for limit field."""
+        # Create records
+        planowanie_payload = {
+            "nazwa_projektu": "Project",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        planowanie_response = client.post("/api/planowanie_budzetu", json=planowanie_payload)
+        planowanie_id = planowanie_response.json()["id"]
+
+        rok_payload = {
+            "planowanie_budzetu_id": planowanie_id,
+            "limit": 50000.00,
+            "potrzeba": 75000.00
+        }
+        rok_response = client.post("/api/rok_budzetowy", json=rok_payload)
+        rok_id = rok_response.json()["id"]
+
+        # Update limit
+        for value in [60000.00, 70000.00, 80000.00]:
+            update_payload = {
+                "field": "limit",
+                "value": value
+            }
+            client.patch(f"/api/rok_budzetowy/{rok_id}", json=update_payload)
+
+        # Get field history
+        response = client.get(f"/api/rok_budzetowy/{rok_id}/field_history/limit")
+        
+        assert response.status_code == 200
+        data = response.json()
+        assert data["field_name"] == "limit"
+        
+        history = data["history"]
+        assert len(history) == 4  # Original + 3 updates
+        assert history[0]["value"] == 80000.00
+        assert history[-1]["value"] == 50000.00
+
+    def test_get_rok_budzetowy_field_history_potrzeba(self, client, db_session):
+        """Test getting history for potrzeba field."""
+        # Create records
+        planowanie_payload = {
+            "nazwa_projektu": "Project",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        planowanie_response = client.post("/api/planowanie_budzetu", json=planowanie_payload)
+        planowanie_id = planowanie_response.json()["id"]
+
+        rok_payload = {
+            "planowanie_budzetu_id": planowanie_id,
+            "limit": 50000.00,
+            "potrzeba": 75000.00
+        }
+        rok_response = client.post("/api/rok_budzetowy", json=rok_payload)
+        rok_id = rok_response.json()["id"]
+
+        # Update potrzeba
+        update_payload = {
+            "field": "potrzeba",
+            "value": 85000.00
+        }
+        client.patch(f"/api/rok_budzetowy/{rok_id}", json=update_payload)
+
+        # Get field history
+        response = client.get(f"/api/rok_budzetowy/{rok_id}/field_history/potrzeba")
+        
+        assert response.status_code == 200
+        data = response.json()
+        assert data["field_name"] == "potrzeba"
+        
+        history = data["history"]
+        assert len(history) == 2
+        assert history[0]["value"] == 85000.00
+        assert history[1]["value"] == 75000.00
+
+    def test_get_rok_budzetowy_field_history_unknown_field(self, client, db_session):
+        """Test getting history for unknown field in rok_budzetowy."""
+        # Create records
+        planowanie_payload = {
+            "nazwa_projektu": "Project",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        planowanie_response = client.post("/api/planowanie_budzetu", json=planowanie_payload)
+        planowanie_id = planowanie_response.json()["id"]
+
+        rok_payload = {
+            "planowanie_budzetu_id": planowanie_id,
+            "limit": 50000.00,
+            "potrzeba": 75000.00
+        }
+        rok_response = client.post("/api/rok_budzetowy", json=rok_payload)
+        rok_id = rok_response.json()["id"]
+
+        response = client.get(f"/api/rok_budzetowy/{rok_id}/field_history/non_existent_field")
+        
+        assert response.status_code == 400
+        assert "Unknown field" in response.json()["detail"]
 
     def test_create_rok_budzetowy_invalid_planowanie(self, client):
         """Test creating rok_budzetowy with non-existent planowanie_budzetu_id."""
