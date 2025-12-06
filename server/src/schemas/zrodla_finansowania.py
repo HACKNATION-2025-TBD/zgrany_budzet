@@ -8,7 +8,7 @@ class ZrodloFinansowania(Base):
     __tablename__ = "zrodla_finansowania"
 
     kod: Mapped[str] = mapped_column(String(10), primary_key=True)
-    nazwa: Mapped[str] = mapped_column(String(500), nullable=False)
+    nazwa: Mapped[str] = mapped_column(String(1000), nullable=False)
     opis: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     def __repr__(self) -> str:

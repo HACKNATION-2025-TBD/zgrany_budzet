@@ -1,13 +1,11 @@
-
-
-import { usePost } from '../queries';
+import { useDzialy } from '~/queries';
 
 export function meta() {
   return [{ title: 'Dashboard' }];
 }
 
 export default function Dashboard() {
-  const { data: posts, isLoading, isError, error } = usePost();
+  const { data: dzialy, isLoading, isError, error } = useDzialy();
 
   if (isLoading) {
     console.log('is loading');
@@ -15,10 +13,6 @@ export default function Dashboard() {
 
   if (isError) {
     console.log('Error loading dashboard data:', error);
-  }
-
-  if (posts) {
-    console.log('Dashboard data:', posts);
   }
 
   return (
