@@ -10,7 +10,9 @@ import user from '@/assets/user.png';
 export const NavBar = () => {
   return (
     <NavigationMenu className='px-12 py-4 border-border border-b w-screen max-w-screen justify-start flex'>
-      <img src={MC} alt='Ministerstwo Cyfryzacji' width={100} />
+      <Link to="/">
+        <img src={MC} alt='Ministerstwo Cyfryzacji' width={100} />
+      </Link>
       <NavigationMenuList className='px-4 border-l border-border ml-4 gap-4'>
         <NavigationMenuLink asChild>
           <Link to='/'>Budżety</Link>
