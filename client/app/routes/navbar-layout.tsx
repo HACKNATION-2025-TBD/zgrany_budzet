@@ -5,7 +5,7 @@ export default function PageLayout() {
   const navigation = useNavigation();
 
   return (
-    <div className='size-full overflow-hidden'>
+    <div className='w-screen h-screen overflow-hidden'>
       {window.location?.pathname !== '/' && <NavBar />}
       <Outlet />
     </div>
