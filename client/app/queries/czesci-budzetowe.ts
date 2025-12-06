@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from './client';
-import type { CzescBudzetowa } from './types';
+import type { CzescBudzetowa } from '~/schema';
 
 export const useCzesciBudzetowe = () => {
   return useQuery({

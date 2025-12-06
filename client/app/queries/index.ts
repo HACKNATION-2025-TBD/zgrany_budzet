@@ -5,5 +5,6 @@ export { apiClient } from './client';
 export { useDzialy } from './dzialy';
 export { useRozdzialy } from './rozdzialy';
 export { useParagrafy } from './paragrafy';
-export { useGrupyWydatkow } from './grupy_wydatkow';
-export { useCzesciBudzetowe } from './czesci_budzetowe';
+export { useGrupyWydatkow } from './grupy-wydatkow';
+export { useCzesciBudzetowe } from './czesci-budzetowe';
+export { useZrodlaFinansowania } from './zrodla-finansowania';

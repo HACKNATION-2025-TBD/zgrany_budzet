@@ -113,6 +113,17 @@ async def get_czesci_budzetowe(db: Session = Depends(get_db)):
         for c in czesci
     ]
 
+@app.get("/zrodla_finansowania")
+async def get_zrodla_finansowania(db: Session = Depends(get_db)):
+    zrodla = db.query(ZrodloFinansowania).all()
+    return [
+        {
+            "kod": z.kod,
+            "nazwa": z.nazwa,
+            "opis": z.opis
+        }
+        for z in zrodla
+    ]
 
 def main():
     uvicorn.run(app, host="0.0.0.0", port=8000)

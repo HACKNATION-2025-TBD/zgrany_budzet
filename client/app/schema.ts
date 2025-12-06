@@ -28,12 +28,22 @@ export const czescBudzetowaSchema = z.object({
   nazwa: z.string(),
 });
 
+export const zrodloFinansowaniaSchema = z.object({
+  kod: z.string(),
+  nazwa: z.string(),
+  opis: z.string().optional(),
+});
+
 export const budgetDocumentRowSchema = z.object({
   dzial: z.array(dzialSchema).nullable().default(null),
   rozdzial: z.array(rozdzialSchema).nullable().default(null),
   paragraf: z.array(paragrafSchema).nullable().default(null),
   grupaWydatkow: z.array(grupaWydatkowSchema).nullable().default(null),
   czescBudzetowa: z.array(czescBudzetowaSchema).nullable().default(null),
+  zrodloFinansowania: z
+    .array(zrodloFinansowaniaSchema)
+    .nullable()
+    .default(null),
 });
 
 export const budgetDocumentSchema = z.array(budgetDocumentRowSchema);
@@ -43,5 +53,6 @@ export type Rozdzial = z.infer<typeof rozdzialSchema>;
 export type Paragraf = z.infer<typeof paragrafSchema>;
 export type GrupaWydatkow = z.infer<typeof grupaWydatkowSchema>;
 export type CzescBudzetowa = z.infer<typeof czescBudzetowaSchema>;
+export type ZrodloFinansowania = z.infer<typeof zrodloFinansowaniaSchema>;
 export type DocumentRow = z.infer<typeof budgetDocumentRowSchema>;
 export type BudgetDocument = z.infer<typeof budgetDocumentSchema>;

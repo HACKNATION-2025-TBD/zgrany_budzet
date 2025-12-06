@@ -11,11 +11,11 @@ export default function Login() {
   return (
     <div className='grid grid-cols-2 gap-4'>
       <div>
-        <header className='p-4 border-b border-gov-gray-500'>
+        <header className='p-4 border-b border-secondary-foreground'>
           <img src={MC} alt='Ministerstwo Cyfryzacji' width={150} />
         </header>
         <h1 className='font-semibold text-2xl py-6'>Zaloguj się do usługi</h1>
-        <p className='text-gov-gray-500'>Wybierz rolę:</p>
+        <p className='text-secondary-foreground'>Wybierz rolę:</p>
         <nav className='flex flex-col gap-4 py-4 mr-8'>
           <RoleCard
             to='/dashboard'
