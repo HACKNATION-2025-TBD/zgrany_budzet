@@ -12,6 +12,7 @@ from src.schemas.rozdzialy import Rozdzial
 from src.schemas.paragrafy import Paragraf
 from src.schemas.grupy_wydatkow import GrupaWydatkow
 from src.schemas.czesci_budzetowe import CzescBudzetowa
+from src.tabela import router as tabela_router
 
 
 app = FastAPI()
@@ -22,6 +23,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(tabela_router, prefix="/api", tags=["tabela"])
 
 
 class ConnectionManager:
@@ -51,7 +54,6 @@ async def root():
     return {"status": "Server is running"}
 
 
-# GET endpoint for all dzialy
 @app.get("/dzialy")
 async def get_dzialy(db: Session = Depends(get_db)):
     dzialy = db.query(Dzial).all()
@@ -65,7 +67,6 @@ async def get_dzialy(db: Session = Depends(get_db)):
     ]
 
 
-# GET endpoint for all rozdzialy
 @app.get("/rozdzialy")
 async def get_rozdzialy(db: Session = Depends(get_db)):
     rozdzialy = db.query(Rozdzial).all()
@@ -78,7 +79,6 @@ async def get_rozdzialy(db: Session = Depends(get_db)):
         for r in rozdzialy
     ]
 
-# GET endpoint for all paragrafy
 @app.get("/paragrafy")
 async def get_paragrafy(db: Session = Depends(get_db)):
     paragrafy = db.query(Paragraf).all()
@@ -90,7 +90,6 @@ async def get_paragrafy(db: Session = Depends(get_db)):
         for p in paragrafy
     ]
 
-# GET endpoint for all grupy_wydatkow
 @app.get("/grupy_wydatkow")
 async def get_grupy_wydatkow(db: Session = Depends(get_db)):
     grupy = db.query(GrupaWydatkow).all()
@@ -103,7 +102,6 @@ async def get_grupy_wydatkow(db: Session = Depends(get_db)):
         for g in grupy
     ]
 
-# GET endpoint for all czesci_budzetowe
 @app.get("/czesci_budzetowe")
 async def get_czesci_budzetowe(db: Session = Depends(get_db)):
     czesci = db.query(CzescBudzetowa).all()
@@ -114,24 +112,6 @@ async def get_czesci_budzetowe(db: Session = Depends(get_db)):
         }
         for c in czesci
     ]
-
-
-@app.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
-    await manager.connect(websocket)
-    try:
-        while True:
-            data = await websocket.receive_json()
-            message = {
-                "cell": data.get("cell"),
-                "user": data.get("user"),
-                "value": data.get("value"),
-                "timestamp": data.get("timestamp"),
-                "type": data.get("type")
-            }
-            await manager.broadcast(message)
-    except WebSocketDisconnect:
-        manager.disconnect(websocket)
 
 
 def main():

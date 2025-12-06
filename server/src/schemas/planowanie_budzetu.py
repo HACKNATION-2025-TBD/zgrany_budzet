@@ -10,55 +10,78 @@ class PlanowanieBudzetu(Base):
     __tablename__ = "planowanie_budzetu"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    nazwa_projektu: Mapped[str | None] = mapped_column(String(500), nullable=True)
-    nazwa_zadania: Mapped[str | None] = mapped_column(String(500), nullable=True)
-    szczegolowe_uzasadnienie_realizacji: Mapped[str | None] = mapped_column(String(2000), nullable=True)
-    budzet: Mapped[str | None] = mapped_column(String(50), nullable=True)
 
-    czesc_budzetowa_kod: Mapped[str] = mapped_column(
-        String(10), 
-        ForeignKey("czesci_budzetowe.kod"),
-        nullable=False
+    # Versioned relationships
+    nazwa_projektu_versions: Mapped[list["VersionedStringField"]] = relationship(
+        primaryjoin="and_(PlanowanieBudzetu.id == foreign(VersionedStringField.entity_id), "
+                   "VersionedStringField.entity_type == 'planowanie_budzetu', "
+                   "VersionedStringField.field_name == 'nazwa_projektu')",
+        viewonly=True
     )
-    dzial_kod: Mapped[str] = mapped_column(
-        String(10),
-        ForeignKey("dzialy.kod"),
-        nullable=False
+    nazwa_zadania_versions: Mapped[list["VersionedStringField"]] = relationship(
+        primaryjoin="and_(PlanowanieBudzetu.id == foreign(VersionedStringField.entity_id), "
+                   "VersionedStringField.entity_type == 'planowanie_budzetu', "
+                   "VersionedStringField.field_name == 'nazwa_zadania')",
+        viewonly=True
     )
-    rozdzial_kod: Mapped[str] = mapped_column(
-        String(10),
-        ForeignKey("rozdzialy.kod"),
-        nullable=False
+    szczegolowe_uzasadnienie_realizacji_versions: Mapped[list["VersionedStringField"]] = relationship(
+        primaryjoin="and_(PlanowanieBudzetu.id == foreign(VersionedStringField.entity_id), "
+                   "VersionedStringField.entity_type == 'planowanie_budzetu', "
+                   "VersionedStringField.field_name == 'szczegolowe_uzasadnienie_realizacji')",
+        viewonly=True
     )
-    paragraf_kod: Mapped[str] = mapped_column(
-        String(10),
-        ForeignKey("paragrafy.kod"),
-        nullable=False
+    budzet_versions: Mapped[list["VersionedStringField"]] = relationship(
+        primaryjoin="and_(PlanowanieBudzetu.id == foreign(VersionedStringField.entity_id), "
+                   "VersionedStringField.entity_type == 'planowanie_budzetu', "
+                   "VersionedStringField.field_name == 'budzet')",
+        viewonly=True
     )
-    zrodlo_finansowania_kod: Mapped[str] = mapped_column(
-        String(10),
-        ForeignKey("zrodla_finansowania.kod"),
-        nullable=False
+    
+    # Versioned foreign key relationships
+    czesc_budzetowa_kod_versions: Mapped[list["VersionedForeignKeyField"]] = relationship(
+        primaryjoin="and_(PlanowanieBudzetu.id == foreign(VersionedForeignKeyField.entity_id), "
+                   "VersionedForeignKeyField.entity_type == 'planowanie_budzetu', "
+                   "VersionedForeignKeyField.field_name == 'czesc_budzetowa_kod')",
+        viewonly=True
     )
-    grupa_wydatkow_id: Mapped[int] = mapped_column(
-        Integer,
-        ForeignKey("grupy_wydatkow.id"),
-        nullable=False
+    dzial_kod_versions: Mapped[list["VersionedForeignKeyField"]] = relationship(
+        primaryjoin="and_(PlanowanieBudzetu.id == foreign(VersionedForeignKeyField.entity_id), "
+                   "VersionedForeignKeyField.entity_type == 'planowanie_budzetu', "
+                   "VersionedForeignKeyField.field_name == 'dzial_kod')",
+        viewonly=True
     )
-    komorka_organizacyjna_id: Mapped[int] = mapped_column(
-        Integer,
-        ForeignKey("komorki_organizacyjne.id"),
-        nullable=False
+    rozdzial_kod_versions: Mapped[list["VersionedForeignKeyField"]] = relationship(
+        primaryjoin="and_(PlanowanieBudzetu.id == foreign(VersionedForeignKeyField.entity_id), "
+                   "VersionedForeignKeyField.entity_type == 'planowanie_budzetu', "
+                   "VersionedForeignKeyField.field_name == 'rozdzial_kod')",
+        viewonly=True
+    )
+    paragraf_kod_versions: Mapped[list["VersionedForeignKeyField"]] = relationship(
+        primaryjoin="and_(PlanowanieBudzetu.id == foreign(VersionedForeignKeyField.entity_id), "
+                   "VersionedForeignKeyField.entity_type == 'planowanie_budzetu', "
+                   "VersionedForeignKeyField.field_name == 'paragraf_kod')",
+        viewonly=True
+    )
+    zrodlo_finansowania_kod_versions: Mapped[list["VersionedForeignKeyField"]] = relationship(
+        primaryjoin="and_(PlanowanieBudzetu.id == foreign(VersionedForeignKeyField.entity_id), "
+                   "VersionedForeignKeyField.entity_type == 'planowanie_budzetu', "
+                   "VersionedForeignKeyField.field_name == 'zrodlo_finansowania_kod')",
+        viewonly=True
+    )
+    grupa_wydatkow_id_versions: Mapped[list["VersionedForeignKeyField"]] = relationship(
+        primaryjoin="and_(PlanowanieBudzetu.id == foreign(VersionedForeignKeyField.entity_id), "
+                   "VersionedForeignKeyField.entity_type == 'planowanie_budzetu', "
+                   "VersionedForeignKeyField.field_name == 'grupa_wydatkow_id')",
+        viewonly=True
+    )
+    komorka_organizacyjna_id_versions: Mapped[list["VersionedForeignKeyField"]] = relationship(
+        primaryjoin="and_(PlanowanieBudzetu.id == foreign(VersionedForeignKeyField.entity_id), "
+                   "VersionedForeignKeyField.entity_type == 'planowanie_budzetu', "
+                   "VersionedForeignKeyField.field_name == 'komorka_organizacyjna_id')",
+        viewonly=True
     )
 
-    czesc_budzetowa: Mapped["CzescBudzetowa"] = relationship()
-    dzial: Mapped["Dzial"] = relationship()
-    rozdzial: Mapped["Rozdzial"] = relationship()
-    paragraf: Mapped["Paragraf"] = relationship()
-    zrodlo_finansowania: Mapped["ZrodloFinansowania"] = relationship()
-    grupa_wydatkow: Mapped["GrupaWydatkow"] = relationship()
-    komorka_organizacyjna: Mapped["KomorkaOrganizacyjna"] = relationship()
     lata_budzetowe: Mapped[list["RokBudzetowy"]] = relationship(back_populates="planowanie_budzetu")
 
     def __repr__(self) -> str:
-        return f"PlanowanieBudzetu(id={self.id!r}, nazwa_projektu={self.nazwa_projektu!r})"
+        return f"PlanowanieBudzetu(id={self.id!r})"

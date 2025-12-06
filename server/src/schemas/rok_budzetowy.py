@@ -1,4 +1,4 @@
-from sqlalchemy import Integer, ForeignKey, Numeric
+from sqlalchemy import Integer, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base
@@ -13,11 +13,21 @@ class RokBudzetowy(Base):
         ForeignKey("planowanie_budzetu.id"),
         nullable=False
     )
-    limit: Mapped[float] = mapped_column(Numeric(15, 2), nullable=False)
-    potrzeba: Mapped[float] = mapped_column(Numeric(15, 2), nullable=False)
     
-    # Relationship
+    limit_versions: Mapped[list["VersionedNumericField"]] = relationship(
+        primaryjoin="and_(RokBudzetowy.id == foreign(VersionedNumericField.entity_id), "
+                   "VersionedNumericField.entity_type == 'rok_budzetowy', "
+                   "VersionedNumericField.field_name == 'limit')",
+        viewonly=True
+    )
+    potrzeba_versions: Mapped[list["VersionedNumericField"]] = relationship(
+        primaryjoin="and_(RokBudzetowy.id == foreign(VersionedNumericField.entity_id), "
+                   "VersionedNumericField.entity_type == 'rok_budzetowy', "
+                   "VersionedNumericField.field_name == 'potrzeba')",
+        viewonly=True
+    )
+
     planowanie_budzetu: Mapped["PlanowanieBudzetu"] = relationship(back_populates="lata_budzetowe")
 
     def __repr__(self) -> str:
-        return f"RokBudzetowy(id={self.id!r}, limit={self.limit!r}, potrzeba={self.potrzeba!r})"
+        return f"RokBudzetowy(id={self.id!r})"
