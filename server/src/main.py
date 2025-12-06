@@ -3,6 +3,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 import json
 import uvicorn
+from fastapi import Depends
+from sqlalchemy.orm import Session
+
+from src.database import get_db
+from src.schemas.dzialy import Dzial
+from src.schemas.rozdzialy import Rozdzial
+from src.schemas.paragrafy import Paragraf
+from src.schemas.grupy_wydatkow import GrupaWydatkow
+from src.schemas.czesci_budzetowe import CzescBudzetowa
 
 
 app = FastAPI()
@@ -40,6 +49,71 @@ manager = ConnectionManager()
 @app.get("/")
 async def root():
     return {"status": "Server is running"}
+
+
+# GET endpoint for all dzialy
+@app.get("/dzialy")
+async def get_dzialy(db: Session = Depends(get_db)):
+    dzialy = db.query(Dzial).all()
+    return [
+        {
+            "kod": d.kod,
+            "nazwa": d.nazwa,
+            "PKD": d.PKD
+        }
+        for d in dzialy
+    ]
+
+
+# GET endpoint for all rozdzialy
+@app.get("/rozdzialy")
+async def get_rozdzialy(db: Session = Depends(get_db)):
+    rozdzialy = db.query(Rozdzial).all()
+    return [
+        {
+            "kod": r.kod,
+            "nazwa": r.nazwa,
+            "dzial": r.dzial
+        }
+        for r in rozdzialy
+    ]
+
+# GET endpoint for all paragrafy
+@app.get("/paragrafy")
+async def get_paragrafy(db: Session = Depends(get_db)):
+    paragrafy = db.query(Paragraf).all()
+    return [
+        {
+            "kod": p.kod,
+            "tresc": p.tresc
+        }
+        for p in paragrafy
+    ]
+
+# GET endpoint for all grupy_wydatkow
+@app.get("/grupy_wydatkow")
+async def get_grupy_wydatkow(db: Session = Depends(get_db)):
+    grupy = db.query(GrupaWydatkow).all()
+    return [
+        {
+            "id": g.id,
+            "nazwa": g.nazwa,
+            "paragrafy": g.paragrafy
+        }
+        for g in grupy
+    ]
+
+# GET endpoint for all czesci_budzetowe
+@app.get("/czesci_budzetowe")
+async def get_czesci_budzetowe(db: Session = Depends(get_db)):
+    czesci = db.query(CzescBudzetowa).all()
+    return [
+        {
+            "kod": c.kod,
+            "nazwa": c.nazwa
+        }
+        for c in czesci
+    ]
 
 
 @app.websocket("/ws")
