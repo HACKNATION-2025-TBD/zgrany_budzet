@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from './client';
-import type { GrupaWydatkow } from './types';
+import type { GrupaWydatkow } from '~/schema';
 
 export const useGrupyWydatkow = () => {
   return useQuery({

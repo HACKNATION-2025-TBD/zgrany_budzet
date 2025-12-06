@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from './client';
-import type { Dzial } from './types';
+import type { Dzial } from '~/schema';
 
 export const useDzialy = () => {
   return useQuery({

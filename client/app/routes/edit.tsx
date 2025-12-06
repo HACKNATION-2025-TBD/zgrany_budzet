@@ -1,4 +1,6 @@
 import { useGridData } from '~/hooks/use-grid-data';
+import { useForm } from '@tanstack/react-form';
+import { budgetDocumentSchema } from '~/schema';
 
 export function meta() {
   return [{ title: 'Edit' }];
@@ -11,18 +13,15 @@ export default function Edit() {
     paragrafy,
     grupyWydatkow,
     czesciBudzetowe,
-    isLoading,
+    isLoading: isLoadingGridData,
   } = useGridData();
 
-  if (!isLoading) {
-    console.log({
-      dzialy,
-      rozdzialy,
-      paragrafy,
-      grupyWydatkow,
-      czesciBudzetowe,
-    });
-  }
+  const { form } = useForm({
+    defaultValues: budgetDocumentSchema.parse([]),
+    onSubmit: (values) => {
+      console.log('Form submitted with values:', values);
+    },
+  });
 
   return (
     <div>

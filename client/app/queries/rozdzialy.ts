@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from './client';
-import type { Rozdzial } from './types';
+import type { Rozdzial } from '~/schema';
 
 export const useRozdzialy = () => {
   return useQuery({
