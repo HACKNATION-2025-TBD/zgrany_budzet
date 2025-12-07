@@ -33,51 +33,55 @@ import { Input } from '~/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { createPlanowanieBudzetu } from '~/queries';
 import { useUserMock } from '~/hooks/use-user-mock';
+import { useQueryClient } from '@tanstack/react-query';
 
-const schema = budgetDocumentRowSchema.required().superRefine((data, ctx) => {
-  Object.entries(data).forEach(([key, value]) => {
-    if (value === null || value === undefined || value === '') {
+const schema = budgetDocumentRowSchema
+  .omit({ id: true })
+  .required()
+  .superRefine((data, ctx) => {
+    Object.entries(data).forEach(([key, value]) => {
+      if (value === null || value === undefined || value === '') {
+        ctx.addIssue({
+          code: 'custom',
+          message: `Pole jest wymagane.`,
+          path: [key],
+        });
+      }
+    });
+
+    if (data.rozdzial && data.dzial && data.rozdzial.dzial !== data.dzial.kod) {
       ctx.addIssue({
         code: 'custom',
-        message: `Pole jest wymagane.`,
-        path: [key],
+        message: 'Rozdział nie należy do wybranego działu.',
+        path: ['rozdzial'],
       });
     }
-  });
 
-  if (data.rozdzial && data.dzial && data.rozdzial.dzial !== data.dzial.kod) {
-    ctx.addIssue({
-      code: 'custom',
-      message: 'Rozdział nie należy do wybranego działu.',
-      path: ['rozdzial'],
-    });
-  }
-
-  if (data.paragraf && data.grupaWydatkow && data.zrodloFinansowania) {
-    if (Array.isArray(data.grupaWydatkow.paragrafy)) {
-      if (!data.grupaWydatkow.paragrafy.includes(data.paragraf.kod)) {
-        ctx.addIssue({
-          code: 'custom',
-          message: 'Paragraf nie należy do wybranej grupy wydatków.',
-          path: ['paragraf'],
-        });
-      }
-    } else {
-      if (
-        !['1', '2', '5', '6', '7', '8', '9'].includes(
-          data.zrodloFinansowania?.kod
-        )
-      ) {
-        ctx.addIssue({
-          code: 'custom',
-          message:
-            'Źródło finansowania nie jest zgodne z wybraną grupą wydatków.',
-          path: ['zrodloFinansowania'],
-        });
+    if (data.paragraf && data.grupaWydatkow && data.zrodloFinansowania) {
+      if (Array.isArray(data.grupaWydatkow.paragrafy)) {
+        if (!data.grupaWydatkow.paragrafy.includes(data.paragraf.kod)) {
+          ctx.addIssue({
+            code: 'custom',
+            message: 'Paragraf nie należy do wybranej grupy wydatków.',
+            path: ['paragraf'],
+          });
+        }
+      } else {
+        if (
+          !['1', '2', '5', '6', '7', '8', '9'].includes(
+            data.zrodloFinansowania?.kod
+          )
+        ) {
+          ctx.addIssue({
+            code: 'custom',
+            message:
+              'Źródło finansowania nie jest zgodne z wybraną grupą wydatków.',
+            path: ['zrodloFinansowania'],
+          });
+        }
       }
     }
-  }
-});
+  });
 
 type NewBudgetDocumentRowModalProps = {
   onAdd?: (row: DocumentRow) => void;
@@ -87,6 +91,7 @@ export const NewBudgetDocumentRowModal = ({
   children,
   onAdd,
 }: PropsWithChildren<NewBudgetDocumentRowModalProps>) => {
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { user } = useUserMock();
@@ -117,9 +122,9 @@ export const NewBudgetDocumentRowModal = ({
     defaultValues: budgetDocumentRowSchema.parse({}),
     onSubmit: async (values) => {
       if (isSubmitting) return;
-      console.log(form.state.errors);
 
       try {
+        form.validateAllFields('submit');
         setIsSubmitting(true);
 
         // Map form data to backend format
@@ -145,12 +150,11 @@ export const NewBudgetDocumentRowModal = ({
         // Call backend API
         const result = await createPlanowanieBudzetu(validated);
 
-        console.log('Created planowanie budzetu:', result);
-
         // Call onAdd with original form data for UI update
         onAdd?.(values.value);
         setOpen(false);
         form.reset();
+        queryClient.invalidateQueries({ queryKey: ['planowanie-budzetu'] });
       } catch (error) {
         console.error('Error creating planowanie budzetu:', error);
         // TODO: Show error message to user
@@ -159,7 +163,7 @@ export const NewBudgetDocumentRowModal = ({
       }
     },
     validators: {
-      onChange: schema,
+      onChange: schema as any,
     },
   });
 
@@ -662,13 +666,13 @@ export const NewBudgetDocumentRowModal = ({
         <DialogFooter>
           <Button
             type='submit'
-            className='w-30'
+            className='w-30 cursor-pointer hover:bg-primary hover:border-border transition-all duration-300'
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
               form.handleSubmit();
             }}
-            disabled={isLoadingGridData || !form.state.isValid || isSubmitting}
+            disabled={isLoadingGridData || isSubmitting}
           >
             {isSubmitting ? 'Dodawanie...' : 'Dodaj'}
           </Button>
