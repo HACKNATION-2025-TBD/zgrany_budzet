@@ -1,4 +1,4 @@
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 import json
@@ -25,6 +25,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+api_router = APIRouter(prefix="/api")
 app.include_router(tabela_router, prefix="/api", tags=["tabela"])
 
 
@@ -55,7 +57,7 @@ async def root():
     return {"status": "Server is running"}
 
 
-@app.get("/dzialy")
+@api_router.get("/dzialy")
 async def get_dzialy(db: Session = Depends(get_db)):
     dzialy = db.query(Dzial).all()
     return [
@@ -68,7 +70,7 @@ async def get_dzialy(db: Session = Depends(get_db)):
     ]
 
 
-@app.get("/rozdzialy")
+@api_router.get("/rozdzialy")
 async def get_rozdzialy(db: Session = Depends(get_db)):
     rozdzialy = db.query(Rozdzial).all()
     return [
@@ -80,7 +82,7 @@ async def get_rozdzialy(db: Session = Depends(get_db)):
         for r in rozdzialy
     ]
 
-@app.get("/paragrafy")
+@api_router.get("/paragrafy")
 async def get_paragrafy(db: Session = Depends(get_db)):
     paragrafy = db.query(Paragraf).all()
     return [
@@ -91,7 +93,7 @@ async def get_paragrafy(db: Session = Depends(get_db)):
         for p in paragrafy
     ]
 
-@app.get("/grupy_wydatkow")
+@api_router.get("/grupy_wydatkow")
 async def get_grupy_wydatkow(db: Session = Depends(get_db)):
     grupy = db.query(GrupaWydatkow).all()
     return [
@@ -103,7 +105,7 @@ async def get_grupy_wydatkow(db: Session = Depends(get_db)):
         for g in grupy
     ]
 
-@app.get("/czesci_budzetowe")
+@api_router.get("/czesci_budzetowe")
 async def get_czesci_budzetowe(db: Session = Depends(get_db)):
     czesci = db.query(CzescBudzetowa).all()
     return [
@@ -114,7 +116,7 @@ async def get_czesci_budzetowe(db: Session = Depends(get_db)):
         for c in czesci
     ]
 
-@app.get("/zrodla_finansowania")
+@api_router.get("/zrodla_finansowania")
 async def get_zrodla_finansowania(db: Session = Depends(get_db)):
     zrodla = db.query(ZrodloFinansowania).all()
     return [
@@ -125,6 +127,9 @@ async def get_zrodla_finansowania(db: Session = Depends(get_db)):
         }
         for z in zrodla
     ]
+
+# Include the API router
+app.include_router(api_router)
 
 def main():
     uvicorn.run(app, host="0.0.0.0", port=8000)
