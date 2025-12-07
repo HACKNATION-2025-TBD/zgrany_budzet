@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
 from typing import Optional, List
@@ -163,19 +163,19 @@ async def create_planowanie_budzetu(
     db.flush()
     
     # Create versioned fields
-    create_string_version(db, "planowanie_budzetu", planowanie.id, "nazwa_projektu", data.nazwa_projektu)
-    create_string_version(db, "planowanie_budzetu", planowanie.id, "nazwa_zadania", data.nazwa_zadania)
-    create_string_version(db, "planowanie_budzetu", planowanie.id, "szczegolowe_uzasadnienie_realizacji", data.szczegolowe_uzasadnienie_realizacji)
-    create_string_version(db, "planowanie_budzetu", planowanie.id, "budzet", data.budzet)
+    create_string_version(db, "planowanie_budzetu", planowanie.id, "nazwa_projektu", data.nazwa_projektu, current_user.id)
+    create_string_version(db, "planowanie_budzetu", planowanie.id, "nazwa_zadania", data.nazwa_zadania, current_user.id)
+    create_string_version(db, "planowanie_budzetu", planowanie.id, "szczegolowe_uzasadnienie_realizacji", data.szczegolowe_uzasadnienie_realizacji, current_user.id)
+    create_string_version(db, "planowanie_budzetu", planowanie.id, "budzet", data.budzet, current_user.id)
     
-    create_fk_version(db, "planowanie_budzetu", planowanie.id, "czesc_budzetowa_kod", value_string=data.czesc_budzetowa_kod)
-    create_fk_version(db, "planowanie_budzetu", planowanie.id, "dzial_kod", value_string=data.dzial_kod)
-    create_fk_version(db, "planowanie_budzetu", planowanie.id, "rozdzial_kod", value_string=data.rozdzial_kod)
-    create_fk_version(db, "planowanie_budzetu", planowanie.id, "paragraf_kod", value_string=data.paragraf_kod)
-    create_fk_version(db, "planowanie_budzetu", planowanie.id, "zrodlo_finansowania_kod", value_string=data.zrodlo_finansowania_kod)
-    create_fk_version(db, "planowanie_budzetu", planowanie.id, "grupa_wydatkow_id", value_int=data.grupa_wydatkow_id)
-    create_fk_version(db, "planowanie_budzetu", planowanie.id, "komorka_organizacyjna_id", value_int=data.komorka_organizacyjna_id)
-    create_fk_version(db, "planowanie_budzetu", planowanie.id, "user_id", value_int=current_user.id)
+    create_fk_version(db, "planowanie_budzetu", planowanie.id, "czesc_budzetowa_kod", value_string=data.czesc_budzetowa_kod, user_id=current_user.id)
+    create_fk_version(db, "planowanie_budzetu", planowanie.id, "dzial_kod", value_string=data.dzial_kod, user_id=current_user.id)
+    create_fk_version(db, "planowanie_budzetu", planowanie.id, "rozdzial_kod", value_string=data.rozdzial_kod, user_id=current_user.id)
+    create_fk_version(db, "planowanie_budzetu", planowanie.id, "paragraf_kod", value_string=data.paragraf_kod, user_id=current_user.id)
+    create_fk_version(db, "planowanie_budzetu", planowanie.id, "zrodlo_finansowania_kod", value_string=data.zrodlo_finansowania_kod, user_id=current_user.id)
+    create_fk_version(db, "planowanie_budzetu", planowanie.id, "grupa_wydatkow_id", value_int=data.grupa_wydatkow_id, user_id=current_user.id)
+    create_fk_version(db, "planowanie_budzetu", planowanie.id, "komorka_organizacyjna_id", value_int=data.komorka_organizacyjna_id, user_id=current_user.id)
+    create_fk_version(db, "planowanie_budzetu", planowanie.id, "user_id", value_int=current_user.id, user_id=current_user.id)
     
     db.commit()
     db.refresh(planowanie)
@@ -224,12 +224,11 @@ async def update_planowanie_budzetu_cell(
     # -------------------------------
 
     if data.field in string_fields:
-        create_string_version(db, "planowanie_budzetu", planowanie_id, data.field,
-                              str(data.value) if data.value is not None else None)
+        create_string_version(db, "planowanie_budzetu", planowanie_id, data.field, str(data.value) if data.value is not None else None, current_user.id)
     elif data.field in fk_string_fields:
         if data.value is None:
             raise HTTPException(status_code=400, detail=f"Field {data.field} cannot be null")
-        create_fk_version(db, "planowanie_budzetu", planowanie_id, data.field, value_string=str(data.value))
+        create_fk_version(db, "planowanie_budzetu", planowanie_id, data.field, value_string=str(data.value), user_id=current_user.id)
     elif data.field in fk_int_fields:
         if data.value is None:
             raise HTTPException(status_code=400, detail=f"Field {data.field} cannot be null")
@@ -240,8 +239,8 @@ async def update_planowanie_budzetu_cell(
                 status_code=403,
                 detail="Cannot change planowanie to a different organizational unit"
             )
-
-        create_fk_version(db, "planowanie_budzetu", planowanie_id, data.field, value_int=int(data.value))
+        
+        create_fk_version(db, "planowanie_budzetu", planowanie_id, data.field, value_int=int(data.value), user_id=current_user.id)
     else:
         raise HTTPException(status_code=400, detail=f"Unknown field: {data.field}")
 
@@ -409,14 +408,17 @@ async def create_rok_budzetowy(
     if not planowanie:
         raise HTTPException(status_code=404, detail="PlanowanieBudzetu not found")
     
-    # Create main record
-    rok = RokBudzetowy(planowanie_budzetu_id=data.planowanie_budzetu_id)
+    # Create main record with rok field
+    rok = RokBudzetowy(
+        planowanie_budzetu_id=data.planowanie_budzetu_id,
+        rok=data.rok
+    )
     db.add(rok)
     db.flush()
     
     # Create versioned fields
-    create_numeric_version(db, "rok_budzetowy", rok.id, "limit", data.limit)
-    create_numeric_version(db, "rok_budzetowy", rok.id, "potrzeba", data.potrzeba)
+    create_numeric_version(db, "rok_budzetowy", rok.id, "limit", data.limit, current_user.id)
+    create_numeric_version(db, "rok_budzetowy", rok.id, "potrzeba", data.potrzeba, current_user.id)
     
     db.commit()
     db.refresh(rok)
@@ -456,7 +458,7 @@ async def update_rok_budzetowy_cell(
     if data.field in numeric_fields:
         if data.value is None:
             raise HTTPException(status_code=400, detail=f"Field {data.field} cannot be null")
-        create_numeric_version(db, "rok_budzetowy", rok_id, data.field, float(data.value))
+        create_numeric_version(db, "rok_budzetowy", rok_id, data.field, float(data.value), current_user.id)
     else:
         raise HTTPException(status_code=400, detail=f"Unknown field: {data.field}")
 
@@ -482,6 +484,7 @@ async def get_all_rok_budzetowy(
         result.append({
             "id": rok.id,
             "planowanie_budzetu_id": rok.planowanie_budzetu_id,
+            "rok": rok.rok,
             "limit": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "limit", "numeric"),
             "potrzeba": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "potrzeba", "numeric")
         })
@@ -505,6 +508,7 @@ async def get_rok_budzetowy(
     return {
         "id": rok.id,
         "planowanie_budzetu_id": rok.planowanie_budzetu_id,
+        "rok": rok.rok,
         "limit": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "limit", "numeric"),
         "potrzeba": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "potrzeba", "numeric")
     }

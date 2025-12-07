@@ -24,8 +24,15 @@ export default function Edit() {
 
   return (
     <div>
-      <div className='flex justify-between items-center'>
-        <h1 className='font-semibold text-2xl py-6'>Budżety</h1>
+      <div className='flex justify-between items-center mb-6'>
+        <div >
+          <h1 className='text-3xl font-bold text-gray-900'>
+            Dashboard Budżetowy
+          </h1>
+          <p className='text-gray-600'>
+            Przegląd wykonania budżetu według konkretnego działu
+          </p>
+        </div>
         <div className='flex gap-[15px]'>
           {user.role !== 'ko' && (
             <Button onClick={() => {}} size='sm' variant='secondary'>
@@ -61,13 +68,9 @@ export default function Edit() {
           </NewBudgetDocumentRowModal>
         </div>
       </div>
-
-      <div className='bg-white rounded-lg shadow-sm border'>
-        <div className='p-4 border-b border-gray-200'>tutaj filtry</div>
-        <div className='p-4' style={{ height: '500px' }}>
+      <div  style={{ height: '500px', border: '1px solid #ddd' }}>
           <BudgetGrid />
         </div>
-      </div>
     </div>
   );
 }

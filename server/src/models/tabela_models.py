@@ -27,6 +27,7 @@ class CellUpdate(BaseModel):
 
 class RokBudzetowyCreate(BaseModel):
     planowanie_budzetu_id: int
+    rok: int
     limit: float
     potrzeba: float
 
@@ -79,5 +80,6 @@ class FieldsHistoryStatusResponse(BaseModel):
 class RokBudzetowyResponse(BaseModel):
     id: int
     planowanie_budzetu_id: int
+    rok: int
     limit: Optional[float] = None
     potrzeba: Optional[float] = None

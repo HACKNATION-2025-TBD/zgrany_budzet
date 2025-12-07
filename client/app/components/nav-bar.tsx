@@ -20,8 +20,8 @@ export const NavBar = () => {
         <NavigationMenuLink asChild>
           <Link to='/'>Budżety</Link>
         </NavigationMenuLink>
-        <NavigationMenuLink asChild>
-          <Link to='/'>Ustawienia</Link>
+        <NavigationMenuLink className="hover:opacity-50 hover:cursor-not-allowed pointer-events-none">
+          <span>Ustawienia</span>
         </NavigationMenuLink>
       </NavigationMenuList>
       <NavigationMenuLink asChild>
