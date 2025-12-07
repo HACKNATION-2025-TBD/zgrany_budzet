@@ -53,6 +53,7 @@ Uwagi:
 import json
 from pathlib import Path
 from sqlalchemy.orm import Session
+from sqlalchemy import create_engine
 
 from src.database import engine, SessionLocal
 from src.schemas.base import Base
@@ -194,7 +195,7 @@ def drop_tables() -> None:
     print("Tables dropped successfully")
 
 
-def load_all_fixtures(drop_existing: bool = False) -> None:
+def load_all_fixtures(drop_existing: bool = False, postgres_url: str = None) -> None:
     """
     Load all fixtures into the database.
     
@@ -204,6 +205,10 @@ def load_all_fixtures(drop_existing: bool = False) -> None:
         If True, drops all existing tables before creating new ones and loading data.
         Use with caution as this will DELETE all data from the database.
         Default is False.
+    postgres_url : str, optional
+        PostgreSQL connection URL. If provided, overrides the default database connection.
+        Format: postgresql://user:password@host:port/database
+        Default is None (uses connection from database.py).
     
     Raises
     ------
@@ -215,13 +220,31 @@ def load_all_fixtures(drop_existing: bool = False) -> None:
     --------
     >>> load_all_fixtures()  # Load fixtures without dropping tables
     >>> load_all_fixtures(drop_existing=True)  # Drop tables first, then load
+    >>> load_all_fixtures(postgres_url="postgresql://user:pass@localhost/db")  # Custom DB
     """
-    if drop_existing:
-        drop_tables()
+    # Use custom database URL if provided
+    if postgres_url:
+        custom_engine = create_engine(postgres_url)
+        from sqlalchemy.orm import sessionmaker
+        CustomSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=custom_engine)
+        
+        if drop_existing:
+            print(f"Using custom database: {postgres_url.split('@')[1] if '@' in postgres_url else postgres_url}")
+            Base.metadata.drop_all(bind=custom_engine)
+            print("Tables dropped successfully")
+        
+        print("Creating tables...")
+        Base.metadata.create_all(bind=custom_engine)
+        print("Tables created successfully")
+        
+        session = CustomSessionLocal()
+    else:
+        if drop_existing:
+            drop_tables()
+        
+        create_tables()
+        session = SessionLocal()
     
-    create_tables()
-    
-    session = SessionLocal()
     try:
         load_czesci_budzetowe(session)
         load_dzialy(session)
@@ -250,6 +273,11 @@ if __name__ == "__main__":
         action="store_true",
         help="Drop existing tables before loading fixtures"
     )
+    parser.add_argument(
+        "--postgres-url",
+        type=str,
+        help="PostgreSQL connection URL (e.g., postgresql://user:password@localhost:5432/dbname)"
+    )
     
     args = parser.parse_args()
-    load_all_fixtures(drop_existing=args.drop)
+    load_all_fixtures(drop_existing=args.drop, postgres_url=args.postgres_url)
