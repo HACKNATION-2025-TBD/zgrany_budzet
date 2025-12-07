@@ -35,6 +35,8 @@ Struktura danych:
 - paragrafy.json - Paragrafy budżetowe (kod jako PK)
 - zrodla_finansowania.json - Źródła finansowania (kod jako PK)
 - grupy_wydatkow.json - Grupy wydatków (id jako PK)
+- komorki_organizacyjne.json - Komórki organizacyjne (id jako PK)
+- users.json - Użytkownicy (id jako PK)
 
 Wymagania:
 ----------
@@ -62,6 +64,7 @@ from schemas.zrodla_finansowania import ZrodloFinansowania
 from schemas.grupy_wydatkow import GrupaWydatkow
 from schemas.planowanie_budzetu import PlanowanieBudzetu
 from schemas.komorki_organizacyjne import KomorkaOrganizacyjna
+from schemas.users import User
 
 
 def load_json_fixture(filename: str) -> list[dict]:
@@ -164,6 +167,19 @@ def load_komorki_organizacyjne(session: Session) -> None:
     print(f"Loaded {len(data)} komórki organizacyjne")
 
 
+def load_users(session: Session) -> None:
+    """Load users fixtures."""
+    print("Loading users...")
+    data = load_json_fixture("users.json")
+    
+    for item in data:
+        obj = User(**item)
+        session.add(obj)
+    
+    session.commit()
+    print(f"Loaded {len(data)} users")
+
+
 def create_tables() -> None:
     """Create all tables in the database."""
     print("Creating tables...")
@@ -214,6 +230,7 @@ def load_all_fixtures(drop_existing: bool = False) -> None:
         load_zrodla_finansowania(session)
         load_grupy_wydatkow(session)
         load_komorki_organizacyjne(session)
+        load_users(session)
         
         print("\n✅ All fixtures loaded successfully!")
     except Exception as e:
