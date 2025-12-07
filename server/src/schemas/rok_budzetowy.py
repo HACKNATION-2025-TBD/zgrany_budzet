@@ -2,6 +2,7 @@ from sqlalchemy import Integer, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base
+from .versioned_fields import VersionedNumericField
 
 
 class RokBudzetowy(Base):

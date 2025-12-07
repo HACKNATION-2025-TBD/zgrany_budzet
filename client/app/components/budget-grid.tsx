@@ -7,7 +7,7 @@ import {
   type ColDef,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import type { BudgetDocument } from '~/schema';
+import type { BudgetDocument, KodZadaniowy } from '~/schema';
 import { useGridData } from '~/hooks/use-grid-data';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 
@@ -25,6 +25,7 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
     grupyWydatkow,
     czesciBudzetowe,
     zrodlaFinansowania,
+    kodyZadaniowe,
     isLoading: isLoadingGridData,
   } = useGridData();
 
@@ -123,6 +124,23 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
         cellEditorParams: {
           values: grupyWydatkow?.map((gw) => gw.nazwa).sort() ?? [],
         },
+      },
+      {
+        field: 'kodZadaniowy' as const,
+        cellRenderer: renderKodCellWithTooltip,
+        editable: true,
+        cellEditor: 'agSelectCellEditor',
+        cellEditorParams: {
+          values:
+            kodyZadaniowe?.sort((a, b) => a.kod.localeCompare(b.kod)) ?? [],
+        },
+      },
+      {
+        field: 'kodZadaniowy' as const,
+        cellRenderer: (params: { value: KodZadaniowy }) => {
+          return params.value.kod_krotki;
+        },
+        editable: false,
       },
     ],
     [
