@@ -1,7 +1,6 @@
-from sqlalchemy import String, Integer, ForeignKey
+from sqlalchemy import Integer
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from .czesci_budzetowe import CzescBudzetowa
 from .base import Base
 from .rok_budzetowy import RokBudzetowy
 

@@ -54,17 +54,17 @@ import json
 from pathlib import Path
 from sqlalchemy.orm import Session
 
-from database import engine, SessionLocal
-from schemas.base import Base
-from schemas.czesci_budzetowe import CzescBudzetowa
-from schemas.dzialy import Dzial
-from schemas.rozdzialy import Rozdzial
-from schemas.paragrafy import Paragraf
-from schemas.zrodla_finansowania import ZrodloFinansowania
-from schemas.grupy_wydatkow import GrupaWydatkow
-from schemas.planowanie_budzetu import PlanowanieBudzetu
-from schemas.komorki_organizacyjne import KomorkaOrganizacyjna
-from schemas.users import User
+from src.database import engine, SessionLocal
+from src.schemas.base import Base
+from src.schemas.czesci_budzetowe import CzescBudzetowa
+from src.schemas.dzialy import Dzial
+from src.schemas.rozdzialy import Rozdzial
+from src.schemas.paragrafy import Paragraf
+from src.schemas.zrodla_finansowania import ZrodloFinansowania
+from src.schemas.grupy_wydatkow import GrupaWydatkow
+from src.schemas.planowanie_budzetu import PlanowanieBudzetu
+from src.schemas.komorki_organizacyjne import KomorkaOrganizacyjna
+from src.schemas.users import User
 
 
 def load_json_fixture(filename: str) -> list[dict]:
