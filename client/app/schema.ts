@@ -63,3 +63,19 @@ export type ZrodloFinansowania = z.infer<typeof zrodloFinansowaniaSchema>;
 export type DocumentRow = z.infer<typeof budgetDocumentRowSchema>;
 export type BudgetDocument = z.infer<typeof budgetDocumentSchema>;
 export type KodZadaniowy = z.infer<typeof kodZadaniowySchema>;
+
+export const planowanieBudzetuCreateSchema = z.object({
+  nazwa_projektu: z.string().optional(),
+  nazwa_zadania: z.string().optional(),
+  szczegolowe_uzasadnienie_realizacji: z.string().optional(),
+  budzet: z.string().optional(),
+  czesc_budzetowa_kod: z.string().min(1, "Część budżetowa jest wymagana"),
+  dzial_kod: z.string().min(1, "Dział jest wymagany"),
+  rozdzial_kod: z.string().min(1, "Rozdział jest wymagany"),
+  paragraf_kod: z.string().min(1, "Paragraf jest wymagany"),
+  zrodlo_finansowania_kod: z.string().min(1, "Źródło finansowania jest wymagane"),
+  grupa_wydatkow_id: z.number().min(1, "Grupa wydatków jest wymagana"),
+  komorka_organizacyjna_id: z.number().min(1, "Komórka organizacyjna jest wymagana"),
+});
+
+export type PlanowanieBudzetuCreate = z.infer<typeof planowanieBudzetuCreateSchema>;

@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from '~/components/ui/dialog';
 import { useForm, type AnyFieldApi } from '@tanstack/react-form';
-import { budgetDocumentRowSchema, type DocumentRow } from '~/schema';
+import { budgetDocumentRowSchema, type DocumentRow, planowanieBudzetuCreateSchema } from '~/schema';
 import {
   Select,
   SelectContent,
@@ -26,6 +26,8 @@ import {
   FieldLabel,
 } from '~/components/ui/field';
 import { Input } from '~/components/ui/input';
+import { createPlanowanieBudzetu } from '~/queries';
+import { useUserMock } from '~/hooks/use-user-mock';
 
 const schema = budgetDocumentRowSchema.required().superRefine((data, ctx) => {
   Object.entries(data).forEach(([key, value]) => {
@@ -81,6 +83,8 @@ export const NewBudgetDocumentRowModal = ({
   onAdd,
 }: PropsWithChildren<NewBudgetDocumentRowModalProps>) => {
   const [open, setOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { user } = useUserMock();
   const {
     dzialy,
     rozdzialy,
@@ -92,12 +96,59 @@ export const NewBudgetDocumentRowModal = ({
     isLoading: isLoadingGridData,
   } = useGridData();
 
+  // Map user roles to komorka_organizacyjna_id based on fixtures
+  const getKomorkaOrganizacyjnaId = () => {
+    switch(user.role) {
+      case 'kierownictwo':
+      case 'bbf':
+        return 0; // Biuro Budżetowo-Finansowe
+      case 'ko':
+      default:
+        return 1; // Centrum Rozwoju Kompetencji Cyfrowych
+    }
+  };
+
   const form = useForm({
     defaultValues: budgetDocumentRowSchema.parse({}),
-    onSubmit: (values) => {
-      onAdd?.(values.value);
-      setOpen(false);
-      form.reset();
+    onSubmit: async (values) => {
+      if (isSubmitting) return;
+      
+      try {
+        setIsSubmitting(true);
+        
+        // Map form data to backend format
+        const planowanieBudzetuData = {
+          nazwa_projektu: values.value.nazwaProgramu || undefined,
+          nazwa_zadania: undefined, // Not in current form
+          szczegolowe_uzasadnienie_realizacji: undefined, // Not in current form  
+          budzet: values.value.planWI || undefined,
+          czesc_budzetowa_kod: values.value.czescBudzetowa?.kod || '',
+          dzial_kod: values.value.dzial?.kod || '',
+          rozdzial_kod: values.value.rozdzial?.kod || '',
+          paragraf_kod: values.value.paragraf?.kod || '',
+          zrodlo_finansowania_kod: values.value.zrodloFinansowania?.kod || '',
+          grupa_wydatkow_id: values.value.grupaWydatkow?.id || 0,
+          komorka_organizacyjna_id: getKomorkaOrganizacyjnaId(),
+        };
+
+        // Validate required fields
+        const validated = planowanieBudzetuCreateSchema.parse(planowanieBudzetuData);
+        
+        // Call backend API
+        const result = await createPlanowanieBudzetu(validated);
+        
+        console.log('Created planowanie budzetu:', result);
+        
+        // Call onAdd with original form data for UI update
+        onAdd?.(values.value);
+        setOpen(false);
+        form.reset();
+      } catch (error) {
+        console.error('Error creating planowanie budzetu:', error);
+        // TODO: Show error message to user
+      } finally {
+        setIsSubmitting(false);
+      }
     },
     validators: {
       onChange: schema,
@@ -449,9 +500,9 @@ export const NewBudgetDocumentRowModal = ({
               e.stopPropagation();
               form.handleSubmit();
             }}
-            disabled={isLoadingGridData || !form.state.isValid}
+            disabled={isLoadingGridData || !form.state.isValid || isSubmitting}
           >
-            Dodaj
+            {isSubmitting ? 'Dodawanie...' : 'Dodaj'}
           </Button>
         </DialogFooter>
       </DialogContent>
