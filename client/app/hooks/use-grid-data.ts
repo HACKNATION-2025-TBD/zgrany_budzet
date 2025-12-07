@@ -3,6 +3,7 @@ import { useRozdzialy } from '../queries';
 import { useParagrafy } from '../queries';
 import { useGrupyWydatkow } from '../queries';
 import { useCzesciBudzetowe } from '../queries';
+import { useZrodlaFinansowania } from '../queries';
 
 export const useGridData = () => {
   const { data: dzialy, isLoading: isLoadingDzialy } = useDzialy();
@@ -12,6 +13,8 @@ export const useGridData = () => {
     useGrupyWydatkow();
   const { data: czesciBudzetowe, isLoading: isLoadingCzesciBudzetowe } =
     useCzesciBudzetowe();
+  const { data: zrodlaFinansowania, isLoading: isLoadingZrodlaFinansowania } =
+    useZrodlaFinansowania();
 
   return {
     dzialy,
@@ -19,11 +22,13 @@ export const useGridData = () => {
     paragrafy,
     grupyWydatkow,
     czesciBudzetowe,
+    zrodlaFinansowania,
     isLoading:
       isLoadingDzialy ||
       isLoadingRozdzialy ||
       isLoadingParagrafy ||
       isLoadingGrupyWydatkow ||
-      isLoadingCzesciBudzetowe,
+      isLoadingCzesciBudzetowe ||
+      isLoadingZrodlaFinansowania,
   };
 };
