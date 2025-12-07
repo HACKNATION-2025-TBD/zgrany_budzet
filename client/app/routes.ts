@@ -5,7 +5,7 @@ export default [
     route('', 'routes/page-layout.tsx', [
       index('routes/login.tsx'),
       route('dashboard', 'routes/dashboard.tsx'),
-      route('edit', 'routes/edit.tsx'),
+      route('dashboard/:id', 'routes/edit.tsx'),
     ]),
   ]),
 ] satisfies RouteConfig;

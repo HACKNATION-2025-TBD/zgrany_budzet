@@ -18,6 +18,11 @@ export async function getPlanowanieBudzetu(): Promise<PlanowanieBudzetuResponse[
   return response.data;
 }
 
+export async function getPlanowanieBudzetuById(id: string): Promise<PlanowanieBudzetuResponse> {
+  const response = await apiClient.get(`/planowanie_budzetu/${id}`);
+  return response.data;
+}
+
 export interface CellUpdateRequest {
   field: string;
   value: string | number | null;

@@ -8,6 +8,7 @@ import {
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { useQueryClient } from '@tanstack/react-query';
+import { useParams } from 'react-router';
 import type { BudgetDocument, KodZadaniowy, DocumentRow } from '~/schema';
 import { useGridData } from '~/hooks/use-grid-data';
 import { usePlanowanieBudzetu } from '~/hooks/use-planowanie-budzetu';
@@ -24,6 +25,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 const BudgetGrid = () => {
   const queryClient = useQueryClient();
   const { user } = useUserMock();
+  const { id } = useParams<{ id?: string }>();
   const [isHistoryMode, setIsHistoryMode] = useState(false);
   const [historyModalData, setHistoryModalData] = useState<{
     field: string;
@@ -42,7 +44,7 @@ const BudgetGrid = () => {
     isLoading: isLoadingGridData,
   } = useGridData();
   const { data: planowanieBudzetu, isLoading: isLoadingPlanowanie } =
-    usePlanowanieBudzetu();
+    usePlanowanieBudzetu(id);
 
   // Map frontend field names to backend field names
   const mapFieldToBackendFieldName = (field: string): string => {

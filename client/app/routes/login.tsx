@@ -33,9 +33,9 @@ export default function Login() {
             title='Biuro Budżetowo Finansowe'
             description='Kierownictwo Ministerstwa Cyfryzacji'
             onClick={() => setUserType('bbf')}
-          />
+          />  
           <RoleCard
-            to='/edit'
+            to='/dashboard/1'
             icon={Landmark}
             title='Komórki organizacyjne'
             description='Departamenty i biura'
