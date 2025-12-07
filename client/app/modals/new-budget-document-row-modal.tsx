@@ -25,6 +25,7 @@ import {
   FieldError,
   FieldLabel,
 } from '~/components/ui/field';
+import { Input } from '~/components/ui/input';
 
 const schema = budgetDocumentRowSchema.required().superRefine((data, ctx) => {
   Object.entries(data).forEach(([key, value]) => {
@@ -112,7 +113,7 @@ export const NewBudgetDocumentRowModal = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className='max-h-[90vh] min-h-0 max-w-[100vw]! w-[800px] min-w-0 overflow-auto'>
+      <DialogContent className='max-h-[90vh] min-h-0 max-w-[100vw]! w-[1200px] min-w-0 overflow-auto'>
         <DialogHeader>
           <DialogTitle>Dodaj nowy wiersz</DialogTitle>
           <DialogClose />
@@ -124,7 +125,7 @@ export const NewBudgetDocumentRowModal = ({
             e.stopPropagation();
             form.handleSubmit();
           }}
-          className='overflow-auto! grid grid-cols-2 gap-4'
+          className='overflow-auto! grid grid-cols-3 gap-4'
         >
           <form.Field name='czescBudzetowa'>
             {(field) => (
@@ -398,6 +399,40 @@ export const NewBudgetDocumentRowModal = ({
                 <FieldDescription className='text-xs'>
                   {field.state.value?.nazwa}
                 </FieldDescription>
+                <FieldError>
+                  <FieldInfo field={field} />
+                </FieldError>
+              </Field>
+            )}
+          </form.Field>
+
+          <form.Field name='nazwaProgramu'>
+            {(field) => (
+              <Field>
+                <FieldLabel htmlFor='input-id'>Nazwa programu</FieldLabel>
+                <Input
+                  name='nazwaProgramu'
+                  placeholder='Wprowadz nazwę programu'
+                  value={field.state.value ?? ''}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+                <FieldError>
+                  <FieldInfo field={field} />
+                </FieldError>
+              </Field>
+            )}
+          </form.Field>
+
+          <form.Field name='planWI'>
+            {(field) => (
+              <Field>
+                <FieldLabel htmlFor='input-id'>Plan WI</FieldLabel>
+                <Input
+                  name='planWI'
+                  placeholder='Wprowadź plan WI'
+                  value={field.state.value ?? ''}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
                 <FieldError>
                   <FieldInfo field={field} />
                 </FieldError>

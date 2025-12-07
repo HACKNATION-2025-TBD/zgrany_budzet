@@ -48,6 +48,8 @@ export const budgetDocumentRowSchema = z.object({
   czescBudzetowa: czescBudzetowaSchema.nullable().default(null),
   zrodloFinansowania: zrodloFinansowaniaSchema.nullable().default(null),
   kodZadaniowy: kodZadaniowySchema.nullable().default(null),
+  nazwaProgramu: z.string().default('nie dotyczy'),
+  planWI: z.string().default('nie dotyczy'),
 });
 
 export const budgetDocumentSchema = z.array(budgetDocumentRowSchema);

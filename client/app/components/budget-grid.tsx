@@ -10,6 +10,7 @@ import { AgGridReact } from 'ag-grid-react';
 import type { BudgetDocument, KodZadaniowy } from '~/schema';
 import { useGridData } from '~/hooks/use-grid-data';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
+import { useUserMock } from '~/hooks/use-user-mock';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -18,6 +19,7 @@ type BudgetGridProps = {
 };
 
 const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
+  const { user } = useUserMock();
   const {
     dzialy,
     rozdzialy,
@@ -64,6 +66,7 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
   const colDefs: ColDef[] = useMemo(
     () => [
       {
+        headerName: 'Część budżetowa',
         field: 'czescBudzetowa' as const,
         editable: true,
         valueFormatter: formatKodAndNazwa,
@@ -75,6 +78,7 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
         },
       },
       {
+        headerName: 'Dział',
         field: 'dzial' as const,
         editable: true,
         valueFormatter: formatKodAndNazwa,
@@ -85,6 +89,7 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
         },
       },
       {
+        headerName: 'Rozdział',
         field: 'rozdzial' as const,
         editable: true,
         cellEditor: 'agSelectCellEditor',
@@ -95,6 +100,7 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
         },
       },
       {
+        headerName: 'Paragraf',
         field: 'paragraf' as const,
         editable: true,
         cellEditor: 'agSelectCellEditor',
@@ -105,6 +111,7 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
         },
       },
       {
+        headerName: 'Źródło finansowania',
         field: 'zrodloFinansowania' as const,
         editable: true,
         cellEditor: 'agSelectCellEditor',
@@ -117,6 +124,7 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
         },
       },
       {
+        headerName: 'Grupa wydatków',
         field: 'grupaWydatkow' as const,
         cellRenderer: renderKodCellWithTooltip,
         editable: true,
@@ -126,6 +134,7 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
         },
       },
       {
+        headerName: 'Budżet zadaniowy (w pełnej szczegółowości)',
         field: 'kodZadaniowy' as const,
         cellRenderer: renderKodCellWithTooltip,
         editable: true,
@@ -136,11 +145,31 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
         },
       },
       {
+        headerName: 'Budżet zadaniowy (nr funkcji, nr zadania)',
         field: 'kodZadaniowy' as const,
         cellRenderer: (params: { value: KodZadaniowy }) => {
           return params.value.kod_krotki;
         },
         editable: false,
+      },
+      {
+        headerName: 'Nazwa programu',
+        field: 'nazwaProgramu' as const,
+        editable: true,
+        cellEditor: 'agTextCellEditor',
+      },
+      {
+        headerName: 'Nazwa komórki organizacyjnej',
+        editable: false,
+        cellRenderer: () => {
+          return user.nazwaKomorkiOrganizacyjnej;
+        },
+      },
+      {
+        headerName: 'Plan WI',
+        field: 'planWI' as const,
+        editable: true,
+        cellEditor: 'agTextCellEditor',
       },
     ],
     [

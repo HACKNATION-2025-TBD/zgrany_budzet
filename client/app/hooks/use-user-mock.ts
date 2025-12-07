@@ -15,8 +15,17 @@ const userMockData = {
     name: 'Karolina Olycz',
     role: 'ko',
     email: 'karoly@mc.gov.pl',
+    nazwaKomorkiOrganizacyjnej: 'Departament GovTech Polska',
   },
-} as Record<UserType, { name: string; role: UserType; email: string }>;
+} as Record<
+  UserType,
+  {
+    name: string;
+    role: UserType;
+    email: string;
+    nazwaKomorkiOrganizacyjnej: string | undefined;
+  }
+>;
 
 export type UserType = 'kierownictwo' | 'bbf' | 'ko';
 
