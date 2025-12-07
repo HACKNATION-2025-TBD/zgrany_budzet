@@ -409,8 +409,11 @@ async def create_rok_budzetowy(
     if not planowanie:
         raise HTTPException(status_code=404, detail="PlanowanieBudzetu not found")
     
-    # Create main record
-    rok = RokBudzetowy(planowanie_budzetu_id=data.planowanie_budzetu_id)
+    # Create main record with rok field
+    rok = RokBudzetowy(
+        planowanie_budzetu_id=data.planowanie_budzetu_id,
+        rok=data.rok
+    )
     db.add(rok)
     db.flush()
     
@@ -482,6 +485,7 @@ async def get_all_rok_budzetowy(
         result.append({
             "id": rok.id,
             "planowanie_budzetu_id": rok.planowanie_budzetu_id,
+            "rok": rok.rok,
             "limit": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "limit", "numeric"),
             "potrzeba": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "potrzeba", "numeric")
         })
@@ -505,6 +509,7 @@ async def get_rok_budzetowy(
     return {
         "id": rok.id,
         "planowanie_budzetu_id": rok.planowanie_budzetu_id,
+        "rok": rok.rok,
         "limit": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "limit", "numeric"),
         "potrzeba": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "potrzeba", "numeric")
     }
