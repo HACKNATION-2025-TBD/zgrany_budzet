@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
-from pydantic import BaseModel
 from typing import Optional, List
 from datetime import datetime
 
@@ -13,34 +12,18 @@ from src.schemas.versioned_fields import (
     VersionedNumericField,
     VersionedForeignKeyField
 )
+from src.models.tabela_models import (
+    PlanowanieBudzetuCreate,
+    CellUpdate,
+    RokBudzetowyCreate,
+    MessageResponse,
+    UpdateResponse,
+    PlanowanieBudzetuResponse,
+    FieldHistoryResponse,
+    RokBudzetowyResponse
+)
 
 router = APIRouter()
-
-
-# Pydantic models for requests
-class PlanowanieBudzetuCreate(BaseModel):
-    nazwa_projektu: Optional[str] = None
-    nazwa_zadania: Optional[str] = None
-    szczegolowe_uzasadnienie_realizacji: Optional[str] = None
-    budzet: Optional[str] = None
-    czesc_budzetowa_kod: str
-    dzial_kod: str
-    rozdzial_kod: str
-    paragraf_kod: str
-    zrodlo_finansowania_kod: str
-    grupa_wydatkow_id: int
-    komorka_organizacyjna_id: int
-
-
-class CellUpdate(BaseModel):
-    field: str
-    value: Optional[str | int | float] = None
-
-
-class RokBudzetowyCreate(BaseModel):
-    planowanie_budzetu_id: int
-    limit: float
-    potrzeba: float
 
 
 # Helper functions
@@ -75,14 +58,41 @@ def create_fk_version(db: Session, entity_type: str, entity_id: int, field_name:
     db.add(version)
 
 
-def get_latest_version(versions: List):
-    if not versions:
-        return None
-    return max(versions, key=lambda v: v.timestamp)
+def get_latest_version_for_field(db: Session, entity_type: str, entity_id: int, field_name: str, field_type: str):
+    """Get latest version for a specific field - optimized to query only latest"""
+    if field_type == "string":
+        version = db.query(VersionedStringField).filter(
+            VersionedStringField.entity_type == entity_type,
+            VersionedStringField.entity_id == entity_id,
+            VersionedStringField.field_name == field_name
+        ).order_by(desc(VersionedStringField.timestamp)).first()
+        return version.value if version else None
+    elif field_type == "numeric":
+        version = db.query(VersionedNumericField).filter(
+            VersionedNumericField.entity_type == entity_type,
+            VersionedNumericField.entity_id == entity_id,
+            VersionedNumericField.field_name == field_name
+        ).order_by(desc(VersionedNumericField.timestamp)).first()
+        return float(version.value) if version else None
+    elif field_type == "fk_string":
+        version = db.query(VersionedForeignKeyField).filter(
+            VersionedForeignKeyField.entity_type == entity_type,
+            VersionedForeignKeyField.entity_id == entity_id,
+            VersionedForeignKeyField.field_name == field_name
+        ).order_by(desc(VersionedForeignKeyField.timestamp)).first()
+        return version.value_string if version else None
+    elif field_type == "fk_int":
+        version = db.query(VersionedForeignKeyField).filter(
+            VersionedForeignKeyField.entity_type == entity_type,
+            VersionedForeignKeyField.entity_id == entity_id,
+            VersionedForeignKeyField.field_name == field_name
+        ).order_by(desc(VersionedForeignKeyField.timestamp)).first()
+        return version.value_int if version else None
+    return None
 
 
 # PlanowanieBudzetu endpoints
-@router.post("/planowanie_budzetu")
+@router.post("/planowanie_budzetu", response_model=MessageResponse)
 async def create_planowanie_budzetu(data: PlanowanieBudzetuCreate, db: Session = Depends(get_db)):
     # Create main record
     planowanie = PlanowanieBudzetu()
@@ -109,7 +119,7 @@ async def create_planowanie_budzetu(data: PlanowanieBudzetuCreate, db: Session =
     return {"id": planowanie.id, "message": "Created successfully"}
 
 
-@router.patch("/planowanie_budzetu/{planowanie_id}")
+@router.patch("/planowanie_budzetu/{planowanie_id}", response_model=UpdateResponse)
 async def update_planowanie_budzetu_cell(planowanie_id: int, data: CellUpdate, db: Session = Depends(get_db)):
     planowanie = db.query(PlanowanieBudzetu).filter(PlanowanieBudzetu.id == planowanie_id).first()
     if not planowanie:
@@ -140,100 +150,98 @@ async def update_planowanie_budzetu_cell(planowanie_id: int, data: CellUpdate, d
     return {"id": planowanie_id, "field": data.field, "value": data.value, "message": "Updated successfully"}
 
 
-@router.get("/planowanie_budzetu")
+@router.get("/planowanie_budzetu", response_model=List[PlanowanieBudzetuResponse])
 async def get_all_planowanie_budzetu(db: Session = Depends(get_db)):
     planowania = db.query(PlanowanieBudzetu).all()
     result = []
     
     for p in planowania:
-        nazwa_projektu_ver = get_latest_version(p.nazwa_projektu_versions)
-        nazwa_zadania_ver = get_latest_version(p.nazwa_zadania_versions)
-        uzasadnienie_ver = get_latest_version(p.szczegolowe_uzasadnienie_realizacji_versions)
-        budzet_ver = get_latest_version(p.budzet_versions)
-        czesc_ver = get_latest_version(p.czesc_budzetowa_kod_versions)
-        dzial_ver = get_latest_version(p.dzial_kod_versions)
-        rozdzial_ver = get_latest_version(p.rozdzial_kod_versions)
-        paragraf_ver = get_latest_version(p.paragraf_kod_versions)
-        zrodlo_ver = get_latest_version(p.zrodlo_finansowania_kod_versions)
-        grupa_ver = get_latest_version(p.grupa_wydatkow_id_versions)
-        komorka_ver = get_latest_version(p.komorka_organizacyjna_id_versions)
-        
         result.append({
             "id": p.id,
-            "nazwa_projektu": nazwa_projektu_ver.value if nazwa_projektu_ver else None,
-            "nazwa_zadania": nazwa_zadania_ver.value if nazwa_zadania_ver else None,
-            "szczegolowe_uzasadnienie_realizacji": uzasadnienie_ver.value if uzasadnienie_ver else None,
-            "budzet": budzet_ver.value if budzet_ver else None,
-            "czesc_budzetowa_kod": czesc_ver.value_string if czesc_ver else None,
-            "dzial_kod": dzial_ver.value_string if dzial_ver else None,
-            "rozdzial_kod": rozdzial_ver.value_string if rozdzial_ver else None,
-            "paragraf_kod": paragraf_ver.value_string if paragraf_ver else None,
-            "zrodlo_finansowania_kod": zrodlo_ver.value_string if zrodlo_ver else None,
-            "grupa_wydatkow_id": grupa_ver.value_int if grupa_ver else None,
-            "komorka_organizacyjna_id": komorka_ver.value_int if komorka_ver else None
+            "nazwa_projektu": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "nazwa_projektu", "string"),
+            "nazwa_zadania": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "nazwa_zadania", "string"),
+            "szczegolowe_uzasadnienie_realizacji": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "szczegolowe_uzasadnienie_realizacji", "string"),
+            "budzet": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "budzet", "string"),
+            "czesc_budzetowa_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "czesc_budzetowa_kod", "fk_string"),
+            "dzial_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "dzial_kod", "fk_string"),
+            "rozdzial_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "rozdzial_kod", "fk_string"),
+            "paragraf_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "paragraf_kod", "fk_string"),
+            "zrodlo_finansowania_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "zrodlo_finansowania_kod", "fk_string"),
+            "grupa_wydatkow_id": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "grupa_wydatkow_id", "fk_int"),
+            "komorka_organizacyjna_id": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "komorka_organizacyjna_id", "fk_int")
         })
     
     return result
 
 
-@router.get("/planowanie_budzetu/{planowanie_id}")
+@router.get("/planowanie_budzetu/{planowanie_id}", response_model=PlanowanieBudzetuResponse)
 async def get_planowanie_budzetu(planowanie_id: int, db: Session = Depends(get_db)):
     p = db.query(PlanowanieBudzetu).filter(PlanowanieBudzetu.id == planowanie_id).first()
     if not p:
         raise HTTPException(status_code=404, detail="PlanowanieBudzetu not found")
     
-    nazwa_projektu_ver = get_latest_version(p.nazwa_projektu_versions)
-    nazwa_zadania_ver = get_latest_version(p.nazwa_zadania_versions)
-    uzasadnienie_ver = get_latest_version(p.szczegolowe_uzasadnienie_realizacji_versions)
-    budzet_ver = get_latest_version(p.budzet_versions)
-    czesc_ver = get_latest_version(p.czesc_budzetowa_kod_versions)
-    dzial_ver = get_latest_version(p.dzial_kod_versions)
-    rozdzial_ver = get_latest_version(p.rozdzial_kod_versions)
-    paragraf_ver = get_latest_version(p.paragraf_kod_versions)
-    zrodlo_ver = get_latest_version(p.zrodlo_finansowania_kod_versions)
-    grupa_ver = get_latest_version(p.grupa_wydatkow_id_versions)
-    komorka_ver = get_latest_version(p.komorka_organizacyjna_id_versions)
-    
     return {
         "id": p.id,
-        "nazwa_projektu": nazwa_projektu_ver.value if nazwa_projektu_ver else None,
-        "nazwa_zadania": nazwa_zadania_ver.value if nazwa_zadania_ver else None,
-        "szczegolowe_uzasadnienie_realizacji": uzasadnienie_ver.value if uzasadnienie_ver else None,
-        "budzet": budzet_ver.value if budzet_ver else None,
-        "czesc_budzetowa_kod": czesc_ver.value_string if czesc_ver else None,
-        "dzial_kod": dzial_ver.value_string if dzial_ver else None,
-        "rozdzial_kod": rozdzial_ver.value_string if rozdzial_ver else None,
-        "paragraf_kod": paragraf_ver.value_string if paragraf_ver else None,
-        "zrodlo_finansowania_kod": zrodlo_ver.value_string if zrodlo_ver else None,
-        "grupa_wydatkow_id": grupa_ver.value_int if grupa_ver else None,
-        "komorka_organizacyjna_id": komorka_ver.value_int if komorka_ver else None
+        "nazwa_projektu": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "nazwa_projektu", "string"),
+        "nazwa_zadania": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "nazwa_zadania", "string"),
+        "szczegolowe_uzasadnienie_realizacji": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "szczegolowe_uzasadnienie_realizacji", "string"),
+        "budzet": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "budzet", "string"),
+        "czesc_budzetowa_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "czesc_budzetowa_kod", "fk_string"),
+        "dzial_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "dzial_kod", "fk_string"),
+        "rozdzial_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "rozdzial_kod", "fk_string"),
+        "paragraf_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "paragraf_kod", "fk_string"),
+        "zrodlo_finansowania_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "zrodlo_finansowania_kod", "fk_string"),
+        "grupa_wydatkow_id": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "grupa_wydatkow_id", "fk_int"),
+        "komorka_organizacyjna_id": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "komorka_organizacyjna_id", "fk_int")
     }
 
 
-@router.get("/planowanie_budzetu/{planowanie_id}/history")
-async def get_planowanie_budzetu_history(planowanie_id: int, db: Session = Depends(get_db)):
+@router.get("/planowanie_budzetu/{planowanie_id}/field_history/{field_name}", response_model=FieldHistoryResponse)
+async def get_planowanie_budzetu_field_history(planowanie_id: int, field_name: str, db: Session = Depends(get_db)):
     p = db.query(PlanowanieBudzetu).filter(PlanowanieBudzetu.id == planowanie_id).first()
     if not p:
         raise HTTPException(status_code=404, detail="PlanowanieBudzetu not found")
     
-    return {
-        "id": p.id,
-        "nazwa_projektu_history": [{"value": v.value, "timestamp": v.timestamp} for v in sorted(p.nazwa_projektu_versions, key=lambda x: x.timestamp, reverse=True)],
-        "nazwa_zadania_history": [{"value": v.value, "timestamp": v.timestamp} for v in sorted(p.nazwa_zadania_versions, key=lambda x: x.timestamp, reverse=True)],
-        "szczegolowe_uzasadnienie_realizacji_history": [{"value": v.value, "timestamp": v.timestamp} for v in sorted(p.szczegolowe_uzasadnienie_realizacji_versions, key=lambda x: x.timestamp, reverse=True)],
-        "budzet_history": [{"value": v.value, "timestamp": v.timestamp} for v in sorted(p.budzet_versions, key=lambda x: x.timestamp, reverse=True)],
-        "czesc_budzetowa_kod_history": [{"value": v.value_string, "timestamp": v.timestamp} for v in sorted(p.czesc_budzetowa_kod_versions, key=lambda x: x.timestamp, reverse=True)],
-        "dzial_kod_history": [{"value": v.value_string, "timestamp": v.timestamp} for v in sorted(p.dzial_kod_versions, key=lambda x: x.timestamp, reverse=True)],
-        "rozdzial_kod_history": [{"value": v.value_string, "timestamp": v.timestamp} for v in sorted(p.rozdzial_kod_versions, key=lambda x: x.timestamp, reverse=True)],
-        "paragraf_kod_history": [{"value": v.value_string, "timestamp": v.timestamp} for v in sorted(p.paragraf_kod_versions, key=lambda x: x.timestamp, reverse=True)],
-        "zrodlo_finansowania_kod_history": [{"value": v.value_string, "timestamp": v.timestamp} for v in sorted(p.zrodlo_finansowania_kod_versions, key=lambda x: x.timestamp, reverse=True)],
-        "grupa_wydatkow_id_history": [{"value": v.value_int, "timestamp": v.timestamp} for v in sorted(p.grupa_wydatkow_id_versions, key=lambda x: x.timestamp, reverse=True)],
-        "komorka_organizacyjna_id_history": [{"value": v.value_int, "timestamp": v.timestamp} for v in sorted(p.komorka_organizacyjna_id_versions, key=lambda x: x.timestamp, reverse=True)]
-    }
+    string_fields = ["nazwa_projektu", "nazwa_zadania", "szczegolowe_uzasadnienie_realizacji", "budzet"]
+    fk_string_fields = ["czesc_budzetowa_kod", "dzial_kod", "rozdzial_kod", "paragraf_kod", "zrodlo_finansowania_kod"]
+    fk_int_fields = ["grupa_wydatkow_id", "komorka_organizacyjna_id"]
+    
+    if field_name in string_fields:
+        versions = db.query(VersionedStringField).filter(
+            VersionedStringField.entity_type == "planowanie_budzetu",
+            VersionedStringField.entity_id == planowanie_id,
+            VersionedStringField.field_name == field_name
+        ).order_by(desc(VersionedStringField.timestamp)).all()
+        return {
+            "field_name": field_name,
+            "history": [{"value": v.value, "timestamp": v.timestamp} for v in versions]
+        }
+    elif field_name in fk_string_fields:
+        versions = db.query(VersionedForeignKeyField).filter(
+            VersionedForeignKeyField.entity_type == "planowanie_budzetu",
+            VersionedForeignKeyField.entity_id == planowanie_id,
+            VersionedForeignKeyField.field_name == field_name
+        ).order_by(desc(VersionedForeignKeyField.timestamp)).all()
+        return {
+            "field_name": field_name,
+            "history": [{"value": v.value_string, "timestamp": v.timestamp} for v in versions]
+        }
+    elif field_name in fk_int_fields:
+        versions = db.query(VersionedForeignKeyField).filter(
+            VersionedForeignKeyField.entity_type == "planowanie_budzetu",
+            VersionedForeignKeyField.entity_id == planowanie_id,
+            VersionedForeignKeyField.field_name == field_name
+        ).order_by(desc(VersionedForeignKeyField.timestamp)).all()
+        return {
+            "field_name": field_name,
+            "history": [{"value": v.value_int, "timestamp": v.timestamp} for v in versions]
+        }
+    else:
+        raise HTTPException(status_code=400, detail=f"Unknown field: {field_name}")
 
 
 # RokBudzetowy endpoints
-@router.post("/rok_budzetowy")
+@router.post("/rok_budzetowy", response_model=MessageResponse)
 async def create_rok_budzetowy(data: RokBudzetowyCreate, db: Session = Depends(get_db)):
     # Verify planowanie_budzetu exists
     planowanie = db.query(PlanowanieBudzetu).filter(PlanowanieBudzetu.id == data.planowanie_budzetu_id).first()
@@ -255,7 +263,7 @@ async def create_rok_budzetowy(data: RokBudzetowyCreate, db: Session = Depends(g
     return {"id": rok.id, "message": "Created successfully"}
 
 
-@router.patch("/rok_budzetowy/{rok_id}")
+@router.patch("/rok_budzetowy/{rok_id}", response_model=UpdateResponse)
 async def update_rok_budzetowy_cell(rok_id: int, data: CellUpdate, db: Session = Depends(get_db)):
     rok = db.query(RokBudzetowy).filter(RokBudzetowy.id == rok_id).first()
     if not rok:
@@ -275,51 +283,53 @@ async def update_rok_budzetowy_cell(rok_id: int, data: CellUpdate, db: Session =
     return {"id": rok_id, "field": data.field, "value": data.value, "message": "Updated successfully"}
 
 
-@router.get("/rok_budzetowy")
+@router.get("/rok_budzetowy", response_model=List[RokBudzetowyResponse])
 async def get_all_rok_budzetowy(db: Session = Depends(get_db)):
     lata = db.query(RokBudzetowy).all()
     result = []
     
     for rok in lata:
-        limit_ver = get_latest_version(rok.limit_versions)
-        potrzeba_ver = get_latest_version(rok.potrzeba_versions)
-        
         result.append({
             "id": rok.id,
             "planowanie_budzetu_id": rok.planowanie_budzetu_id,
-            "limit": float(limit_ver.value) if limit_ver else None,
-            "potrzeba": float(potrzeba_ver.value) if potrzeba_ver else None
+            "limit": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "limit", "numeric"),
+            "potrzeba": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "potrzeba", "numeric")
         })
     
     return result
 
 
-@router.get("/rok_budzetowy/{rok_id}")
+@router.get("/rok_budzetowy/{rok_id}", response_model=RokBudzetowyResponse)
 async def get_rok_budzetowy(rok_id: int, db: Session = Depends(get_db)):
     rok = db.query(RokBudzetowy).filter(RokBudzetowy.id == rok_id).first()
     if not rok:
         raise HTTPException(status_code=404, detail="RokBudzetowy not found")
     
-    limit_ver = get_latest_version(rok.limit_versions)
-    potrzeba_ver = get_latest_version(rok.potrzeba_versions)
-    
     return {
         "id": rok.id,
         "planowanie_budzetu_id": rok.planowanie_budzetu_id,
-        "limit": float(limit_ver.value) if limit_ver else None,
-        "potrzeba": float(potrzeba_ver.value) if potrzeba_ver else None
+        "limit": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "limit", "numeric"),
+        "potrzeba": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "potrzeba", "numeric")
     }
 
 
-@router.get("/rok_budzetowy/{rok_id}/history")
-async def get_rok_budzetowy_history(rok_id: int, db: Session = Depends(get_db)):
+@router.get("/rok_budzetowy/{rok_id}/field_history/{field_name}", response_model=FieldHistoryResponse)
+async def get_rok_budzetowy_field_history(rok_id: int, field_name: str, db: Session = Depends(get_db)):
     rok = db.query(RokBudzetowy).filter(RokBudzetowy.id == rok_id).first()
     if not rok:
         raise HTTPException(status_code=404, detail="RokBudzetowy not found")
     
-    return {
-        "id": rok.id,
-        "planowanie_budzetu_id": rok.planowanie_budzetu_id,
-        "limit_history": [{"value": float(v.value), "timestamp": v.timestamp} for v in sorted(rok.limit_versions, key=lambda x: x.timestamp, reverse=True)],
-        "potrzeba_history": [{"value": float(v.value), "timestamp": v.timestamp} for v in sorted(rok.potrzeba_versions, key=lambda x: x.timestamp, reverse=True)]
-    }
+    numeric_fields = ["limit", "potrzeba"]
+    
+    if field_name in numeric_fields:
+        versions = db.query(VersionedNumericField).filter(
+            VersionedNumericField.entity_type == "rok_budzetowy",
+            VersionedNumericField.entity_id == rok_id,
+            VersionedNumericField.field_name == field_name
+        ).order_by(desc(VersionedNumericField.timestamp)).all()
+        return {
+            "field_name": field_name,
+            "history": [{"value": float(v.value), "timestamp": v.timestamp} for v in versions]
+        }
+    else:
+        raise HTTPException(status_code=400, detail=f"Unknown field: {field_name}")
