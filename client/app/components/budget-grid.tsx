@@ -7,18 +7,15 @@ import {
   type ColDef,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import type { BudgetDocument, KodZadaniowy } from '~/schema';
+import type { BudgetDocument, KodZadaniowy, DocumentRow } from '~/schema';
 import { useGridData } from '~/hooks/use-grid-data';
+import { usePlanowanieBudzetu } from '~/hooks/use-planowanie-budzetu';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import { useUserMock } from '~/hooks/use-user-mock';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-type BudgetGridProps = {
-  budgetDocument: BudgetDocument;
-};
-
-const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
+const BudgetGrid = () => {
   const { user } = useUserMock();
   const {
     dzialy,
@@ -30,6 +27,37 @@ const BudgetGrid = ({ budgetDocument }: BudgetGridProps) => {
     kodyZadaniowe,
     isLoading: isLoadingGridData,
   } = useGridData();
+  const { data: planowanieBudzetu, isLoading: isLoadingPlanowanie } = usePlanowanieBudzetu();
+
+  // Transform planning data to budget document format
+  const budgetDocument: BudgetDocument = useMemo(() => {
+    if (!planowanieBudzetu) return [];
+
+    return planowanieBudzetu.map((item): DocumentRow => {
+      // Find corresponding objects from the grid data
+      const dzial = dzialy?.find(d => d.kod === item.dzial_kod) || null;
+      const rozdzial = rozdzialy?.find(r => r.kod === item.rozdzial_kod) || null;
+      const paragraf = paragrafy?.find(p => p.kod === item.paragraf_kod) || null;
+      const czescBudzetowa = czesciBudzetowe?.find(c => c.kod === item.czesc_budzetowa_kod) || null;
+      const zrodloFinansowania = zrodlaFinansowania?.find(z => z.kod === item.zrodlo_finansowania_kod) || null;
+      const grupaWydatkow = grupyWydatkow?.find(g => g.id === item.grupa_wydatkow_id) || null;
+      
+      // For now, we'll use a mock kod zadaniowy since we don't have the mapping
+      const kodZadaniowy = kodyZadaniowe?.[0] || null;
+
+      return {
+        dzial,
+        rozdzial,
+        paragraf,
+        grupaWydatkow,
+        czescBudzetowa,
+        zrodloFinansowania,
+        kodZadaniowy,
+        nazwaProgramu: item.nazwa_projektu || 'nie dotyczy',
+        planWI: item.budzet || 'nie dotyczy',
+      };
+    });
+  }, [planowanieBudzetu, dzialy, rozdzialy, paragrafy, grupyWydatkow, czesciBudzetowe, zrodlaFinansowania, kodyZadaniowe]);
 
   const formatKodAndNazwa = (params: {
     value: { kod: string; nazwa?: string; tresc?: string } | null;

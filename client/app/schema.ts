@@ -79,3 +79,20 @@ export const planowanieBudzetuCreateSchema = z.object({
 });
 
 export type PlanowanieBudzetuCreate = z.infer<typeof planowanieBudzetuCreateSchema>;
+
+export const planowanieBudzetuResponseSchema = z.object({
+  id: z.number(),
+  nazwa_projektu: z.string().nullable(),
+  nazwa_zadania: z.string().nullable(),
+  szczegolowe_uzasadnienie_realizacji: z.string().nullable(),
+  budzet: z.string().nullable(),
+  czesc_budzetowa_kod: z.string().nullable(),
+  dzial_kod: z.string().nullable(),
+  rozdzial_kod: z.string().nullable(),
+  paragraf_kod: z.string().nullable(),
+  zrodlo_finansowania_kod: z.string().nullable(),
+  grupa_wydatkow_id: z.number().nullable(),
+  komorka_organizacyjna_id: z.number().nullable(),
+});
+
+export type PlanowanieBudzetuResponse = z.infer<typeof planowanieBudzetuResponseSchema>;

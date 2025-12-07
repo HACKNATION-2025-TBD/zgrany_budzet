@@ -1,3 +1,5 @@
+import BudgetGrid from '~/components/budget-grid';
+
 export function meta() {
   return [{ title: 'Dashboard - Budżet' }];
 }
@@ -23,7 +25,7 @@ export default function Dashboard() {
           </h2>
         </div>
         <div className='p-4' style={{ height: '500px' }}>
-          {/*<BudgetGrid />*/}
+          <BudgetGrid />
         </div>
       </div>
     </div>

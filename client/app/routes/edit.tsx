@@ -65,7 +65,7 @@ export default function Edit() {
       <div className='bg-white rounded-lg shadow-sm border'>
         <div className='p-4 border-b border-gray-200'>tutaj filtry</div>
         <div className='p-4' style={{ height: '500px' }}>
-          <BudgetGrid budgetDocument={budgetDocument} />
+          <BudgetGrid />
         </div>
       </div>
     </div>
