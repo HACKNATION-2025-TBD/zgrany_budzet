@@ -26,10 +26,11 @@ import {
   FieldLabel,
 } from '~/components/ui/field';
 import { Input } from '~/components/ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 
 const schema = budgetDocumentRowSchema.required().superRefine((data, ctx) => {
   Object.entries(data).forEach(([key, value]) => {
-    if (value === null || value === undefined) {
+    if (value === null || value === undefined || value === '') {
       ctx.addIssue({
         code: 'custom',
         message: `Pole jest wymagane.`,
@@ -439,11 +440,120 @@ export const NewBudgetDocumentRowModal = ({
               </Field>
             )}
           </form.Field>
+
+          <Tabs
+            defaultValue={String(form.state.values.roczneSegmenty[0].year)}
+            className='col-span-3 w-full mx-auto border border-card-foreground rounded-md p-4'
+          >
+            <TabsList className='gap-10 border-boerder mb-4'>
+              {form.state.values.roczneSegmenty.map((segment) => (
+                <TabsTrigger key={segment.year} value={String(segment.year)}>
+                  {segment.year}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            {form.state.values.roczneSegmenty.map((segment) => (
+              <TabsContent
+                key={segment.year}
+                value={String(segment.year)}
+                className='grid grid-cols-2 gap-x-8 gap-y-4'
+              >
+                <form.Field
+                  name={`roczneSegmenty[${form.state.values.roczneSegmenty.findIndex((s) => s.year === segment.year)}].potrzebyFinansowe`}
+                >
+                  {(field) => (
+                    <Field>
+                      <FieldLabel htmlFor='input-id'>
+                        Potrzeby finansowe na rok {segment.year}
+                      </FieldLabel>
+                      <Input
+                        name={`roczneSegmenty[${form.state.values.roczneSegmenty.findIndex((s) => s.year === segment.year)}].potrzebyFinansowe`}
+                        type='number'
+                        placeholder='Wprowadź potrzeby finansowe'
+                        value={field.state.value ?? 0}
+                        onChange={(e) => field.handleChange(+e.target.value)}
+                      />
+                      <FieldError>
+                        <FieldInfo field={field} />
+                      </FieldError>
+                    </Field>
+                  )}
+                </form.Field>
+
+                <form.Field
+                  name={`roczneSegmenty[${form.state.values.roczneSegmenty.findIndex((s) => s.year === segment.year)}].limitWydatków`}
+                >
+                  {(field) => (
+                    <Field>
+                      <FieldLabel htmlFor='input-id'>
+                        Limit wydatków na rok {segment.year}
+                      </FieldLabel>
+                      <Input
+                        name={`roczneSegmenty[${form.state.values.roczneSegmenty.findIndex((s) => s.year === segment.year)}].limitWydatków`}
+                        type='number'
+                        placeholder='Wprowadź limit wydatków'
+                        value={field.state.value ?? 0}
+                        onChange={(e) => field.handleChange(+e.target.value)}
+                      />
+                      <FieldError>
+                        <FieldInfo field={field} />
+                      </FieldError>
+                    </Field>
+                  )}
+                </form.Field>
+
+                <form.Field
+                  name={`roczneSegmenty[${form.state.values.roczneSegmenty.findIndex((s) => s.year === segment.year)}].kwotaZawartejUmowy`}
+                >
+                  {(field) => (
+                    <Field>
+                      <FieldLabel htmlFor='input-id'>
+                        Kwota zawartej umowy/wniosku o udzielenie zamówienia
+                        publicznego
+                      </FieldLabel>
+                      <Input
+                        name={`roczneSegmenty[${form.state.values.roczneSegmenty.findIndex((s) => s.year === segment.year)}].kwotaZawartejUmowy`}
+                        type='number'
+                        placeholder='Wprowadź kwotę zawartej umowy'
+                        value={field.state.value ?? 0}
+                        onChange={(e) => field.handleChange(+e.target.value)}
+                      />
+                      <FieldError>
+                        <FieldInfo field={field} />
+                      </FieldError>
+                    </Field>
+                  )}
+                </form.Field>
+
+                <form.Field
+                  name={`roczneSegmenty[${form.state.values.roczneSegmenty.findIndex((s) => s.year === segment.year)}].numerUmowy`}
+                >
+                  {(field) => (
+                    <Field>
+                      <FieldLabel htmlFor='input-id'>
+                        Nr umowy/nr wniosku o udzielenie zamówienia publicznego
+                      </FieldLabel>
+                      <Input
+                        name={`roczneSegmenty[${form.state.values.roczneSegmenty.findIndex((s) => s.year === segment.year)}].numerUmowy`}
+                        placeholder='Wprowadź numer umowy'
+                        value={field.state.value ?? ''}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                      />
+                      <FieldError>
+                        <FieldInfo field={field} />
+                      </FieldError>
+                    </Field>
+                  )}
+                </form.Field>
+              </TabsContent>
+            ))}
+          </Tabs>
         </form>
 
         <DialogFooter>
           <Button
             type='submit'
+            className='w-30'
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
