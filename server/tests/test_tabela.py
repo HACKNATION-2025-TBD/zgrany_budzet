@@ -448,6 +448,140 @@ class TestPlanowanieBudzetuEndpoints:
         assert response.status_code == 404
         assert "not found" in response.json()["detail"].lower()
 
+    def test_get_fields_history_status_no_history(self, client, db_session):
+        """Test getting fields history status when no fields have been updated."""
+        # Create record
+        payload = {
+            "nazwa_projektu": "Project",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        create_response = client.post("/api/planowanie_budzetu", json=payload)
+        planowanie_id = create_response.json()["id"]
+
+        # Get fields history status
+        response = client.get(f"/api/planowanie_budzetu/{planowanie_id}/fields_history_status")
+        
+        assert response.status_code == 200
+        data = response.json()
+        assert "fields" in data
+        
+        fields = data["fields"]
+        # All fields should have False since nothing was updated
+        assert fields["nazwa_projektu"] is False
+        assert fields["nazwa_zadania"] is False
+        assert fields["szczegolowe_uzasadnienie_realizacji"] is False
+        assert fields["budzet"] is False
+        assert fields["czesc_budzetowa_kod"] is False
+        assert fields["dzial_kod"] is False
+        assert fields["rozdzial_kod"] is False
+        assert fields["paragraf_kod"] is False
+        assert fields["zrodlo_finansowania_kod"] is False
+        assert fields["grupa_wydatkow_id"] is False
+        assert fields["komorka_organizacyjna_id"] is False
+
+    def test_get_fields_history_status_with_updates(self, client, db_session):
+        """Test getting fields history status after some fields have been updated."""
+        # Create record
+        payload = {
+            "nazwa_projektu": "Original Project",
+            "nazwa_zadania": "Original Task",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        create_response = client.post("/api/planowanie_budzetu", json=payload)
+        planowanie_id = create_response.json()["id"]
+
+        # Update some fields
+        client.patch(f"/api/planowanie_budzetu/{planowanie_id}", json={
+            "field": "nazwa_projektu",
+            "value": "Updated Project"
+        })
+        client.patch(f"/api/planowanie_budzetu/{planowanie_id}", json={
+            "field": "dzial_kod",
+            "value": "801"
+        })
+        client.patch(f"/api/planowanie_budzetu/{planowanie_id}", json={
+            "field": "grupa_wydatkow_id",
+            "value": 2
+        })
+
+        # Get fields history status
+        response = client.get(f"/api/planowanie_budzetu/{planowanie_id}/fields_history_status")
+        
+        assert response.status_code == 200
+        data = response.json()
+        assert "fields" in data
+        
+        fields = data["fields"]
+        # Updated fields should have True
+        assert fields["nazwa_projektu"] is True
+        assert fields["dzial_kod"] is True
+        assert fields["grupa_wydatkow_id"] is True
+        
+        # Non-updated fields should have False
+        assert fields["nazwa_zadania"] is False
+        assert fields["szczegolowe_uzasadnienie_realizacji"] is False
+        assert fields["budzet"] is False
+        assert fields["czesc_budzetowa_kod"] is False
+        assert fields["rozdzial_kod"] is False
+        assert fields["paragraf_kod"] is False
+        assert fields["zrodlo_finansowania_kod"] is False
+        assert fields["komorka_organizacyjna_id"] is False
+
+    def test_get_fields_history_status_multiple_updates_same_field(self, client, db_session):
+        """Test that field shows history status even after multiple updates."""
+        # Create record
+        payload = {
+            "nazwa_projektu": "Original",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        create_response = client.post("/api/planowanie_budzetu", json=payload)
+        planowanie_id = create_response.json()["id"]
+
+        # Update the same field multiple times
+        for i in range(5):
+            client.patch(f"/api/planowanie_budzetu/{planowanie_id}", json={
+                "field": "nazwa_projektu",
+                "value": f"Version {i+1}"
+            })
+
+        # Get fields history status
+        response = client.get(f"/api/planowanie_budzetu/{planowanie_id}/fields_history_status")
+        
+        assert response.status_code == 200
+        data = response.json()
+        fields = data["fields"]
+        
+        # Should still show True (has more than 1 version)
+        assert fields["nazwa_projektu"] is True
+
+    def test_get_fields_history_status_nonexistent_record(self, client):
+        """Test getting fields history status for non-existent record."""
+        response = client.get("/api/planowanie_budzetu/99999/fields_history_status")
+        
+        assert response.status_code == 404
+        assert "not found" in response.json()["detail"].lower()
+
 
 class TestRokBudzetowyEndpoints:
     """Tests for rok_budzetowy endpoints."""
@@ -677,6 +811,184 @@ class TestRokBudzetowyEndpoints:
             "potrzeba": 75000.00
         }
         response = client.post("/api/rok_budzetowy", json=payload)
+        
+        assert response.status_code == 404
+        assert "not found" in response.json()["detail"].lower()
+
+    def test_get_rok_budzetowy_fields_history_status_no_history(self, client, db_session):
+        """Test getting fields history status for rok_budzetowy when no fields have been updated."""
+        # Create planowanie_budzetu and rok_budzetowy
+        planowanie_payload = {
+            "nazwa_projektu": "Project",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        planowanie_response = client.post("/api/planowanie_budzetu", json=planowanie_payload)
+        planowanie_id = planowanie_response.json()["id"]
+
+        rok_payload = {
+            "planowanie_budzetu_id": planowanie_id,
+            "limit": 50000.00,
+            "potrzeba": 75000.00
+        }
+        rok_response = client.post("/api/rok_budzetowy", json=rok_payload)
+        rok_id = rok_response.json()["id"]
+
+        # Get fields history status
+        response = client.get(f"/api/rok_budzetowy/{rok_id}/fields_history_status")
+        
+        assert response.status_code == 200
+        data = response.json()
+        assert "fields" in data
+        
+        fields = data["fields"]
+        # Both fields should have False since nothing was updated
+        assert fields["limit"] is False
+        assert fields["potrzeba"] is False
+
+    def test_get_rok_budzetowy_fields_history_status_with_updates(self, client, db_session):
+        """Test getting fields history status after some fields have been updated."""
+        # Create planowanie_budzetu and rok_budzetowy
+        planowanie_payload = {
+            "nazwa_projektu": "Project",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        planowanie_response = client.post("/api/planowanie_budzetu", json=planowanie_payload)
+        planowanie_id = planowanie_response.json()["id"]
+
+        rok_payload = {
+            "planowanie_budzetu_id": planowanie_id,
+            "limit": 50000.00,
+            "potrzeba": 75000.00
+        }
+        rok_response = client.post("/api/rok_budzetowy", json=rok_payload)
+        rok_id = rok_response.json()["id"]
+
+        # Update only limit field
+        client.patch(f"/api/rok_budzetowy/{rok_id}", json={
+            "field": "limit",
+            "value": 60000.00
+        })
+
+        # Get fields history status
+        response = client.get(f"/api/rok_budzetowy/{rok_id}/fields_history_status")
+        
+        assert response.status_code == 200
+        data = response.json()
+        fields = data["fields"]
+        
+        # Updated field should have True
+        assert fields["limit"] is True
+        
+        # Non-updated field should have False
+        assert fields["potrzeba"] is False
+
+    def test_get_rok_budzetowy_fields_history_status_both_updated(self, client, db_session):
+        """Test fields history status when both fields have been updated."""
+        # Create planowanie_budzetu and rok_budzetowy
+        planowanie_payload = {
+            "nazwa_projektu": "Project",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        planowanie_response = client.post("/api/planowanie_budzetu", json=planowanie_payload)
+        planowanie_id = planowanie_response.json()["id"]
+
+        rok_payload = {
+            "planowanie_budzetu_id": planowanie_id,
+            "limit": 50000.00,
+            "potrzeba": 75000.00
+        }
+        rok_response = client.post("/api/rok_budzetowy", json=rok_payload)
+        rok_id = rok_response.json()["id"]
+
+        # Update both fields
+        client.patch(f"/api/rok_budzetowy/{rok_id}", json={
+            "field": "limit",
+            "value": 60000.00
+        })
+        client.patch(f"/api/rok_budzetowy/{rok_id}", json={
+            "field": "potrzeba",
+            "value": 85000.00
+        })
+
+        # Get fields history status
+        response = client.get(f"/api/rok_budzetowy/{rok_id}/fields_history_status")
+        
+        assert response.status_code == 200
+        data = response.json()
+        fields = data["fields"]
+        
+        # Both fields should have True
+        assert fields["limit"] is True
+        assert fields["potrzeba"] is True
+
+    def test_get_rok_budzetowy_fields_history_status_multiple_updates(self, client, db_session):
+        """Test fields history status with multiple updates to the same field."""
+        # Create planowanie_budzetu and rok_budzetowy
+        planowanie_payload = {
+            "nazwa_projektu": "Project",
+            "budzet": "2024",
+            "czesc_budzetowa_kod": "75",
+            "dzial_kod": "750",
+            "rozdzial_kod": "75011",
+            "paragraf_kod": "4210",
+            "zrodlo_finansowania_kod": "1",
+            "grupa_wydatkow_id": 1,
+            "komorka_organizacyjna_id": 1
+        }
+        planowanie_response = client.post("/api/planowanie_budzetu", json=planowanie_payload)
+        planowanie_id = planowanie_response.json()["id"]
+
+        rok_payload = {
+            "planowanie_budzetu_id": planowanie_id,
+            "limit": 50000.00,
+            "potrzeba": 75000.00
+        }
+        rok_response = client.post("/api/rok_budzetowy", json=rok_payload)
+        rok_id = rok_response.json()["id"]
+
+        # Update limit field multiple times
+        for value in [60000.00, 70000.00, 80000.00]:
+            client.patch(f"/api/rok_budzetowy/{rok_id}", json={
+                "field": "limit",
+                "value": value
+            })
+
+        # Get fields history status
+        response = client.get(f"/api/rok_budzetowy/{rok_id}/fields_history_status")
+        
+        assert response.status_code == 200
+        data = response.json()
+        fields = data["fields"]
+        
+        # Limit should have True (has more than 1 version)
+        assert fields["limit"] is True
+        # Potrzeba should still have False
+        assert fields["potrzeba"] is False
+
+    def test_get_rok_budzetowy_fields_history_status_nonexistent_record(self, client):
+        """Test getting fields history status for non-existent rok_budzetowy."""
+        response = client.get("/api/rok_budzetowy/99999/fields_history_status")
         
         assert response.status_code == 404
         assert "not found" in response.json()["detail"].lower()
