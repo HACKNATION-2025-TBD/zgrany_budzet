@@ -44,10 +44,6 @@ USER appuser
 # Expose port
 EXPOSE 8000
 
-# Health check - używamy wbudowanego modułu urllib
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "from urllib.request import urlopen; urlopen('http://localhost:8000/').read()"
-
 # Run the application
 # DATABASE_URL będzie przekazane przez Railway jako zmienna środowiskowa
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
