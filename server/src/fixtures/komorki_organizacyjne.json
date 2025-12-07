@@ -1,0 +1,66 @@
+[
+  {
+    "id": 0,
+    "nazwa": "Biuro Budżetowo-Finansowe"
+  },
+  {
+    "id": 1,
+    "nazwa": "Centrum Rozwoju Kompetencji Cyfrowych"
+  },
+  {
+    "id": 2,
+    "nazwa": "Departament Badań i Innowacji"
+  },
+  {
+    "id": 3,
+    "nazwa": "Departament Cyberbezpieczeństwa"
+  },
+  {
+    "id": 4,
+    "nazwa": "Departament GovTech Polska"
+  },
+  {
+    "id": 5,
+    "nazwa": "Departament Prawny"
+  },
+  {
+    "id": 6,
+    "nazwa": "Departament Projektów i Strategii"
+  },
+  {
+    "id": 7,
+    "nazwa": "Departament Telekomunikacji"
+  },
+  {
+    "id": 8,
+    "nazwa": "Departament Transformacji Cyfrowej"
+  },
+  {
+    "id": 9,
+    "nazwa": "Departament Współpracy Międzynarodowej"
+  },
+  {
+    "id": 10,
+    "nazwa": "Departament Zarządzania Danymi"
+  },
+  {
+    "id": 11,
+    "nazwa": "Biuro Administracyjne"
+  },
+  {
+    "id": 12,
+    "nazwa": "Biuro Dyrektora Generalnego"
+  },
+  {
+    "id": 13,
+    "nazwa": "Biuro Komunikacji"
+  },
+  {
+    "id": 14,
+    "nazwa": "Biuro Ministra"
+  },
+  {
+    "id": 15,
+    "nazwa": "Gabinet Polityczny Ministra"
+  }
+]
