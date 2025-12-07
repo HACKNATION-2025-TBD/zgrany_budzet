@@ -97,6 +97,51 @@ def check_field_conflict(
         )
 
 
+@router.get("/admin/planowanie_budzetu", response_model=List[PlanowanieBudzetuResponse])
+async def get_admin_all_planowanie_budzetu(
+        db: Session = Depends(get_db),
+        current_user: User = Depends(get_current_user)
+):
+    """
+    Admin endpoint (user_id=0 only).
+    Returns budget planning for ALL organizational units without filtering.
+    """
+    # 1. Authorization Check
+    if current_user.id != 0:
+        raise HTTPException(
+            status_code=403,
+            detail="Access denied. Only administrator (ID 0) can access this data."
+        )
+
+    # 2. Get All Records
+    planowania = db.query(PlanowanieBudzetu).all()
+    result = []
+
+    # 3. Construct Response (Fetching latest versions for all fields)
+    for p in planowania:
+        result.append({
+            "id": p.id,
+            "nazwa_projektu": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "nazwa_projektu", "string"),
+            "nazwa_zadania": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "nazwa_zadania", "string"),
+            "szczegolowe_uzasadnienie_realizacji": get_latest_version_for_field(db, "planowanie_budzetu", p.id,
+                                                                                "szczegolowe_uzasadnienie_realizacji",
+                                                                                "string"),
+            "budzet": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "budzet", "string"),
+            "czesc_budzetowa_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "czesc_budzetowa_kod",
+                                                                "fk_string"),
+            "dzial_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "dzial_kod", "fk_string"),
+            "rozdzial_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "rozdzial_kod", "fk_string"),
+            "paragraf_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "paragraf_kod", "fk_string"),
+            "zrodlo_finansowania_kod": get_latest_version_for_field(db, "planowanie_budzetu", p.id,
+                                                                    "zrodlo_finansowania_kod", "fk_string"),
+            "grupa_wydatkow_id": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "grupa_wydatkow_id",
+                                                              "fk_int"),
+            "komorka_organizacyjna_id": get_latest_version_for_field(db, "planowanie_budzetu", p.id,
+                                                                     "komorka_organizacyjna_id", "fk_int")
+        })
+
+    return result
+
 
 # PlanowanieBudzetu endpoints
 @router.post("/planowanie_budzetu", response_model=MessageResponse)
