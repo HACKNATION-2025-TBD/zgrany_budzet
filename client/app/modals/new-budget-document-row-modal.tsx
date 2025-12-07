@@ -10,7 +10,11 @@ import {
   DialogTrigger,
 } from '~/components/ui/dialog';
 import { useForm, type AnyFieldApi } from '@tanstack/react-form';
-import { budgetDocumentRowSchema, type DocumentRow, planowanieBudzetuCreateSchema } from '~/schema';
+import {
+  budgetDocumentRowSchema,
+  type DocumentRow,
+  planowanieBudzetuCreateSchema,
+} from '~/schema';
 import {
   Select,
   SelectContent,
@@ -99,7 +103,7 @@ export const NewBudgetDocumentRowModal = ({
 
   // Map user roles to komorka_organizacyjna_id based on fixtures
   const getKomorkaOrganizacyjnaId = () => {
-    switch(user.role) {
+    switch (user.role) {
       case 'kierownictwo':
       case 'bbf':
         return 0; // Biuro Budżetowo-Finansowe
@@ -113,15 +117,16 @@ export const NewBudgetDocumentRowModal = ({
     defaultValues: budgetDocumentRowSchema.parse({}),
     onSubmit: async (values) => {
       if (isSubmitting) return;
-      
+      console.log(form.state.errors);
+
       try {
         setIsSubmitting(true);
-        
+
         // Map form data to backend format
         const planowanieBudzetuData = {
           nazwa_projektu: values.value.nazwaProgramu || undefined,
           nazwa_zadania: undefined, // Not in current form
-          szczegolowe_uzasadnienie_realizacji: undefined, // Not in current form  
+          szczegolowe_uzasadnienie_realizacji: undefined, // Not in current form
           budzet: values.value.planWI || undefined,
           czesc_budzetowa_kod: values.value.czescBudzetowa?.kod || '',
           dzial_kod: values.value.dzial?.kod || '',
@@ -133,13 +138,15 @@ export const NewBudgetDocumentRowModal = ({
         };
 
         // Validate required fields
-        const validated = planowanieBudzetuCreateSchema.parse(planowanieBudzetuData);
-        
+        const validated = planowanieBudzetuCreateSchema.parse(
+          planowanieBudzetuData
+        );
+
         // Call backend API
         const result = await createPlanowanieBudzetu(validated);
-        
+
         console.log('Created planowanie budzetu:', result);
-        
+
         // Call onAdd with original form data for UI update
         onAdd?.(values.value);
         setOpen(false);
@@ -494,15 +501,22 @@ export const NewBudgetDocumentRowModal = ({
 
           <Tabs
             defaultValue={String(form.state.values.roczneSegmenty[0].year)}
-            className='col-span-3 w-full mx-auto border border-card-foreground rounded-md p-4'
+            className='col-span-2 w-full mx-auto border border-card-foreground rounded-md p-4'
           >
-            <TabsList className='gap-10 border-boerder mb-4'>
-              {form.state.values.roczneSegmenty.map((segment) => (
-                <TabsTrigger key={segment.year} value={String(segment.year)}>
-                  {segment.year}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+            <div className='flex items-center justify-between'>
+              <p className='h-9 mb-4 font-medium'>Budżet na kolejne lata</p>
+              <TabsList className='gap-10 border-boerder mb-4'>
+                {form.state.values.roczneSegmenty.map((segment) => (
+                  <TabsTrigger
+                    key={segment.year}
+                    value={String(segment.year)}
+                    className='text-primary-foreground cursor-pointer hover:bg-primary hover:border-border transition-all duration-300'
+                  >
+                    {segment.year}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
             {form.state.values.roczneSegmenty.map((segment) => (
               <TabsContent
                 key={segment.year}
@@ -599,6 +613,50 @@ export const NewBudgetDocumentRowModal = ({
               </TabsContent>
             ))}
           </Tabs>
+
+          <div className='col-span-1 grid-rows-2 flex gap-2 flex-col w-full mx-auto border border-card-foreground rounded-md p-4'>
+            <p className='h-9 mb-4 font-medium'>
+              W przypadku uzyskanej dotacji
+            </p>
+
+            <form.Field name='dotacjaNumerUmowy'>
+              {(field) => (
+                <Field className='mb-2'>
+                  <FieldLabel htmlFor='input-id'>
+                    Z kim zawarta/planowana umowa
+                  </FieldLabel>
+                  <Input
+                    name='dotacjaNumerUmowy'
+                    placeholder='Wprowadź numer umowy'
+                    value={field.state.value ?? ''}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                  <FieldError>
+                    <FieldInfo field={field} />
+                  </FieldError>
+                </Field>
+              )}
+            </form.Field>
+
+            <form.Field name='dotacjaPodstawaPrawna'>
+              {(field) => (
+                <Field>
+                  <FieldLabel htmlFor='input-id'>
+                    Podstawa prawna udzielenia dotacji
+                  </FieldLabel>
+                  <Input
+                    name='dotacjaPodstawaPrawna'
+                    placeholder='Wprowadź podstawę prawną'
+                    value={field.state.value ?? ''}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                  <FieldError>
+                    <FieldInfo field={field} />
+                  </FieldError>
+                </Field>
+              )}
+            </form.Field>
+          </div>
         </form>
 
         <DialogFooter>

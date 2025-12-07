@@ -70,6 +70,9 @@ export const budgetDocumentRowSchema = z.object({
           budgetDocumentRowYearlySegmentSchema.parse({ year: nextYear + index })
         );
     }),
+  dotacjaNumerUmowy: z.string().default('nie dotyczy'),
+  dotacjaPodstawaPrawna: z.string().default('—'),
+  uwagi: z.string().default('—'),
 });
 
 export const budgetDocumentSchema = z.array(budgetDocumentRowSchema);
