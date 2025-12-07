@@ -1,12 +1,13 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
+from contextlib import asynccontextmanager
 import json
 import uvicorn
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
-from src.database import get_db
+from src.database import get_db, init_db
 from src.schemas.dzialy import Dzial
 from src.schemas.rozdzialy import Rozdzial
 from src.schemas.paragrafy import Paragraf
@@ -16,7 +17,13 @@ from src.schemas.zrodla_finansowania import ZrodloFinansowania
 from src.tabela import router as tabela_router
 
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_db()
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -30,31 +37,20 @@ api_router = APIRouter(prefix="/api")
 app.include_router(tabela_router, prefix="/api", tags=["tabela"])
 
 
-class ConnectionManager:
-    def __init__(self):
-        self.active_connections: List[WebSocket] = []
-
-    async def connect(self, websocket: WebSocket):
-        await websocket.accept()
-        self.active_connections.append(websocket)
-
-    def disconnect(self, websocket: WebSocket):
-        self.active_connections.remove(websocket)
-
-    async def broadcast(self, message: dict):
-        for connection in self.active_connections:
-            try:
-                await connection.send_json(message)
-            except:
-                pass
-
-
-manager = ConnectionManager()
-
-
 @app.get("/")
 async def root():
     return {"status": "Server is running"}
+
+
+@app.get("/health")
+async def health_check(db: Session = Depends(get_db)):
+    """Health check endpoint that verifies database connection"""
+    try:
+        # Simple query to check DB connection
+        db.execute("SELECT 1")
+        return {"status": "healthy", "database": "connected"}
+    except Exception as e:
+        return {"status": "unhealthy", "database": "disconnected", "error": str(e)}
 
 
 @api_router.get("/dzialy")
