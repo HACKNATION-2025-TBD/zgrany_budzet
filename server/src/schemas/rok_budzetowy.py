@@ -13,6 +13,7 @@ class RokBudzetowy(Base):
         ForeignKey("planowanie_budzetu.id"),
         nullable=False
     )
+    rok: Mapped[int] = mapped_column(Integer, nullable=False)
     
     limit_versions: Mapped[list["VersionedNumericField"]] = relationship(
         primaryjoin="and_(RokBudzetowy.id == foreign(VersionedNumericField.entity_id), "
@@ -30,4 +31,4 @@ class RokBudzetowy(Base):
     planowanie_budzetu: Mapped["PlanowanieBudzetu"] = relationship(back_populates="lata_budzetowe")
 
     def __repr__(self) -> str:
-        return f"RokBudzetowy(id={self.id!r})"
+        return f"RokBudzetowy(id={self.id!r}, rok={self.rok!r})"
