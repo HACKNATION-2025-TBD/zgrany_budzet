@@ -20,6 +20,7 @@ from src.models.tabela_models import (
     UpdateResponse,
     PlanowanieBudzetuResponse,
     FieldHistoryResponse,
+    FieldsHistoryStatusResponse,
     RokBudzetowyResponse
 )
 
@@ -89,6 +90,32 @@ def get_latest_version_for_field(db: Session, entity_type: str, entity_id: int, 
         ).order_by(desc(VersionedForeignKeyField.timestamp)).first()
         return version.value_int if version else None
     return None
+
+
+def has_field_history(db: Session, entity_type: str, entity_id: int, field_name: str, field_type: str) -> bool:
+    """Check if a field has more than one version (has history)"""
+    if field_type == "string":
+        count = db.query(VersionedStringField).filter(
+            VersionedStringField.entity_type == entity_type,
+            VersionedStringField.entity_id == entity_id,
+            VersionedStringField.field_name == field_name
+        ).count()
+    elif field_type == "numeric":
+        count = db.query(VersionedNumericField).filter(
+            VersionedNumericField.entity_type == entity_type,
+            VersionedNumericField.entity_id == entity_id,
+            VersionedNumericField.field_name == field_name
+        ).count()
+    elif field_type in ("fk_string", "fk_int"):
+        count = db.query(VersionedForeignKeyField).filter(
+            VersionedForeignKeyField.entity_type == entity_type,
+            VersionedForeignKeyField.entity_id == entity_id,
+            VersionedForeignKeyField.field_name == field_name
+        ).count()
+    else:
+        return False
+    
+    return count > 1
 
 
 # PlanowanieBudzetu endpoints
@@ -194,6 +221,30 @@ async def get_planowanie_budzetu(planowanie_id: int, db: Session = Depends(get_d
         "grupa_wydatkow_id": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "grupa_wydatkow_id", "fk_int"),
         "komorka_organizacyjna_id": get_latest_version_for_field(db, "planowanie_budzetu", p.id, "komorka_organizacyjna_id", "fk_int")
     }
+
+
+@router.get("/planowanie_budzetu/{planowanie_id}/fields_history_status", response_model=FieldsHistoryStatusResponse)
+async def get_planowanie_budzetu_fields_history_status(planowanie_id: int, db: Session = Depends(get_db)):
+    """Get status of which fields have history (more than 1 version)"""
+    p = db.query(PlanowanieBudzetu).filter(PlanowanieBudzetu.id == planowanie_id).first()
+    if not p:
+        raise HTTPException(status_code=404, detail="PlanowanieBudzetu not found")
+    
+    fields_status = {
+        "nazwa_projektu": has_field_history(db, "planowanie_budzetu", planowanie_id, "nazwa_projektu", "string"),
+        "nazwa_zadania": has_field_history(db, "planowanie_budzetu", planowanie_id, "nazwa_zadania", "string"),
+        "szczegolowe_uzasadnienie_realizacji": has_field_history(db, "planowanie_budzetu", planowanie_id, "szczegolowe_uzasadnienie_realizacji", "string"),
+        "budzet": has_field_history(db, "planowanie_budzetu", planowanie_id, "budzet", "string"),
+        "czesc_budzetowa_kod": has_field_history(db, "planowanie_budzetu", planowanie_id, "czesc_budzetowa_kod", "fk_string"),
+        "dzial_kod": has_field_history(db, "planowanie_budzetu", planowanie_id, "dzial_kod", "fk_string"),
+        "rozdzial_kod": has_field_history(db, "planowanie_budzetu", planowanie_id, "rozdzial_kod", "fk_string"),
+        "paragraf_kod": has_field_history(db, "planowanie_budzetu", planowanie_id, "paragraf_kod", "fk_string"),
+        "zrodlo_finansowania_kod": has_field_history(db, "planowanie_budzetu", planowanie_id, "zrodlo_finansowania_kod", "fk_string"),
+        "grupa_wydatkow_id": has_field_history(db, "planowanie_budzetu", planowanie_id, "grupa_wydatkow_id", "fk_int"),
+        "komorka_organizacyjna_id": has_field_history(db, "planowanie_budzetu", planowanie_id, "komorka_organizacyjna_id", "fk_int")
+    }
+    
+    return {"fields": fields_status}
 
 
 @router.get("/planowanie_budzetu/{planowanie_id}/field_history/{field_name}", response_model=FieldHistoryResponse)
@@ -311,6 +362,21 @@ async def get_rok_budzetowy(rok_id: int, db: Session = Depends(get_db)):
         "limit": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "limit", "numeric"),
         "potrzeba": get_latest_version_for_field(db, "rok_budzetowy", rok.id, "potrzeba", "numeric")
     }
+
+
+@router.get("/rok_budzetowy/{rok_id}/fields_history_status", response_model=FieldsHistoryStatusResponse)
+async def get_rok_budzetowy_fields_history_status(rok_id: int, db: Session = Depends(get_db)):
+    """Get status of which fields have history (more than 1 version)"""
+    rok = db.query(RokBudzetowy).filter(RokBudzetowy.id == rok_id).first()
+    if not rok:
+        raise HTTPException(status_code=404, detail="RokBudzetowy not found")
+    
+    fields_status = {
+        "limit": has_field_history(db, "rok_budzetowy", rok_id, "limit", "numeric"),
+        "potrzeba": has_field_history(db, "rok_budzetowy", rok_id, "potrzeba", "numeric")
+    }
+    
+    return {"fields": fields_status}
 
 
 @router.get("/rok_budzetowy/{rok_id}/field_history/{field_name}", response_model=FieldHistoryResponse)

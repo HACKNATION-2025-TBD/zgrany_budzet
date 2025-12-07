@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional, List, Dict
 from datetime import datetime
 
 
@@ -66,6 +66,11 @@ class FieldHistoryEntry(BaseModel):
 class FieldHistoryResponse(BaseModel):
     field_name: str
     history: List[FieldHistoryEntry]
+
+
+class FieldsHistoryStatusResponse(BaseModel):
+    """Response showing which fields have history (more than 1 version)"""
+    fields: Dict[str, bool]
 
 
 # RokBudzetowy response models
