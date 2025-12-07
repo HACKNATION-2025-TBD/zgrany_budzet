@@ -39,3 +39,56 @@ def client(db_session):
     with TestClient(app) as test_client:
         yield test_client
     app.dependency_overrides.clear()
+
+
+@pytest.fixture
+def test_users(db_session):
+    """Create test users in different komorki_organizacyjne."""
+    from src.schemas.users import User
+    from src.schemas.komorki_organizacyjne import KomorkaOrganizacyjna
+    
+    # Ensure komorki exist
+    komorki = []
+    for i in range(3):
+        komorka = db_session.query(KomorkaOrganizacyjna).filter_by(id=i).first()
+        if not komorka:
+            komorka = KomorkaOrganizacyjna(id=i, nazwa=f"Test Komorka {i}")
+            db_session.add(komorka)
+        komorki.append(komorka)
+    
+    db_session.commit()
+    
+    # Create users
+    users = [
+        User(
+            id=1,
+            firstname="Anna",
+            lastname="Kowalska",
+            email="anna.kowalska@test.pl",
+            komorka_organizacyjna_id=0
+        ),
+        User(
+            id=2,
+            firstname="Jan",
+            lastname="Nowak",
+            email="jan.nowak@test.pl",
+            komorka_organizacyjna_id=0
+        ),
+        User(
+            id=3,
+            firstname="Piotr",
+            lastname="Wiśniewski",
+            email="piotr.wisniewski@test.pl",
+            komorka_organizacyjna_id=1
+        ),
+    ]
+    
+    for user in users:
+        db_session.add(user)
+    
+    db_session.commit()
+    
+    for user in users:
+        db_session.refresh(user)
+    
+    return users
