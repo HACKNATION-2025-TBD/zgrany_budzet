@@ -1,0 +1,164 @@
+[
+  {
+    "id": 1,
+    "komorka_organizacyjna_id": 0,
+    "nazwa_projektu": "System zarządzania dokumentami elektronicznymi",
+    "nazwa_zadania": "Wdrożenie platformy DMS",
+    "szczegolowe_uzasadnienie_realizacji": "Projekt ma na celu digitalizację obiegu dokumentów w urzędzie, co przyspieszy procesy administracyjne i zmniejszy koszty operacyjne związane z przechowywaniem dokumentów papierowych.",
+    "budzet": "Budżet państwa",
+    "czesc_budzetowa_kod": "83",
+    "dzial_kod": "750",
+    "rozdzial_kod": "75095",
+    "paragraf_kod": "4210",
+    "zrodlo_finansowania_kod": "1",
+    "grupa_wydatkow_id": 1,
+    "user_id": 1,
+    "lata_budzetowe": [
+      {
+        "rok": 2025,
+        "limit": 500000.00,
+        "potrzeba": 750000.00
+      },
+      {
+        "rok": 2026,
+        "limit": 300000.00,
+        "potrzeba": 450000.00
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "komorka_organizacyjna_id": 0,
+    "nazwa_projektu": "Szkolenia z zakresu rachunkowości publicznej",
+    "nazwa_zadania": "Program rozwoju kompetencji kadrowych",
+    "szczegolowe_uzasadnienie_realizacji": "Regularne szkolenia pracowników Biura Budżetowo-Finansowego w zakresie nowych przepisów dotyczących rachunkowości budżetowej oraz zarządzania finansami publicznymi.",
+    "budzet": "Budżet państwa",
+    "czesc_budzetowa_kod": "83",
+    "dzial_kod": "750",
+    "rozdzial_kod": "75095",
+    "paragraf_kod": "4700",
+    "zrodlo_finansowania_kod": "1",
+    "grupa_wydatkow_id": 2,
+    "user_id": 1,
+    "lata_budzetowe": [
+      {
+        "rok": 2025,
+        "limit": 50000.00,
+        "potrzeba": 80000.00
+      },
+      {
+        "rok": 2026,
+        "limit": 55000.00,
+        "potrzeba": 85000.00
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "komorka_organizacyjna_id": 2,
+    "nazwa_projektu": "Badania nad technologiami AI w administracji",
+    "nazwa_zadania": "Program badawczy zastosowania sztucznej inteligencji",
+    "szczegolowe_uzasadnienie_realizacji": "Realizacja projektu badawczego mającego na celu analizę możliwości wykorzystania sztucznej inteligencji w procesach administracyjnych, w tym automatyzacji obsługi obywateli i analityki predykcyjnej.",
+    "budzet": "Budżet państwa",
+    "czesc_budzetowa_kod": "83",
+    "dzial_kod": "750",
+    "rozdzial_kod": "75095",
+    "paragraf_kod": "4300",
+    "zrodlo_finansowania_kod": "1",
+    "grupa_wydatkow_id": 1,
+    "user_id": 2,
+    "lata_budzetowe": [
+      {
+        "rok": 2025,
+        "limit": 1200000.00,
+        "potrzeba": 1800000.00
+      },
+      {
+        "rok": 2026,
+        "limit": 900000.00,
+        "potrzeba": 1500000.00
+      },
+      {
+        "rok": 2027,
+        "limit": 600000.00,
+        "potrzeba": 1000000.00
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "komorka_organizacyjna_id": 2,
+    "nazwa_projektu": "Laboratorium innowacji cyfrowych",
+    "nazwa_zadania": "Budowa i wyposażenie laboratorium testowego",
+    "szczegolowe_uzasadnienie_realizacji": "Utworzenie dedykowanego laboratorium do testowania innowacyjnych rozwiązań technologicznych przed ich wdrożeniem w środowisku produkcyjnym. Obejmuje zakup sprzętu, oprogramowania oraz licencji.",
+    "budzet": "Budżet państwa",
+    "czesc_budzetowa_kod": "83",
+    "dzial_kod": "750",
+    "rozdzial_kod": "75095",
+    "paragraf_kod": "6060",
+    "zrodlo_finansowania_kod": "1",
+    "grupa_wydatkow_id": 3,
+    "user_id": 2,
+    "lata_budzetowe": [
+      {
+        "rok": 2025,
+        "limit": 800000.00,
+        "potrzeba": 1200000.00
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "komorka_organizacyjna_id": 3,
+    "nazwa_projektu": "System monitoringu zagrożeń cybernetycznych",
+    "nazwa_zadania": "Wdrożenie SOC (Security Operations Center)",
+    "szczegolowe_uzasadnienie_realizacji": "Budowa centrum operacji bezpieczeństwa do ciągłego monitorowania infrastruktury IT pod kątem zagrożeń cybernetycznych, analiz incydentów oraz szybkiego reagowania na ataki.",
+    "budzet": "Budżet państwa",
+    "czesc_budzetowa_kod": "83",
+    "dzial_kod": "750",
+    "rozdzial_kod": "75095",
+    "paragraf_kod": "4210",
+    "zrodlo_finansowania_kod": "1",
+    "grupa_wydatkow_id": 1,
+    "user_id": 3,
+    "lata_budzetowe": [
+      {
+        "rok": 2025,
+        "limit": 2000000.00,
+        "potrzeba": 3000000.00
+      },
+      {
+        "rok": 2026,
+        "limit": 1500000.00,
+        "potrzeba": 2000000.00
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "komorka_organizacyjna_id": 3,
+    "nazwa_projektu": "Szkolenia z cyberbezpieczeństwa dla pracowników",
+    "nazwa_zadania": "Program podnoszenia świadomości bezpieczeństwa",
+    "szczegolowe_uzasadnienie_realizacji": "Kompleksowy program szkoleń dla wszystkich pracowników ministerstwa z zakresu bezpiecznego korzystania z systemów IT, rozpoznawania zagrożeń typu phishing oraz procedur postępowania w przypadku incydentów.",
+    "budzet": "Budżet państwa",
+    "czesc_budzetowa_kod": "83",
+    "dzial_kod": "750",
+    "rozdzial_kod": "75095",
+    "paragraf_kod": "4700",
+    "zrodlo_finansowania_kod": "1",
+    "grupa_wydatkow_id": 2,
+    "user_id": 3,
+    "lata_budzetowe": [
+      {
+        "rok": 2025,
+        "limit": 120000.00,
+        "potrzeba": 180000.00
+      },
+      {
+        "rok": 2026,
+        "limit": 100000.00,
+        "potrzeba": 150000.00
+      }
+    ]
+  }
+]

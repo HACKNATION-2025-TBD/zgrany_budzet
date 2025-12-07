@@ -10,38 +10,69 @@ from src.schemas.versioned_fields import (
 )
 
 
-def create_string_version(db: Session, entity_type: str, entity_id: int, field_name: str, value: Optional[str]):
+def create_string_version(
+    db: Session,
+    entity_type: str,
+    entity_id: int,
+    field_name: str,
+    value: Optional[str],
+    user_id: Optional[int] = None
+) -> VersionedStringField:
     """Create a new version for a string field."""
     version = VersionedStringField(
         entity_type=entity_type,
         entity_id=entity_id,
         field_name=field_name,
-        value=value
+        value=value,
+        created_by_user_id=user_id
     )
     db.add(version)
+    db.flush()
+    return version
 
 
-def create_numeric_version(db: Session, entity_type: str, entity_id: int, field_name: str, value: float):
+def create_numeric_version(
+    db: Session,
+    entity_type: str,
+    entity_id: int,
+    field_name: str,
+    value: float,
+    user_id: Optional[int] = None
+) -> VersionedNumericField:
     """Create a new version for a numeric field."""
     version = VersionedNumericField(
         entity_type=entity_type,
         entity_id=entity_id,
         field_name=field_name,
-        value=value
+        value=value,
+        created_by_user_id=user_id
     )
     db.add(version)
+    db.flush()
+    return version
 
 
-def create_fk_version(db: Session, entity_type: str, entity_id: int, field_name: str, value_string: Optional[str] = None, value_int: Optional[int] = None):
+def create_fk_version(
+    db: Session,
+    entity_type: str,
+    entity_id: int,
+    field_name: str,
+    value_string: Optional[str] = None,
+    value_int: Optional[int] = None,
+    user_id: Optional[int] = None
+) -> VersionedForeignKeyField:
     """Create a new version for a foreign key field."""
     version = VersionedForeignKeyField(
         entity_type=entity_type,
         entity_id=entity_id,
         field_name=field_name,
         value_string=value_string,
-        value_int=value_int
+        value_int=value_int,
+        created_by_user_id=user_id
     )
     db.add(version)
+    db.flush()
+    return version
 
 
 def get_latest_version_for_field(db: Session, entity_type: str, entity_id: int, field_name: str, field_type: str):
