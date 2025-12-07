@@ -35,15 +35,12 @@ export const zrodloFinansowaniaSchema = z.object({
 });
 
 export const budgetDocumentRowSchema = z.object({
-  dzial: z.array(dzialSchema).nullable().default(null),
-  rozdzial: z.array(rozdzialSchema).nullable().default(null),
-  paragraf: z.array(paragrafSchema).nullable().default(null),
-  grupaWydatkow: z.array(grupaWydatkowSchema).nullable().default(null),
-  czescBudzetowa: z.array(czescBudzetowaSchema).nullable().default(null),
-  zrodloFinansowania: z
-    .array(zrodloFinansowaniaSchema)
-    .nullable()
-    .default(null),
+  dzial: dzialSchema.nullable().default(null),
+  rozdzial: rozdzialSchema.nullable().default(null),
+  paragraf: paragrafSchema.nullable().default(null),
+  grupaWydatkow: grupaWydatkowSchema.nullable().default(null),
+  czescBudzetowa: czescBudzetowaSchema.nullable().default(null),
+  zrodloFinansowania: zrodloFinansowaniaSchema.nullable().default(null),
 });
 
 export const budgetDocumentSchema = z.array(budgetDocumentRowSchema);
