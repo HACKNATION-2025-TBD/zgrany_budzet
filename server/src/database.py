@@ -17,6 +17,10 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
+# Import all models to ensure they are registered with SQLAlchemy
+# This must be done after Base is created but before create_all() is called
+import src.schemas  # noqa: F401, E402
+
 
 def get_db():
     """Dependency for getting database session"""
