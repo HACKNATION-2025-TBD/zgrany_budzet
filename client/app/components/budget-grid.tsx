@@ -7,15 +7,18 @@ import {
   type ColDef,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
+import { useQueryClient } from '@tanstack/react-query';
 import type { BudgetDocument, KodZadaniowy, DocumentRow } from '~/schema';
 import { useGridData } from '~/hooks/use-grid-data';
 import { usePlanowanieBudzetu } from '~/hooks/use-planowanie-budzetu';
+import { updatePlanowanieBudzetuCell } from '~/queries/planowanie-budzetu';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import { useUserMock } from '~/hooks/use-user-mock';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 const BudgetGrid = () => {
+  const queryClient = useQueryClient();
   const { user } = useUserMock();
   const {
     dzialy,
@@ -46,6 +49,7 @@ const BudgetGrid = () => {
       const kodZadaniowy = kodyZadaniowe?.[0] || null;
 
       return {
+        id: item.id, // Add ID for updates
         dzial,
         rozdzial,
         paragraf,
@@ -55,9 +59,78 @@ const BudgetGrid = () => {
         kodZadaniowy,
         nazwaProgramu: item.nazwa_projektu || 'nie dotyczy',
         planWI: item.budzet || 'nie dotyczy',
+        roczneSegmenty: [0, 1, 2, 3].map(index => ({
+          year: new Date().getFullYear() + 1 + index,
+          potrzebyFinansowe: 0,
+          limitWydatków: 0,
+          kwotaZawartejUmowy: 0,
+          numerUmowy: ''
+        })),
       };
     });
   }, [planowanieBudzetu, dzialy, rozdzialy, paragrafy, grupyWydatkow, czesciBudzetowe, zrodlaFinansowania, kodyZadaniowe]);
+
+  // Map grid field names to backend field names
+  const mapFieldToBackend = (field: string): string => {
+    const fieldMap: Record<string, string> = {
+      'czescBudzetowa': 'czesc_budzetowa_kod',
+      'dzial': 'dzial_kod',
+      'rozdzial': 'rozdzial_kod',
+      'paragraf': 'paragraf_kod',
+      'zrodloFinansowania': 'zrodlo_finansowania_kod',
+      'grupaWydatkow': 'grupa_wydatkow_id',
+      'nazwaProgramu': 'nazwa_projektu',
+      'planWI': 'budzet',
+    };
+    return fieldMap[field] || field;
+  };
+
+  // Handle cell value changes
+  const handleCellValueChanged = async (event: any) => {
+    const { data, colDef, newValue, oldValue } = event;
+    
+    if (newValue === oldValue) return; // No change
+    
+    const rowId = data.id;
+    if (!rowId) {
+      console.error('Row ID not found for update');
+      return;
+    }
+
+    const field = colDef.field;
+    const backendField = mapFieldToBackend(field);
+    
+    try {
+      // Handle different field types
+      let value: string | number | null = newValue;
+      
+      // For object fields, extract the kod or id
+      if (typeof newValue === 'object' && newValue !== null) {
+        if ('kod' in newValue) {
+          value = newValue.kod;
+        } else if ('id' in newValue) {
+          value = newValue.id;
+        } else if ('nazwa' in newValue) {
+          // For grupa wydatkow, find the id by name
+          const grupa = grupyWydatkow?.find(g => g.nazwa === newValue.nazwa);
+          value = grupa?.id || null;
+        }
+      }
+
+      await updatePlanowanieBudzetuCell(rowId, {
+        field: backendField,
+        value: value,
+      });
+      
+      // Invalidate queries to refresh data
+      queryClient.invalidateQueries({ queryKey: ['planowanie-budzetu'] });
+      
+      console.log('Cell updated successfully:', { field: backendField, value });
+    } catch (error) {
+      console.error('Failed to update cell:', error);
+      // You might want to revert the change here or show an error message
+    }
+  };
 
   const formatKodAndNazwa = (params: {
     value: { kod: string; nazwa?: string; tresc?: string } | null;
@@ -251,7 +324,7 @@ const BudgetGrid = () => {
             cellEditorParams: {
               precision: 2,
             },
-            cellRenderer: (params) => {
+            cellRenderer: (params: any) => {
               return (
                 params.data.roczneSegmenty[index].potrzebyFinansowe -
                 params.data.roczneSegmenty[index].limitWydatków
@@ -311,9 +384,7 @@ const BudgetGrid = () => {
         onCellEditingStarted={(event) => {
           console.log('Cell editing started:', event);
         }}
-        onCellValueChanged={(event) => {
-          console.log('Cell value changed:', event);
-        }}
+        onCellValueChanged={handleCellValueChanged}
         defaultColDef={defaultColDef}
       />
     </div>

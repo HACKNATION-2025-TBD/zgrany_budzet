@@ -49,6 +49,7 @@ export const budgetDocumentRowYearlySegmentSchema = z.object({
 });
 
 export const budgetDocumentRowSchema = z.object({
+  id: z.number().optional(), // Add ID for backend updates
   dzial: dzialSchema.nullable().default(null),
   rozdzial: rozdzialSchema.nullable().default(null),
   paragraf: paragrafSchema.nullable().default(null),

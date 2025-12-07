@@ -10,5 +10,5 @@ export { useCzesciBudzetowe } from './czesci-budzetowe';
 export { useZrodlaFinansowania } from './zrodla-finansowania';
 
 // Export planowanie budzetu functions
-export { createPlanowanieBudzetu, getPlanowanieBudzetu } from './planowanie-budzetu';
-export type { CreatePlanowanieBudzetuResponse } from './planowanie-budzetu';
+export { createPlanowanieBudzetu, getPlanowanieBudzetu, updatePlanowanieBudzetuCell } from './planowanie-budzetu';
+export type { CreatePlanowanieBudzetuResponse, CellUpdateRequest, UpdateResponse } from './planowanie-budzetu';
