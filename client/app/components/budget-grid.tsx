@@ -186,8 +186,6 @@ const BudgetGrid = () => {
       queryClient.invalidateQueries({
         queryKey: ['planowanie-budzetu-field-history'],
       });
-
-      console.log('Cell updated successfully:', { field: backendField, value });
     } catch (error) {
       console.error('Failed to update cell:', error);
       // You might want to revert the change here or show an error message
