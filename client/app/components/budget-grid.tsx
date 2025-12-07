@@ -91,6 +91,15 @@ const BudgetGrid = () => {
     );
   };
 
+  const headerStyle = {
+    whiteSpace: 'wrap',
+    overflow: 'hidden',
+    display: '-webkit-box',
+    WebkitBoxOrient: 'vertical',
+    WebkitLineClamp: 2,
+    fontSize: '12px',
+  };
+
   const colDefs: ColDef[] = useMemo(
     () => [
       {
@@ -104,6 +113,7 @@ const BudgetGrid = () => {
           values:
             czesciBudzetowe?.sort((a, b) => a.kod.localeCompare(b.kod)) ?? [],
         },
+        headerStyle,
       },
       {
         headerName: 'Dział',
@@ -115,6 +125,7 @@ const BudgetGrid = () => {
         cellEditorParams: {
           values: dzialy?.sort((a, b) => a.kod.localeCompare(b.kod)) ?? [],
         },
+        headerStyle,
       },
       {
         headerName: 'Rozdział',
@@ -126,6 +137,7 @@ const BudgetGrid = () => {
         cellEditorParams: {
           values: rozdzialy?.sort((a, b) => a.kod.localeCompare(b.kod)) ?? [],
         },
+        headerStyle,
       },
       {
         headerName: 'Paragraf',
@@ -137,6 +149,7 @@ const BudgetGrid = () => {
         cellEditorParams: {
           values: paragrafy?.sort((a, b) => a.kod.localeCompare(b.kod)) ?? [],
         },
+        headerStyle,
       },
       {
         headerName: 'Źródło finansowania',
@@ -150,6 +163,7 @@ const BudgetGrid = () => {
             zrodlaFinansowania?.sort((a, b) => a.kod.localeCompare(b.kod)) ??
             [],
         },
+        headerStyle,
       },
       {
         headerName: 'Grupa wydatków',
@@ -160,6 +174,7 @@ const BudgetGrid = () => {
         cellEditorParams: {
           values: grupyWydatkow?.map((gw) => gw.nazwa).sort() ?? [],
         },
+        headerStyle,
       },
       {
         headerName: 'Budżet zadaniowy (w pełnej szczegółowości)',
@@ -171,6 +186,7 @@ const BudgetGrid = () => {
           values:
             kodyZadaniowe?.sort((a, b) => a.kod.localeCompare(b.kod)) ?? [],
         },
+        headerStyle,
       },
       {
         headerName: 'Budżet zadaniowy (nr funkcji, nr zadania)',
@@ -179,12 +195,14 @@ const BudgetGrid = () => {
           return params.value.kod_krotki;
         },
         editable: false,
+        headerStyle,
       },
       {
         headerName: 'Nazwa programu',
         field: 'nazwaProgramu' as const,
         editable: true,
         cellEditor: 'agTextCellEditor',
+        headerStyle,
       },
       {
         headerName: 'Nazwa komórki organizacyjnej',
@@ -192,21 +210,85 @@ const BudgetGrid = () => {
         cellRenderer: () => {
           return user.nazwaKomorkiOrganizacyjnej;
         },
+        headerStyle,
       },
       {
         headerName: 'Plan WI',
         field: 'planWI' as const,
         editable: true,
         cellEditor: 'agTextCellEditor',
+        headerStyle,
       },
+      ...[0, 1, 2, 3].map((index) => ({
+        headerName: String(new Date().getFullYear() + 1 + index),
+        children: [
+          {
+            headerName: 'Potrzeby finansowe na rok',
+            field: `roczneSegmenty.${index}.potrzebyFinansowe` as const,
+            editable: true,
+            cellEditor: 'agNumericCellEditor',
+            cellEditorParams: {
+              precision: 2,
+            },
+            headerStyle: { ...headerStyle, fontSize: '10px' },
+          },
+          {
+            headerName: 'Limit wydatków na rok',
+            field: `roczneSegmenty.${index}.limitWydatków` as const,
+            editable: true,
+            cellEditor: 'agNumericCellEditor',
+            cellEditorParams: {
+              precision: 2,
+            },
+            headerStyle: { ...headerStyle, fontSize: '10px' },
+          },
+          {
+            headerName:
+              'Kwota na realizację zadań w roku, która nie została zabezpieczona w limicie',
+            field: `roczneSegmenty.${index}.potrzebyFinansowe` as const,
+            editable: false,
+            cellEditor: 'agNumericCellEditor',
+            cellEditorParams: {
+              precision: 2,
+            },
+            cellRenderer: (params) => {
+              return (
+                params.data.roczneSegmenty[index].potrzebyFinansowe -
+                params.data.roczneSegmenty[index].limitWydatków
+              );
+            },
+            headerStyle: { ...headerStyle, fontSize: '10px' },
+          },
+          {
+            headerName:
+              'Kwota zawartej umowy/wniosku o udzielenie zamówienia publicznego',
+            field: `roczneSegmenty.${index}.kwotaZawartejUmowy` as const,
+            editable: true,
+            cellEditor: 'agNumericCellEditor',
+            cellEditorParams: {
+              precision: 2,
+            },
+            headerStyle: { ...headerStyle, fontSize: '10px' },
+          },
+          {
+            headerName:
+              'Nr umowy/nr wniosku o udzielenie zamówienia publicznego',
+            field: `roczneSegmenty.${index}.numerUmowy` as const,
+            editable: true,
+            cellEditor: 'agTextCellEditor',
+            headerStyle: { ...headerStyle, fontSize: '10px' },
+          },
+        ],
+      })),
     ],
     [
-      czesciBudzetowe,
       dzialy,
       rozdzialy,
       paragrafy,
-      zrodlaFinansowania,
       grupyWydatkow,
+      czesciBudzetowe,
+      zrodlaFinansowania,
+      kodyZadaniowe,
     ]
   );
 
@@ -215,22 +297,26 @@ const BudgetGrid = () => {
   };
 
   return (
-    <AgGridReact
-      rowData={budgetDocument}
-      columnDefs={colDefs}
-      editType='singleCell'
-      stopEditingWhenCellsLoseFocus={true}
-      onCellEditingStopped={(event) => {
-        console.log('Cell editing stopped:', event);
-      }}
-      onCellEditingStarted={(event) => {
-        console.log('Cell editing started:', event);
-      }}
-      onCellValueChanged={(event) => {
-        console.log('Cell value changed:', event);
-      }}
-      defaultColDef={defaultColDef}
-    />
+    <div className='relative w-full h-full overflow-auto'>
+      <AgGridReact
+        className='min-w-0 overflow-visible w-[4000px]'
+        headerHeight={70}
+        rowData={budgetDocument}
+        columnDefs={colDefs}
+        editType='singleCell'
+        stopEditingWhenCellsLoseFocus={true}
+        onCellEditingStopped={(event) => {
+          console.log('Cell editing stopped:', event);
+        }}
+        onCellEditingStarted={(event) => {
+          console.log('Cell editing started:', event);
+        }}
+        onCellValueChanged={(event) => {
+          console.log('Cell value changed:', event);
+        }}
+        defaultColDef={defaultColDef}
+      />
+    </div>
   );
 };
 

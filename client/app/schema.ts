@@ -40,6 +40,14 @@ export const kodZadaniowySchema = z.object({
   nazwa: z.string(),
 });
 
+export const budgetDocumentRowYearlySegmentSchema = z.object({
+  year: z.number().default(new Date().getFullYear()),
+  potrzebyFinansowe: z.number().default(0),
+  limitWydatków: z.number().default(0),
+  kwotaZawartejUmowy: z.number().default(0),
+  numerUmowy: z.string().default('nie dotyczy'),
+});
+
 export const budgetDocumentRowSchema = z.object({
   dzial: dzialSchema.nullable().default(null),
   rozdzial: rozdzialSchema.nullable().default(null),
@@ -50,6 +58,17 @@ export const budgetDocumentRowSchema = z.object({
   kodZadaniowy: kodZadaniowySchema.nullable().default(null),
   nazwaProgramu: z.string().default('nie dotyczy'),
   planWI: z.string().default('nie dotyczy'),
+  roczneSegmenty: z
+    .array(budgetDocumentRowYearlySegmentSchema)
+    .length(4)
+    .default(() => {
+      const nextYear = new Date().getFullYear() + 1;
+      return new Array(4)
+        .fill(null)
+        .map((_, index) =>
+          budgetDocumentRowYearlySegmentSchema.parse({ year: nextYear + index })
+        );
+    }),
 });
 
 export const budgetDocumentSchema = z.array(budgetDocumentRowSchema);

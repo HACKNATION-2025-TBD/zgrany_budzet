@@ -36,6 +36,68 @@ from src.versioning_utils import (
 router = APIRouter()
 
 
+def check_field_conflict(
+        db: Session,
+        entity_type: str,
+        entity_id: int,
+        field_name: str,
+        field_type: str,
+        client_timestamp: datetime
+):
+    """
+    Checks if there are any versions of the field created AFTER the client_timestamp.
+    If yes, raises HTTP 409 Conflict with the list of changes.
+    """
+    conflicting_changes = []
+
+    if field_type == "string":
+        query = db.query(VersionedStringField).filter(
+            VersionedStringField.entity_type == entity_type,
+            VersionedStringField.entity_id == entity_id,
+            VersionedStringField.field_name == field_name,
+            VersionedStringField.timestamp > client_timestamp
+        ).order_by(desc(VersionedStringField.timestamp))
+
+        results = query.all()
+        conflicting_changes = [{"value": r.value, "timestamp": r.timestamp, "user_id": r.created_by} for r in results]
+
+    elif field_type == "numeric":
+        query = db.query(VersionedNumericField).filter(
+            VersionedNumericField.entity_type == entity_type,
+            VersionedNumericField.entity_id == entity_id,
+            VersionedNumericField.field_name == field_name,
+            VersionedNumericField.timestamp > client_timestamp
+        ).order_by(desc(VersionedNumericField.timestamp))
+
+        results = query.all()
+        conflicting_changes = [{"value": float(r.value), "timestamp": r.timestamp, "user_id": r.created_by} for r in
+                               results]
+
+    elif field_type in ["fk_string", "fk_int"]:
+        query = db.query(VersionedForeignKeyField).filter(
+            VersionedForeignKeyField.entity_type == entity_type,
+            VersionedForeignKeyField.entity_id == entity_id,
+            VersionedForeignKeyField.field_name == field_name,
+            VersionedForeignKeyField.timestamp > client_timestamp
+        ).order_by(desc(VersionedForeignKeyField.timestamp))
+
+        results = query.all()
+        for r in results:
+            val = r.value_int if field_type == "fk_int" else r.value_string
+            conflicting_changes.append({"value": val, "timestamp": r.timestamp, "user_id": r.created_by})
+
+    if conflicting_changes:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "message": "Data has been modified by another user.",
+                "field": field_name,
+                "changes": conflicting_changes
+            }
+        )
+
+
+
 # PlanowanieBudzetu endpoints
 @router.post("/planowanie_budzetu", response_model=MessageResponse)
 async def create_planowanie_budzetu(
@@ -78,27 +140,47 @@ async def create_planowanie_budzetu(
 
 @router.patch("/planowanie_budzetu/{planowanie_id}", response_model=UpdateResponse)
 async def update_planowanie_budzetu_cell(
-    planowanie_id: int,
-    data: CellUpdate,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+        planowanie_id: int,
+        data: CellUpdate,
+        db: Session = Depends(get_db),
+        current_user: User = Depends(get_current_user)
 ):
     # Validate access
     validate_planowanie_access(planowanie_id, current_user, db)
-    
+
     planowanie = db.query(PlanowanieBudzetu).filter(PlanowanieBudzetu.id == planowanie_id).first()
     if not planowanie:
         raise HTTPException(status_code=404, detail="PlanowanieBudzetu not found")
-    
-    # String fields
+
+    # Define field categories
     string_fields = ["nazwa_projektu", "nazwa_zadania", "szczegolowe_uzasadnienie_realizacji", "budzet"]
-    # Foreign key string fields
     fk_string_fields = ["czesc_budzetowa_kod", "dzial_kod", "rozdzial_kod", "paragraf_kod", "zrodlo_finansowania_kod"]
-    # Foreign key int fields
     fk_int_fields = ["grupa_wydatkow_id", "komorka_organizacyjna_id", "user_id"]
-    
+
+    # --- Conflict Detection Logic ---
+    if data.last_known_timestamp:
+        field_type = None
+        if data.field in string_fields:
+            field_type = "string"
+        elif data.field in fk_string_fields:
+            field_type = "fk_string"
+        elif data.field in fk_int_fields:
+            field_type = "fk_int"
+
+        if field_type:
+            check_field_conflict(
+                db=db,
+                entity_type="planowanie_budzetu",
+                entity_id=planowanie_id,
+                field_name=data.field,
+                field_type=field_type,
+                client_timestamp=data.last_known_timestamp
+            )
+    # -------------------------------
+
     if data.field in string_fields:
-        create_string_version(db, "planowanie_budzetu", planowanie_id, data.field, str(data.value) if data.value is not None else None)
+        create_string_version(db, "planowanie_budzetu", planowanie_id, data.field,
+                              str(data.value) if data.value is not None else None)
     elif data.field in fk_string_fields:
         if data.value is None:
             raise HTTPException(status_code=400, detail=f"Field {data.field} cannot be null")
@@ -106,22 +188,21 @@ async def update_planowanie_budzetu_cell(
     elif data.field in fk_int_fields:
         if data.value is None:
             raise HTTPException(status_code=400, detail=f"Field {data.field} cannot be null")
-        
+
         # Validate komorka_organizacyjna_id changes
         if data.field == "komorka_organizacyjna_id" and int(data.value) != current_user.komorka_organizacyjna_id:
             raise HTTPException(
                 status_code=403,
                 detail="Cannot change planowanie to a different organizational unit"
             )
-        
+
         create_fk_version(db, "planowanie_budzetu", planowanie_id, data.field, value_int=int(data.value))
     else:
         raise HTTPException(status_code=400, detail=f"Unknown field: {data.field}")
-    
-    db.commit()
-    
-    return {"id": planowanie_id, "field": data.field, "value": data.value, "message": "Updated successfully"}
 
+    db.commit()
+
+    return {"id": planowanie_id, "field": data.field, "value": data.value, "message": "Updated successfully"}
 
 @router.get("/planowanie_budzetu", response_model=List[PlanowanieBudzetuResponse])
 async def get_all_planowanie_budzetu(
@@ -300,31 +381,43 @@ async def create_rok_budzetowy(
 
 @router.patch("/rok_budzetowy/{rok_id}", response_model=UpdateResponse)
 async def update_rok_budzetowy_cell(
-    rok_id: int,
-    data: CellUpdate,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+        rok_id: int,
+        data: CellUpdate,
+        db: Session = Depends(get_db),
+        current_user: User = Depends(get_current_user)
 ):
     # Validate access
     validate_rok_budzetowy_access(rok_id, current_user, db)
-    
+
     rok = db.query(RokBudzetowy).filter(RokBudzetowy.id == rok_id).first()
     if not rok:
         raise HTTPException(status_code=404, detail="RokBudzetowy not found")
-    
+
     numeric_fields = ["limit", "potrzeba"]
-    
+
+    # --- Conflict Detection Logic ---
+    if data.last_known_timestamp:
+        if data.field in numeric_fields:
+            check_field_conflict(
+                db=db,
+                entity_type="rok_budzetowy",
+                entity_id=rok_id,
+                field_name=data.field,
+                field_type="numeric",
+                client_timestamp=data.last_known_timestamp
+            )
+    # -------------------------------
+
     if data.field in numeric_fields:
         if data.value is None:
             raise HTTPException(status_code=400, detail=f"Field {data.field} cannot be null")
         create_numeric_version(db, "rok_budzetowy", rok_id, data.field, float(data.value))
     else:
         raise HTTPException(status_code=400, detail=f"Unknown field: {data.field}")
-    
-    db.commit()
-    
-    return {"id": rok_id, "field": data.field, "value": data.value, "message": "Updated successfully"}
 
+    db.commit()
+
+    return {"id": rok_id, "field": data.field, "value": data.value, "message": "Updated successfully"}
 
 @router.get("/rok_budzetowy", response_model=List[RokBudzetowyResponse])
 async def get_all_rok_budzetowy(

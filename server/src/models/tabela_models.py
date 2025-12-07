@@ -21,6 +21,8 @@ class PlanowanieBudzetuCreate(BaseModel):
 class CellUpdate(BaseModel):
     field: str
     value: Optional[str | int | float] = None
+    # If you want to check for merge conflict, pass here the last time you have pulled the information
+    last_known_timestamp: Optional[datetime] = None
 
 
 class RokBudzetowyCreate(BaseModel):
