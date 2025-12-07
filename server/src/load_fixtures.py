@@ -64,8 +64,14 @@ from src.schemas.paragrafy import Paragraf
 from src.schemas.zrodla_finansowania import ZrodloFinansowania
 from src.schemas.grupy_wydatkow import GrupaWydatkow
 from src.schemas.planowanie_budzetu import PlanowanieBudzetu
+from src.schemas.rok_budzetowy import RokBudzetowy
 from src.schemas.komorki_organizacyjne import KomorkaOrganizacyjna
 from src.schemas.users import User
+from src.versioning_utils import (
+    create_string_version,
+    create_numeric_version,
+    create_fk_version
+)
 
 
 def load_json_fixture(filename: str) -> list[dict]:
@@ -181,6 +187,52 @@ def load_users(session: Session) -> None:
     print(f"Loaded {len(data)} users")
 
 
+def load_planowanie_budzetu(session: Session) -> None:
+    """Load planowanie budżetu fixtures with versioned fields."""
+    print("Loading planowanie budżetu...")
+    data = load_json_fixture("planowanie_budzetu.json")
+    
+    for item in data:
+        # Extract lata_budzetowe and user_id before creating main record
+        lata_budzetowe = item.pop("lata_budzetowe", [])
+        user_id = item.get("user_id")
+        
+        # Create main PlanowanieBudzetu record (empty)
+        planowanie = PlanowanieBudzetu()
+        session.add(planowanie)
+        session.flush()  # Get the ID
+        
+        # Create versioned fields for planowanie_budzetu
+        create_string_version(session, "planowanie_budzetu", planowanie.id, "nazwa_projektu", item.get("nazwa_projektu"), user_id)
+        create_string_version(session, "planowanie_budzetu", planowanie.id, "nazwa_zadania", item.get("nazwa_zadania"), user_id)
+        create_string_version(session, "planowanie_budzetu", planowanie.id, "szczegolowe_uzasadnienie_realizacji", item.get("szczegolowe_uzasadnienie_realizacji"), user_id)
+        create_string_version(session, "planowanie_budzetu", planowanie.id, "budzet", item.get("budzet"), user_id)
+        
+        create_fk_version(session, "planowanie_budzetu", planowanie.id, "czesc_budzetowa_kod", value_string=item.get("czesc_budzetowa_kod"), user_id=user_id)
+        create_fk_version(session, "planowanie_budzetu", planowanie.id, "dzial_kod", value_string=item.get("dzial_kod"), user_id=user_id)
+        create_fk_version(session, "planowanie_budzetu", planowanie.id, "rozdzial_kod", value_string=item.get("rozdzial_kod"), user_id=user_id)
+        create_fk_version(session, "planowanie_budzetu", planowanie.id, "paragraf_kod", value_string=item.get("paragraf_kod"), user_id=user_id)
+        create_fk_version(session, "planowanie_budzetu", planowanie.id, "zrodlo_finansowania_kod", value_string=item.get("zrodlo_finansowania_kod"), user_id=user_id)
+        create_fk_version(session, "planowanie_budzetu", planowanie.id, "grupa_wydatkow_id", value_int=item.get("grupa_wydatkow_id"), user_id=user_id)
+        create_fk_version(session, "planowanie_budzetu", planowanie.id, "komorka_organizacyjna_id", value_int=item.get("komorka_organizacyjna_id"), user_id=user_id)
+        create_fk_version(session, "planowanie_budzetu", planowanie.id, "user_id", value_int=user_id, user_id=user_id)
+        
+        # Create RokBudzetowy records with versioned fields
+        for rok_data in lata_budzetowe:
+            rok = RokBudzetowy(
+                planowanie_budzetu_id=planowanie.id,
+                rok=rok_data["rok"]
+            )
+            session.add(rok)
+            session.flush()  # Get the ID
+            
+            create_numeric_version(session, "rok_budzetowy", rok.id, "limit", rok_data.get("limit"), user_id)
+            create_numeric_version(session, "rok_budzetowy", rok.id, "potrzeba", rok_data.get("potrzeba"), user_id)
+    
+    session.commit()
+    print(f"Loaded {len(data)} planowanie budżetu records")
+
+
 def create_tables() -> None:
     """Create all tables in the database."""
     print("Creating tables...")
@@ -254,6 +306,7 @@ def load_all_fixtures(drop_existing: bool = False, postgres_url: str = None) -> 
         load_grupy_wydatkow(session)
         load_komorki_organizacyjne(session)
         load_users(session)
+        load_planowanie_budzetu(session)
         
         print("\n✅ All fixtures loaded successfully!")
     except Exception as e:

@@ -12,28 +12,26 @@ export const apiClient = axios.create({
 // Request interceptor
 apiClient.interceptors.request.use(
   (config) => {
-    console.log(`Making ${config.method?.toUpperCase()} request to: ${config.url}`);
-    
     // Add mock user ID based on user type for authorization
     const userType = localStorage.getItem('userType') || 'ko';
     let userId: string;
-    
+
     // Map user types to IDs based on fixtures/users.json
-    switch(userType) {
+    switch (userType) {
       case 'kierownictwo':
         userId = '1'; // Anna Kowalska
         break;
       case 'bbf':
-        userId = '2'; // Jan Nowak  
+        userId = '1'; // Jan Nowak
         break;
       case 'ko':
       default:
-        userId = '3'; // Piotr Wiśniewski (komorka_organizacyjna_id: 1)
+        userId = '2'; // Piotr Wiśniewski (komorka_organizacyjna_id: 1)
         break;
     }
-    
+
     config.headers.Authorization = userId;
-    
+
     return config;
   },
   (error) => {
