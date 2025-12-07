@@ -22,11 +22,11 @@ apiClient.interceptors.request.use(
         userId = '1'; // Anna Kowalska
         break;
       case 'bbf':
-        userId = '2'; // Jan Nowak
+        userId = '1'; // Jan Nowak
         break;
       case 'ko':
       default:
-        userId = '3'; // Piotr Wiśniewski (komorka_organizacyjna_id: 1)
+        userId = '2'; // Piotr Wiśniewski (komorka_organizacyjna_id: 1)
         break;
     }
 
