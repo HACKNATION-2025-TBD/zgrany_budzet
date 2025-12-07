@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "firstname": "Anna",
+    "lastname": "Kowalska",
+    "email": "anna.kowalska@gov.pl",
+    "komorka_organizacyjna_id": 0
+  },
+  {
+    "id": 2,
+    "firstname": "Jan",
+    "lastname": "Nowak",
+    "email": "jan.nowak@gov.pl",
+    "komorka_organizacyjna_id": 0
+  },
+  {
+    "id": 3,
+    "firstname": "Piotr",
+    "lastname": "Wiśniewski",
+    "email": "piotr.wisniewski@gov.pl",
+    "komorka_organizacyjna_id": 1
+  },
+  {
+    "id": 4,
+    "firstname": "Maria",
+    "lastname": "Wójcik",
+    "email": "maria.wojcik@gov.pl",
+    "komorka_organizacyjna_id": 2
+  },
+  {
+    "id": 5,
+    "firstname": "Tomasz",
+    "lastname": "Kamiński",
+    "email": "tomasz.kaminski@gov.pl",
+    "komorka_organizacyjna_id": 3
+  },
+  {
+    "id": 6,
+    "firstname": "Katarzyna",
+    "lastname": "Lewandowska",
+    "email": "katarzyna.lewandowska@gov.pl",
+    "komorka_organizacyjna_id": 4
+  },
+  {
+    "id": 7,
+    "firstname": "Michał",
+    "lastname": "Zieliński",
+    "email": "michal.zielinski@gov.pl",
+    "komorka_organizacyjna_id": 5
+  },
+  {
+    "id": 8,
+    "firstname": "Agnieszka",
+    "lastname": "Szymańska",
+    "email": "agnieszka.szymanska@gov.pl",
+    "komorka_organizacyjna_id": 14
+  }
+]

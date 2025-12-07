@@ -12,6 +12,7 @@ from src.schemas.rozdzialy import Rozdzial
 from src.schemas.paragrafy import Paragraf
 from src.schemas.grupy_wydatkow import GrupaWydatkow
 from src.schemas.czesci_budzetowe import CzescBudzetowa
+from src.schemas.zrodla_finansowania import ZrodloFinansowania
 from src.tabela import router as tabela_router
 
 
