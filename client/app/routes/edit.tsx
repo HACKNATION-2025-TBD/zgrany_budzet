@@ -1,4 +1,4 @@
-import { budgetDocumentRowSchema, budgetDocumentSchema } from '~/schema';
+import { budgetDocumentSchema } from '~/schema';
 import { Button } from '~/components/ui/button';
 import {
   Download,
@@ -10,6 +10,7 @@ import {
 import BudgetGrid from '~/components/budget-grid';
 import { useState } from 'react';
 import { useUserMock } from '~/hooks/use-user-mock';
+import { NewBudgetDocumentRowModal } from '~/modals/new-budget-document-row-modal';
 
 export function meta() {
   return [{ title: 'Budżety' }];
@@ -50,19 +51,14 @@ export default function Edit() {
               Export
             </Button>
           )}
-          <Button
-            onClick={() => {
-              setBudgetDocument((prev) => [
-                ...prev,
-                budgetDocumentRowSchema.parse({}),
-              ]);
-            }}
-            size='sm'
-            variant='secondary'
+          <NewBudgetDocumentRowModal
+            onAdd={(newRow) => setBudgetDocument((prev) => [...prev, newRow])}
           >
-            <ListPlusIcon />
-            Dodaj nowy wiersz
-          </Button>
+            <Button size='sm' variant='secondary'>
+              <ListPlusIcon />
+              Dodaj nowy wiersz
+            </Button>
+          </NewBudgetDocumentRowModal>
         </div>
       </div>
 
