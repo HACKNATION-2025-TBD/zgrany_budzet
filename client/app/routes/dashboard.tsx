@@ -18,15 +18,8 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className='bg-white rounded-lg shadow-sm border'>
-        <div className='p-4 border-b border-gray-200'>
-          <h2 className='text-xl font-semibold text-gray-800'>
-            Wykonanie budżetu wg działów
-          </h2>
-        </div>
-        <div className='p-4' style={{ height: '500px' }}>
-          <BudgetGrid />
-        </div>
+      <div  style={{ height: '500px', border: '1px solid #ddd' }}>
+        <BudgetGrid />
       </div>
     </div>
   );

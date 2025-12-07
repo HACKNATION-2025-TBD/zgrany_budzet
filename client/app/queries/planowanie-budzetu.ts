@@ -38,3 +38,32 @@ export async function updatePlanowanieBudzetuCell(
   const response = await apiClient.patch(`/planowanie_budzetu/${planowanieBudzetuId}`, data);
   return response.data;
 }
+
+export interface FieldsHistoryStatusResponse {
+  fields: Record<string, boolean>;
+}
+
+export interface FieldHistoryEntry {
+  value: any;
+  timestamp: string;
+}
+
+export interface FieldHistoryResponse {
+  field_name: string;
+  history: FieldHistoryEntry[];
+}
+
+export async function getPlanowanieBudzetuFieldsHistoryStatus(
+  planowanieBudzetuId: number
+): Promise<FieldsHistoryStatusResponse> {
+  const response = await apiClient.get(`/planowanie_budzetu/${planowanieBudzetuId}/fields_history_status`);
+  return response.data;
+}
+
+export async function getPlanowanieBudzetuFieldHistory(
+  planowanieBudzetuId: number,
+  fieldName: string
+): Promise<FieldHistoryResponse> {
+  const response = await apiClient.get(`/planowanie_budzetu/${planowanieBudzetuId}/field_history/${fieldName}`);
+  return response.data;
+}

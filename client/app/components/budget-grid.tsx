@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import {
   AllCommunityModule,
   ModuleRegistry,
@@ -13,13 +13,24 @@ import { useGridData } from '~/hooks/use-grid-data';
 import { usePlanowanieBudzetu } from '~/hooks/use-planowanie-budzetu';
 import { updatePlanowanieBudzetuCell } from '~/queries/planowanie-budzetu';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
+import { Button } from './ui/button';
 import { useUserMock } from '~/hooks/use-user-mock';
+import { History, Edit } from 'lucide-react';
+import HistoryModal from './history-modal';
+import { useFieldsHistoryStatus } from '~/hooks/use-field-history';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 const BudgetGrid = () => {
   const queryClient = useQueryClient();
   const { user } = useUserMock();
+  const [isHistoryMode, setIsHistoryMode] = useState(false);
+  const [historyModalData, setHistoryModalData] = useState<{
+    field: string;
+    value: any;
+    rowId: number;
+  } | null>(null);
+
   const {
     dzialy,
     rozdzialy,
@@ -31,6 +42,21 @@ const BudgetGrid = () => {
     isLoading: isLoadingGridData,
   } = useGridData();
   const { data: planowanieBudzetu, isLoading: isLoadingPlanowanie } = usePlanowanieBudzetu();
+
+  // Map frontend field names to backend field names
+  const mapFieldToBackendFieldName = (field: string): string => {
+    const fieldMap: Record<string, string> = {
+      'czescBudzetowa': 'czesc_budzetowa_kod',
+      'dzial': 'dzial_kod',
+      'rozdzial': 'rozdzial_kod',
+      'paragraf': 'paragraf_kod',
+      'zrodloFinansowania': 'zrodlo_finansowania_kod',
+      'grupaWydatkow': 'grupa_wydatkow_id',
+      'nazwaProgramu': 'nazwa_projektu',
+      'planWI': 'budzet',
+    };
+    return fieldMap[field] || field;
+  };
 
   // Transform planning data to budget document format
   const budgetDocument: BudgetDocument = useMemo(() => {
@@ -69,6 +95,10 @@ const BudgetGrid = () => {
       };
     });
   }, [planowanieBudzetu, dzialy, rozdzialy, paragrafy, grupyWydatkow, czesciBudzetowe, zrodlaFinansowania, kodyZadaniowe]);
+
+  // Get the first row ID for history status (assuming we want to check history for the first item)
+  const firstRowId: number | null = budgetDocument.length > 0 && budgetDocument[0].id ? budgetDocument[0].id : null;
+  const { data: fieldsHistoryStatus } = useFieldsHistoryStatus(firstRowId);
 
   // Map grid field names to backend field names
   const mapFieldToBackend = (field: string): string => {
@@ -125,6 +155,10 @@ const BudgetGrid = () => {
       // Invalidate queries to refresh data
       queryClient.invalidateQueries({ queryKey: ['planowanie-budzetu'] });
       
+      // Invalidate history queries to refresh history status and data
+      queryClient.invalidateQueries({ queryKey: ['planowanie-budzetu-fields-history-status'] });
+      queryClient.invalidateQueries({ queryKey: ['planowanie-budzetu-field-history'] });
+      
       console.log('Cell updated successfully:', { field: backendField, value });
     } catch (error) {
       console.error('Failed to update cell:', error);
@@ -142,14 +176,38 @@ const BudgetGrid = () => {
 
   const renderKodCellWithTooltip = (params: {
     value: { kod: string; nazwa?: string; tresc?: string } | null;
+    colDef?: any;
+    data?: any;
   }) => {
     if (!params?.value) return '';
+
+    const handleCellClick = () => {
+      if (isHistoryMode && params.colDef && params.data) {
+        const backendFieldName = mapFieldToBackendFieldName(params.colDef.field);
+        setHistoryModalData({
+          field: backendFieldName,
+          value: params.value,
+          rowId: params.data.id,
+        });
+      }
+    };
+
+    // Check if this field has history
+    const backendFieldName = mapFieldToBackendFieldName(params.colDef?.field || '');
+    const hasHistory = fieldsHistoryStatus?.fields?.[backendFieldName] || false;
+    const showHistoryIcon = isHistoryMode && hasHistory;
 
     return (
       <Tooltip>
         <TooltipTrigger asChild>
-          <div className='w-full'>
-            {params.value.kod ?? params.value?.nazwa ?? params.value}
+          <div 
+            className={`w-full flex items-center gap-1 ${showHistoryIcon ? 'cursor-pointer hover:bg-blue-50 p-1 rounded' : ''}`}
+            onClick={handleCellClick}
+          >
+            {showHistoryIcon && <History className="h-3 w-3 text-blue-500 shrink-0" />}
+            <span className="truncate">
+              {params.value.kod ?? params.value?.nazwa ?? params.value}
+            </span>
           </div>
         </TooltipTrigger>
         <TooltipContent side='bottom' className='max-w-sm'>
@@ -163,6 +221,42 @@ const BudgetGrid = () => {
       </Tooltip>
     );
   };
+
+  const renderClickableCellWithTooltip = (params: {
+    value: any;
+    colDef?: any;
+    data?: any;
+  }) => {
+    const displayValue = params.value || '';
+    
+    const handleCellClick = () => {
+      if (isHistoryMode && params.colDef && params.data) {
+        const backendFieldName = mapFieldToBackendFieldName(params.colDef.field);
+        setHistoryModalData({
+          field: backendFieldName,
+          value: params.value,
+          rowId: params.data.id,
+        });
+      }
+    };
+
+    // Check if this field has history
+    const backendFieldName = mapFieldToBackendFieldName(params.colDef?.field || '');
+    const hasHistory = fieldsHistoryStatus?.fields?.[backendFieldName] || false;
+    const showHistoryIcon = isHistoryMode && hasHistory;
+
+    return (
+      <div 
+        className={`w-full flex items-center gap-1 ${showHistoryIcon ? 'cursor-pointer hover:bg-blue-50 p-1 rounded' : ''}`}
+        onClick={handleCellClick}
+      >
+        {showHistoryIcon && <History className="h-3 w-3 text-blue-500 shrink-0" />}
+        <span className="truncate">{displayValue}</span>
+      </div>
+    );
+  };
+
+
 
   const headerStyle = {
     whiteSpace: 'wrap',
@@ -178,7 +272,7 @@ const BudgetGrid = () => {
       {
         headerName: 'Część budżetowa',
         field: 'czescBudzetowa' as const,
-        editable: true,
+        editable: !isHistoryMode,
         valueFormatter: formatKodAndNazwa,
         cellRenderer: renderKodCellWithTooltip,
         cellEditor: 'agSelectCellEditor',
@@ -191,7 +285,7 @@ const BudgetGrid = () => {
       {
         headerName: 'Dział',
         field: 'dzial' as const,
-        editable: true,
+        editable: !isHistoryMode,
         valueFormatter: formatKodAndNazwa,
         cellRenderer: renderKodCellWithTooltip,
         cellEditor: 'agSelectCellEditor',
@@ -203,7 +297,7 @@ const BudgetGrid = () => {
       {
         headerName: 'Rozdział',
         field: 'rozdzial' as const,
-        editable: true,
+        editable: !isHistoryMode,
         cellEditor: 'agSelectCellEditor',
         valueFormatter: formatKodAndNazwa,
         cellRenderer: renderKodCellWithTooltip,
@@ -215,7 +309,7 @@ const BudgetGrid = () => {
       {
         headerName: 'Paragraf',
         field: 'paragraf' as const,
-        editable: true,
+        editable: !isHistoryMode,
         cellEditor: 'agSelectCellEditor',
         valueFormatter: formatKodAndNazwa,
         cellRenderer: renderKodCellWithTooltip,
@@ -227,7 +321,7 @@ const BudgetGrid = () => {
       {
         headerName: 'Źródło finansowania',
         field: 'zrodloFinansowania' as const,
-        editable: true,
+        editable: !isHistoryMode,
         cellEditor: 'agSelectCellEditor',
         valueFormatter: formatKodAndNazwa,
         cellRenderer: renderKodCellWithTooltip,
@@ -242,7 +336,7 @@ const BudgetGrid = () => {
         headerName: 'Grupa wydatków',
         field: 'grupaWydatkow' as const,
         cellRenderer: renderKodCellWithTooltip,
-        editable: true,
+        editable: !isHistoryMode,
         cellEditor: 'agSelectCellEditor',
         cellEditorParams: {
           values: grupyWydatkow?.map((gw) => gw.nazwa).sort() ?? [],
@@ -253,7 +347,7 @@ const BudgetGrid = () => {
         headerName: 'Budżet zadaniowy (w pełnej szczegółowości)',
         field: 'kodZadaniowy' as const,
         cellRenderer: renderKodCellWithTooltip,
-        editable: true,
+        editable: !isHistoryMode,
         cellEditor: 'agSelectCellEditor',
         cellEditorParams: {
           values:
@@ -264,8 +358,32 @@ const BudgetGrid = () => {
       {
         headerName: 'Budżet zadaniowy (nr funkcji, nr zadania)',
         field: 'kodZadaniowy' as const,
-        cellRenderer: (params: { value: KodZadaniowy }) => {
-          return params.value.kod_krotki;
+        cellRenderer: (params: { value: KodZadaniowy; colDef?: any; data?: any }) => {
+          const backendFieldName = mapFieldToBackendFieldName(params.colDef?.field || '');
+          const hasHistory = fieldsHistoryStatus?.fields?.[backendFieldName] || false;
+          const showHistoryIcon = isHistoryMode && hasHistory;
+          
+          const handleCellClick = () => {
+            if (showHistoryIcon && params.colDef && params.data) {
+              setHistoryModalData({
+                field: backendFieldName,
+                value: params.value?.kod_krotki,
+                rowId: params.data.id,
+              });
+            }
+          };
+          
+          const displayValue = params.value?.kod_krotki || '';
+          
+          return (
+            <div 
+              className={`w-full flex items-center gap-1 ${showHistoryIcon ? 'cursor-pointer hover:bg-blue-50 p-1 rounded' : ''}`}
+              onClick={handleCellClick}
+            >
+              {showHistoryIcon && <History className="h-3 w-3 text-blue-500 shrink-0" />}
+              <span className="truncate">{displayValue}</span>
+            </div>
+          );
         },
         editable: false,
         headerStyle,
@@ -273,23 +391,47 @@ const BudgetGrid = () => {
       {
         headerName: 'Nazwa programu',
         field: 'nazwaProgramu' as const,
-        editable: true,
+        editable: !isHistoryMode,
         cellEditor: 'agTextCellEditor',
+        cellRenderer: isHistoryMode ? renderClickableCellWithTooltip : undefined,
         headerStyle,
       },
       {
         headerName: 'Nazwa komórki organizacyjnej',
         editable: false,
-        cellRenderer: () => {
-          return user.nazwaKomorkiOrganizacyjnej;
+        cellRenderer: (params: { colDef?: any; data?: any }) => {
+          const backendFieldName = 'komorka_organizacyjna_id'; // This field is not mapped in our function
+          const hasHistory = fieldsHistoryStatus?.fields?.[backendFieldName] || false;
+          const showHistoryIcon = isHistoryMode && hasHistory;
+          
+          const handleCellClick = () => {
+            if (showHistoryIcon && params.colDef && params.data) {
+              setHistoryModalData({
+                field: backendFieldName,
+                value: user.nazwaKomorkiOrganizacyjnej,
+                rowId: params.data.id,
+              });
+            }
+          };
+          
+          return (
+            <div 
+              className={`w-full flex items-center gap-1 ${showHistoryIcon ? 'cursor-pointer hover:bg-blue-50 p-1 rounded' : ''}`}
+              onClick={handleCellClick}
+            >
+              {showHistoryIcon && <History className="h-3 w-3 text-blue-500 shrink-0" />}
+              <span className="truncate">{user.nazwaKomorkiOrganizacyjnej}</span>
+            </div>
+          );
         },
         headerStyle,
       },
       {
         headerName: 'Plan WI',
         field: 'planWI' as const,
-        editable: true,
+        editable: !isHistoryMode,
         cellEditor: 'agTextCellEditor',
+        cellRenderer: isHistoryMode ? renderClickableCellWithTooltip : undefined,
         headerStyle,
       },
       ...[0, 1, 2, 3].map((index) => ({
@@ -298,8 +440,9 @@ const BudgetGrid = () => {
           {
             headerName: 'Potrzeby finansowe na rok',
             field: `roczneSegmenty.${index}.potrzebyFinansowe` as const,
-            editable: true,
+            editable: !isHistoryMode,
             cellEditor: 'agNumericCellEditor',
+            cellRenderer: isHistoryMode ? renderClickableCellWithTooltip : undefined,
             cellEditorParams: {
               precision: 2,
             },
@@ -308,8 +451,9 @@ const BudgetGrid = () => {
           {
             headerName: 'Limit wydatków na rok',
             field: `roczneSegmenty.${index}.limitWydatków` as const,
-            editable: true,
+            editable: !isHistoryMode,
             cellEditor: 'agNumericCellEditor',
+            cellRenderer: isHistoryMode ? renderClickableCellWithTooltip : undefined,
             cellEditorParams: {
               precision: 2,
             },
@@ -325,10 +469,11 @@ const BudgetGrid = () => {
               precision: 2,
             },
             cellRenderer: (params: any) => {
-              return (
-                params.data.roczneSegmenty[index].potrzebyFinansowe -
-                params.data.roczneSegmenty[index].limitWydatków
-              );
+              const calculatedValue = params.data.roczneSegmenty[index].potrzebyFinansowe -
+                params.data.roczneSegmenty[index].limitWydatków;
+              
+              // This is a calculated field, it doesn't have history in backend
+              return calculatedValue;
             },
             headerStyle: { ...headerStyle, fontSize: '10px' },
           },
@@ -336,8 +481,9 @@ const BudgetGrid = () => {
             headerName:
               'Kwota zawartej umowy/wniosku o udzielenie zamówienia publicznego',
             field: `roczneSegmenty.${index}.kwotaZawartejUmowy` as const,
-            editable: true,
+            editable: !isHistoryMode,
             cellEditor: 'agNumericCellEditor',
+            cellRenderer: isHistoryMode ? renderClickableCellWithTooltip : undefined,
             cellEditorParams: {
               precision: 2,
             },
@@ -347,8 +493,9 @@ const BudgetGrid = () => {
             headerName:
               'Nr umowy/nr wniosku o udzielenie zamówienia publicznego',
             field: `roczneSegmenty.${index}.numerUmowy` as const,
-            editable: true,
+            editable: !isHistoryMode,
             cellEditor: 'agTextCellEditor',
+            cellRenderer: isHistoryMode ? renderClickableCellWithTooltip : undefined,
             headerStyle: { ...headerStyle, fontSize: '10px' },
           },
         ],
@@ -362,6 +509,9 @@ const BudgetGrid = () => {
       czesciBudzetowe,
       zrodlaFinansowania,
       kodyZadaniowe,
+      isHistoryMode,
+      user,
+      fieldsHistoryStatus,
     ]
   );
 
@@ -371,6 +521,27 @@ const BudgetGrid = () => {
 
   return (
     <div className='relative w-full h-full overflow-auto'>
+      <div className="flex justify-between items-center p-4 bg-white">
+        <h2 className="text-lg font-semibold">Planowanie Budżetu</h2>
+        <Button
+          variant={isHistoryMode ? "default" : "outline"}
+          onClick={() => setIsHistoryMode(!isHistoryMode)}
+          className="flex items-center gap-2"
+        >
+          {isHistoryMode ? (
+            <>
+              <Edit className="h-4 w-4" />
+              Tryb edycji
+            </>
+          ) : (
+            <>
+              <History className="h-4 w-4" />
+              Tryb historii
+            </>
+          )}
+        </Button>
+      </div>
+      
       <AgGridReact
         className='min-w-0 overflow-visible w-[4000px]'
         headerHeight={70}
@@ -386,6 +557,12 @@ const BudgetGrid = () => {
         }}
         onCellValueChanged={handleCellValueChanged}
         defaultColDef={defaultColDef}
+      />
+      
+      <HistoryModal
+        isOpen={!!historyModalData}
+        onClose={() => setHistoryModalData(null)}
+        cellData={historyModalData}
       />
     </div>
   );
