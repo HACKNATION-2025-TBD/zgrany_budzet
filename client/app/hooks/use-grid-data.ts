@@ -1,3 +1,4 @@
+import { kodyZadaniowe } from '~/mocks/kody-zadaniowe';
 import { useDzialy } from '../queries';
 import { useRozdzialy } from '../queries';
 import { useParagrafy } from '../queries';
@@ -23,6 +24,7 @@ export const useGridData = () => {
     grupyWydatkow,
     czesciBudzetowe,
     zrodlaFinansowania,
+    kodyZadaniowe,
     isLoading:
       isLoadingDzialy ||
       isLoadingRozdzialy ||

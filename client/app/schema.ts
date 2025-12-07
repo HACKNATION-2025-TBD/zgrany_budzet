@@ -34,6 +34,12 @@ export const zrodloFinansowaniaSchema = z.object({
   opis: z.string().optional(),
 });
 
+export const kodZadaniowySchema = z.object({
+  kod: z.string(),
+  kod_krotki: z.string(),
+  nazwa: z.string(),
+});
+
 export const budgetDocumentRowSchema = z.object({
   dzial: dzialSchema.nullable().default(null),
   rozdzial: rozdzialSchema.nullable().default(null),
@@ -41,6 +47,7 @@ export const budgetDocumentRowSchema = z.object({
   grupaWydatkow: grupaWydatkowSchema.nullable().default(null),
   czescBudzetowa: czescBudzetowaSchema.nullable().default(null),
   zrodloFinansowania: zrodloFinansowaniaSchema.nullable().default(null),
+  kodZadaniowy: kodZadaniowySchema.nullable().default(null),
 });
 
 export const budgetDocumentSchema = z.array(budgetDocumentRowSchema);
@@ -53,3 +60,4 @@ export type CzescBudzetowa = z.infer<typeof czescBudzetowaSchema>;
 export type ZrodloFinansowania = z.infer<typeof zrodloFinansowaniaSchema>;
 export type DocumentRow = z.infer<typeof budgetDocumentRowSchema>;
 export type BudgetDocument = z.infer<typeof budgetDocumentSchema>;
+export type KodZadaniowy = z.infer<typeof kodZadaniowySchema>;

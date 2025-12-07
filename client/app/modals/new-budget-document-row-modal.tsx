@@ -87,6 +87,7 @@ export const NewBudgetDocumentRowModal = ({
     grupyWydatkow,
     czesciBudzetowe,
     zrodlaFinansowania,
+    kodyZadaniowe,
     isLoading: isLoadingGridData,
   } = useGridData();
 
@@ -345,6 +346,51 @@ export const NewBudgetDocumentRowModal = ({
                       <SelectItem key={grupa.nazwa} value={grupa.nazwa}>
                         {grupa?.nazwa.substring(0, 50)}
                         {grupa?.nazwa.length > 50 ? '...' : ''}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FieldDescription className='text-xs'>
+                  {field.state.value?.nazwa}
+                </FieldDescription>
+                <FieldError>
+                  <FieldInfo field={field} />
+                </FieldError>
+              </Field>
+            )}
+          </form.Field>
+
+          <form.Field name='kodZadaniowy'>
+            {(field) => (
+              <Field>
+                <FieldLabel htmlFor='input-id'>
+                  Budżet zadaniowy (w pełnej szczegółowości)
+                </FieldLabel>
+                <Select
+                  name='kodZadaniowy'
+                  onValueChange={(kod) => {
+                    const selectedKodZadaniowy = kodyZadaniowe?.find(
+                      (kodZadaniowy) => kodZadaniowy.kod === kod
+                    );
+                    if (selectedKodZadaniowy)
+                      field.handleChange(selectedKodZadaniowy);
+                  }}
+                  value={field.state.value?.nazwa}
+                >
+                  <SelectTrigger disabled={isLoadingGridData}>
+                    <SelectValue placeholder='Wybierz kod zadaniowy'>
+                      {field.state.value?.kod ?? ''}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {kodyZadaniowe?.map((kodZadaniowy) => (
+                      <SelectItem
+                        key={kodZadaniowy.kod}
+                        value={kodZadaniowy.kod}
+                      >
+                        {kodZadaniowy?.kod} -{' '}
+                        {kodZadaniowy?.nazwa.substring(0, 50)}
+                        {kodZadaniowy?.nazwa.length > 50 ? '...' : ''}
                       </SelectItem>
                     ))}
                   </SelectContent>
