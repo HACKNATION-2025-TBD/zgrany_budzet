@@ -61,6 +61,7 @@ from schemas.paragrafy import Paragraf
 from schemas.zrodla_finansowania import ZrodloFinansowania
 from schemas.grupy_wydatkow import GrupaWydatkow
 from schemas.planowanie_budzetu import PlanowanieBudzetu
+from schemas.komorki_organizacyjne import KomorkaOrganizacyjna
 
 
 def load_json_fixture(filename: str) -> list[dict]:
@@ -150,6 +151,19 @@ def load_grupy_wydatkow(session: Session) -> None:
     print(f"Loaded {len(data)} grupy wydatków")
 
 
+def load_komorki_organizacyjne(session: Session) -> None:
+    """Load komórki organizacyjne fixtures."""
+    print("Loading komórki organizacyjne...")
+    data = load_json_fixture("komorki_organizacyjne.json")
+    
+    for item in data:
+        obj = KomorkaOrganizacyjna(**item)
+        session.add(obj)
+    
+    session.commit()
+    print(f"Loaded {len(data)} komórki organizacyjne")
+
+
 def create_tables() -> None:
     """Create all tables in the database."""
     print("Creating tables...")
@@ -199,6 +213,7 @@ def load_all_fixtures(drop_existing: bool = False) -> None:
         load_paragrafy(session)
         load_zrodla_finansowania(session)
         load_grupy_wydatkow(session)
+        load_komorki_organizacyjne(session)
         
         print("\n✅ All fixtures loaded successfully!")
     except Exception as e:
