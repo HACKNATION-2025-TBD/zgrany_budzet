@@ -269,47 +269,6 @@ class TestPlanowanieBudzetuEndpoints:
         assert data["nazwa_projektu"] == "Single Project"
         assert data["nazwa_zadania"] == "Task"
 
-    def test_get_history(self, client, db_session):
-        """Test getting version history for a record."""
-        # Create record
-        payload = {
-            "nazwa_projektu": "Original",
-            "budzet": "2024",
-            "czesc_budzetowa_kod": "75",
-            "dzial_kod": "750",
-            "rozdzial_kod": "75011",
-            "paragraf_kod": "4210",
-            "zrodlo_finansowania_kod": "1",
-            "grupa_wydatkow_id": 1,
-            "komorka_organizacyjna_id": 1
-        }
-        create_response = client.post("/api/planowanie_budzetu", json=payload)
-        planowanie_id = create_response.json()["id"]
-
-        # Make several updates
-        for i in range(3):
-            update_payload = {
-                "field": "nazwa_projektu",
-                "value": f"Version {i+2}"
-            }
-            client.patch(f"/api/planowanie_budzetu/{planowanie_id}", json=update_payload)
-
-        # Get history
-        response = client.get(f"/api/planowanie_budzetu/{planowanie_id}/history")
-        
-        assert response.status_code == 200
-        data = response.json()
-        assert "nazwa_projektu_history" in data
-        
-        history = data["nazwa_projektu_history"]
-        assert len(history) == 4  # Original + 3 updates
-        assert history[0]["value"] == "Version 4"  # Most recent first
-        assert history[-1]["value"] == "Original"  # Original last
-        
-        # Verify timestamps are in descending order
-        timestamps = [item["timestamp"] for item in history]
-        assert timestamps == sorted(timestamps, reverse=True)
-
     def test_get_field_history_string_field(self, client, db_session):
         """Test getting history for a specific string field."""
         # Create record
@@ -590,51 +549,6 @@ class TestRokBudzetowyEndpoints:
         assert len(versions) == 2
         assert float(versions[0].value) == 50000.00
         assert float(versions[1].value) == 60000.00
-
-    def test_get_rok_budzetowy_history(self, client, db_session):
-        """Test getting version history for rok_budzetowy."""
-        # Create records
-        planowanie_payload = {
-            "nazwa_projektu": "Project",
-            "budzet": "2024",
-            "czesc_budzetowa_kod": "75",
-            "dzial_kod": "750",
-            "rozdzial_kod": "75011",
-            "paragraf_kod": "4210",
-            "zrodlo_finansowania_kod": "1",
-            "grupa_wydatkow_id": 1,
-            "komorka_organizacyjna_id": 1
-        }
-        planowanie_response = client.post("/api/planowanie_budzetu", json=planowanie_payload)
-        planowanie_id = planowanie_response.json()["id"]
-
-        rok_payload = {
-            "planowanie_budzetu_id": planowanie_id,
-            "limit": 50000.00,
-            "potrzeba": 75000.00
-        }
-        rok_response = client.post("/api/rok_budzetowy", json=rok_payload)
-        rok_id = rok_response.json()["id"]
-
-        # Make updates
-        for value in [60000.00, 70000.00]:
-            update_payload = {
-                "field": "limit",
-                "value": value
-            }
-            client.patch(f"/api/rok_budzetowy/{rok_id}", json=update_payload)
-
-        # Get history
-        response = client.get(f"/api/rok_budzetowy/{rok_id}/history")
-        
-        assert response.status_code == 200
-        data = response.json()
-        assert "limit_history" in data
-        
-        history = data["limit_history"]
-        assert len(history) == 3  # Original + 2 updates
-        assert history[0]["value"] == 70000.00  # Most recent
-        assert history[-1]["value"] == 50000.00  # Original
 
     def test_get_rok_budzetowy_field_history_limit(self, client, db_session):
         """Test getting history for limit field."""

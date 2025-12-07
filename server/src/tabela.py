@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
-from pydantic import BaseModel
 from typing import Optional, List
 from datetime import datetime
 
@@ -13,34 +12,18 @@ from src.schemas.versioned_fields import (
     VersionedNumericField,
     VersionedForeignKeyField
 )
+from src.models.tabela_models import (
+    PlanowanieBudzetuCreate,
+    CellUpdate,
+    RokBudzetowyCreate,
+    MessageResponse,
+    UpdateResponse,
+    PlanowanieBudzetuResponse,
+    FieldHistoryResponse,
+    RokBudzetowyResponse
+)
 
 router = APIRouter()
-
-
-# Pydantic models for requests
-class PlanowanieBudzetuCreate(BaseModel):
-    nazwa_projektu: Optional[str] = None
-    nazwa_zadania: Optional[str] = None
-    szczegolowe_uzasadnienie_realizacji: Optional[str] = None
-    budzet: Optional[str] = None
-    czesc_budzetowa_kod: str
-    dzial_kod: str
-    rozdzial_kod: str
-    paragraf_kod: str
-    zrodlo_finansowania_kod: str
-    grupa_wydatkow_id: int
-    komorka_organizacyjna_id: int
-
-
-class CellUpdate(BaseModel):
-    field: str
-    value: Optional[str | int | float] = None
-
-
-class RokBudzetowyCreate(BaseModel):
-    planowanie_budzetu_id: int
-    limit: float
-    potrzeba: float
 
 
 # Helper functions
@@ -109,7 +92,7 @@ def get_latest_version_for_field(db: Session, entity_type: str, entity_id: int, 
 
 
 # PlanowanieBudzetu endpoints
-@router.post("/planowanie_budzetu")
+@router.post("/planowanie_budzetu", response_model=MessageResponse)
 async def create_planowanie_budzetu(data: PlanowanieBudzetuCreate, db: Session = Depends(get_db)):
     # Create main record
     planowanie = PlanowanieBudzetu()
@@ -136,7 +119,7 @@ async def create_planowanie_budzetu(data: PlanowanieBudzetuCreate, db: Session =
     return {"id": planowanie.id, "message": "Created successfully"}
 
 
-@router.patch("/planowanie_budzetu/{planowanie_id}")
+@router.patch("/planowanie_budzetu/{planowanie_id}", response_model=UpdateResponse)
 async def update_planowanie_budzetu_cell(planowanie_id: int, data: CellUpdate, db: Session = Depends(get_db)):
     planowanie = db.query(PlanowanieBudzetu).filter(PlanowanieBudzetu.id == planowanie_id).first()
     if not planowanie:
@@ -167,7 +150,7 @@ async def update_planowanie_budzetu_cell(planowanie_id: int, data: CellUpdate, d
     return {"id": planowanie_id, "field": data.field, "value": data.value, "message": "Updated successfully"}
 
 
-@router.get("/planowanie_budzetu")
+@router.get("/planowanie_budzetu", response_model=List[PlanowanieBudzetuResponse])
 async def get_all_planowanie_budzetu(db: Session = Depends(get_db)):
     planowania = db.query(PlanowanieBudzetu).all()
     result = []
@@ -191,7 +174,7 @@ async def get_all_planowanie_budzetu(db: Session = Depends(get_db)):
     return result
 
 
-@router.get("/planowanie_budzetu/{planowanie_id}")
+@router.get("/planowanie_budzetu/{planowanie_id}", response_model=PlanowanieBudzetuResponse)
 async def get_planowanie_budzetu(planowanie_id: int, db: Session = Depends(get_db)):
     p = db.query(PlanowanieBudzetu).filter(PlanowanieBudzetu.id == planowanie_id).first()
     if not p:
@@ -213,7 +196,7 @@ async def get_planowanie_budzetu(planowanie_id: int, db: Session = Depends(get_d
     }
 
 
-@router.get("/planowanie_budzetu/{planowanie_id}/field_history/{field_name}")
+@router.get("/planowanie_budzetu/{planowanie_id}/field_history/{field_name}", response_model=FieldHistoryResponse)
 async def get_planowanie_budzetu_field_history(planowanie_id: int, field_name: str, db: Session = Depends(get_db)):
     p = db.query(PlanowanieBudzetu).filter(PlanowanieBudzetu.id == planowanie_id).first()
     if not p:
@@ -257,47 +240,8 @@ async def get_planowanie_budzetu_field_history(planowanie_id: int, field_name: s
         raise HTTPException(status_code=400, detail=f"Unknown field: {field_name}")
 
 
-@router.get("/planowanie_budzetu/{planowanie_id}/history")
-async def get_planowanie_budzetu_history(planowanie_id: int, db: Session = Depends(get_db)):
-    p = db.query(PlanowanieBudzetu).filter(PlanowanieBudzetu.id == planowanie_id).first()
-    if not p:
-        raise HTTPException(status_code=404, detail="PlanowanieBudzetu not found")
-    
-    string_fields = ["nazwa_projektu", "nazwa_zadania", "szczegolowe_uzasadnienie_realizacji", "budzet"]
-    fk_string_fields = ["czesc_budzetowa_kod", "dzial_kod", "rozdzial_kod", "paragraf_kod", "zrodlo_finansowania_kod"]
-    fk_int_fields = ["grupa_wydatkow_id", "komorka_organizacyjna_id"]
-    
-    result = {"id": planowanie_id}
-    
-    for field in string_fields:
-        versions = db.query(VersionedStringField).filter(
-            VersionedStringField.entity_type == "planowanie_budzetu",
-            VersionedStringField.entity_id == planowanie_id,
-            VersionedStringField.field_name == field
-        ).order_by(desc(VersionedStringField.timestamp)).all()
-        result[f"{field}_history"] = [{"value": v.value, "timestamp": v.timestamp} for v in versions]
-    
-    for field in fk_string_fields:
-        versions = db.query(VersionedForeignKeyField).filter(
-            VersionedForeignKeyField.entity_type == "planowanie_budzetu",
-            VersionedForeignKeyField.entity_id == planowanie_id,
-            VersionedForeignKeyField.field_name == field
-        ).order_by(desc(VersionedForeignKeyField.timestamp)).all()
-        result[f"{field}_history"] = [{"value": v.value_string, "timestamp": v.timestamp} for v in versions]
-    
-    for field in fk_int_fields:
-        versions = db.query(VersionedForeignKeyField).filter(
-            VersionedForeignKeyField.entity_type == "planowanie_budzetu",
-            VersionedForeignKeyField.entity_id == planowanie_id,
-            VersionedForeignKeyField.field_name == field
-        ).order_by(desc(VersionedForeignKeyField.timestamp)).all()
-        result[f"{field}_history"] = [{"value": v.value_int, "timestamp": v.timestamp} for v in versions]
-    
-    return result
-
-
 # RokBudzetowy endpoints
-@router.post("/rok_budzetowy")
+@router.post("/rok_budzetowy", response_model=MessageResponse)
 async def create_rok_budzetowy(data: RokBudzetowyCreate, db: Session = Depends(get_db)):
     # Verify planowanie_budzetu exists
     planowanie = db.query(PlanowanieBudzetu).filter(PlanowanieBudzetu.id == data.planowanie_budzetu_id).first()
@@ -319,7 +263,7 @@ async def create_rok_budzetowy(data: RokBudzetowyCreate, db: Session = Depends(g
     return {"id": rok.id, "message": "Created successfully"}
 
 
-@router.patch("/rok_budzetowy/{rok_id}")
+@router.patch("/rok_budzetowy/{rok_id}", response_model=UpdateResponse)
 async def update_rok_budzetowy_cell(rok_id: int, data: CellUpdate, db: Session = Depends(get_db)):
     rok = db.query(RokBudzetowy).filter(RokBudzetowy.id == rok_id).first()
     if not rok:
@@ -339,7 +283,7 @@ async def update_rok_budzetowy_cell(rok_id: int, data: CellUpdate, db: Session =
     return {"id": rok_id, "field": data.field, "value": data.value, "message": "Updated successfully"}
 
 
-@router.get("/rok_budzetowy")
+@router.get("/rok_budzetowy", response_model=List[RokBudzetowyResponse])
 async def get_all_rok_budzetowy(db: Session = Depends(get_db)):
     lata = db.query(RokBudzetowy).all()
     result = []
@@ -355,7 +299,7 @@ async def get_all_rok_budzetowy(db: Session = Depends(get_db)):
     return result
 
 
-@router.get("/rok_budzetowy/{rok_id}")
+@router.get("/rok_budzetowy/{rok_id}", response_model=RokBudzetowyResponse)
 async def get_rok_budzetowy(rok_id: int, db: Session = Depends(get_db)):
     rok = db.query(RokBudzetowy).filter(RokBudzetowy.id == rok_id).first()
     if not rok:
@@ -369,7 +313,7 @@ async def get_rok_budzetowy(rok_id: int, db: Session = Depends(get_db)):
     }
 
 
-@router.get("/rok_budzetowy/{rok_id}/field_history/{field_name}")
+@router.get("/rok_budzetowy/{rok_id}/field_history/{field_name}", response_model=FieldHistoryResponse)
 async def get_rok_budzetowy_field_history(rok_id: int, field_name: str, db: Session = Depends(get_db)):
     rok = db.query(RokBudzetowy).filter(RokBudzetowy.id == rok_id).first()
     if not rok:
@@ -389,25 +333,3 @@ async def get_rok_budzetowy_field_history(rok_id: int, field_name: str, db: Sess
         }
     else:
         raise HTTPException(status_code=400, detail=f"Unknown field: {field_name}")
-
-
-@router.get("/rok_budzetowy/{rok_id}/history")
-async def get_rok_budzetowy_history(rok_id: int, db: Session = Depends(get_db)):
-    rok = db.query(RokBudzetowy).filter(RokBudzetowy.id == rok_id).first()
-    if not rok:
-        raise HTTPException(status_code=404, detail="RokBudzetowy not found")
-    
-    result = {
-        "id": rok.id,
-        "planowanie_budzetu_id": rok.planowanie_budzetu_id
-    }
-    
-    for field in ["limit", "potrzeba"]:
-        versions = db.query(VersionedNumericField).filter(
-            VersionedNumericField.entity_type == "rok_budzetowy",
-            VersionedNumericField.entity_id == rok_id,
-            VersionedNumericField.field_name == field
-        ).order_by(desc(VersionedNumericField.timestamp)).all()
-        result[f"{field}_history"] = [{"value": float(v.value), "timestamp": v.timestamp} for v in versions]
-    
-    return result
